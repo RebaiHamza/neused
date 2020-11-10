@@ -328,7 +328,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         //  Front End Controller
 
         Route::get('pincode-check', 'PinCodController@pincode_check');
-
+        Route::get('/used', 'used\MainController@index');
+        
         Route::get('/', 'MainController@index');
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');

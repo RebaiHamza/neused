@@ -351,7 +351,7 @@ $current_date = date('Y-m-d H:i:s');
           <?php $parents = explode(",",$abcd->name);?>
           <div id="product-tabs-slider" class="scroll-tabs">
             <div class="more-info-tab clearfix ">
-              <h3 class="new-product-title pull-left">{{ __('staticwords.newprods') }}</h3>
+              <h3 class="new-product-title pull-left">{{ __('Used product') }}</h3>
               <div class="scroller scroller-left"><i class="fa fa-angle-left"></i></div>
               <div class="scroller scroller-right"><i class="fa fa-angle-right"></i></div>
               <div class="wrapper">
@@ -413,8 +413,15 @@ $current_date = date('Y-m-d H:i:s');
                       {
                       $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
                       }
+                      //vardump($products);
                       @endphp
+ @php
+vardump($products);
 
+
+
+
+@endphp
                       <div class="item item-carousel">
                         <div class="products">
                           <div class="product">
@@ -817,8 +824,10 @@ $current_date = date('Y-m-d H:i:s');
 
                               </a>
                             </div>
+                           
 
                             @if($orivar->stock == 0)
+                            
                             <h6 align="center" class="oottext"><span>{{ __('staticwords.Outofstock') }}</span></h6>
                             @endif
 

@@ -97,7 +97,9 @@ class MainController extends Controller
         $old_product = $productsquery->where('status', '1')->where('is_used', '0')->take(7)
             ->orderBy('id', 'DESC')
             ->get();
-
+            $USed_product = $productsquery->where('status', '1')->where('is_new', '0')->take(7)
+            ->orderBy('id', 'DESC')
+            ->get();
         if ($sellerSystem == 1) {
             $featureds = $productsquery->take(20)->orderBy('id', 'DESC')
                 ->where([['status', '1'], ['featured', '1'], ['is_used', '0']])
@@ -118,7 +120,7 @@ class MainController extends Controller
 
         Session::put('currencyChanged', 'no');
 
-        return view('front.index', compact('slider', 'advs', 'old_product', 'products', 'featureds', 'home_slider', 'blogs', 'conversion_rate', 'conversion_rate'));
+        return view('front.index', compact('slider', 'advs', 'old_product', 'products', 'featureds', 'home_slider', 'blogs', 'conversion_rate', 'conversion_rate','USed_product'));
     }
 
     public function share(Request $request)
