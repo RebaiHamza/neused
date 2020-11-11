@@ -376,48 +376,50 @@ $current_date = date('Y-m-d H:i:s');
               <!-- /.nav-tabs -->
             </div>
             <div class="tab-content outer-top-xs">
+        
+
               <div class="tab-pane in show active" id="all">
                 <div class="product-slider">
 
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
              <!-- /.item -->
                     @if(isset($products))
-                    <?php $i = 0;
-                          $countP = 0;
-                          
-                         ?>
-                    @foreach($products as $pro)
- 
-                    @if($genrals_settings->vendor_enable != 1)
- 
-                    @if($pro->vender['role_id'] == 'a')
+                              <?php $i = 0;
+                                    $countP = 0;
+                                    
+                                  ?>
+                              @foreach($products as $pro)
+          
+                              @if($genrals_settings->vendor_enable == 1)
+                            
+                              @if($pro->vender['role_id'] == 'a')
 
-                    @foreach($pro->subvariants as $key=> $orivar)
+                              @foreach($pro->subvariants as $key=> $orivar)
 
-                    @if($orivar->def == 1)
+                              @if($orivar->def == 1)
 
-                    @php
-                    $var_name_count = count($orivar['main_attr_id']);
+                              @php
+                              $var_name_count = count($orivar['main_attr_id']);
 
-                    $name = array();
-                    $var_name;
-                    $newarr = array();
-                    for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
-                      $var_name[$i]=$orivar['main_attr_value'][$var_id];
-                      $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
-                      }
+                              $name = array();
+                              $var_name;
+                              $newarr = array();
+                              for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
+                                $var_name[$i]=$orivar['main_attr_value'][$var_id];
+                                $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
+                                }
 
 
-                      try{
-                      $url =
-                      url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
-                      }catch(Exception $e)
-                      {
-                      $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
-                      }
-                     
-                      @endphp
- 
+                                try{
+                                $url =
+                                url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+                                }catch(Exception $e)
+                                {
+                                $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+                                }
+                              
+                                @endphp
+          
                       <div class="item item-carousel">
                         <div class="products">
                           <div class="product">
