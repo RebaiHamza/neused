@@ -4006,6 +4006,10 @@ $current_date = date('Y-m-d H:i:s');
     <h3 class="section-title display-none">
       {{ __('staticwords.Featured') }}
     </h3>
+    @php
+   echo'ddddd';
+        var_dump( $orivar);
+    @endphp
     <div class="feature-product-dtl">
       <div class="row no-pad">
         @foreach($featureds as $featured)
