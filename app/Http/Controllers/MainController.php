@@ -77,13 +77,13 @@ class MainController extends Controller
 
         $productsquery = Product::query();
         if ($sellerSystem == 1) {
-            $products = $productsquery->orderBy('id', 'DESC')->where('status', '1')->where('is_used', '0')
+            $products = $productsquery->orderBy('id', 'DESC')->where('status', '1')->where('is_new', '1')
                 ->take(20)
                 ->get();
         } else {
             $products = [];
 
-            $x = $productsquery->orderBy('id', 'DESC')->where('status', '1')->where('is_used', '0')
+            $x = $productsquery->orderBy('id', 'DESC')->where('status', '1')->where('is_new', '1')
                 ->take(20)
                 ->get();
 
