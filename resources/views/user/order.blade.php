@@ -605,9 +605,6 @@
 
               @else
                   <h3>{{ __('staticwords.ShoppingText') }}</h3>
-                  <div align="center">
-                    <img title="{{ __('staticwords.ShoppingText') }}" src="{{ url('images/noorder.jpg') }}" alt="no-order.jpg" width="70%">
-                  </div>
               @endif
           
             </div>

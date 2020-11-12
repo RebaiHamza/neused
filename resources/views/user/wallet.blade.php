@@ -192,7 +192,11 @@
 
         <h4 class="user_m2">{{ __('staticwords.MyWallet') }}</h4>
         <h4 class="user_m2 text-green">{{ __('staticwords.CurrentBalance') }} :
-          <i class="{{ $defCurrency->currency_symbol }}"></i>
+          @if ($defCurrency->currency_symbol == 'qar')
+                    <i class="">QAR</i>
+                  @else
+                    <i class="{{ $defCurrency->currency_symbol }}"></i>
+                  @endif
            @if(isset($user->wallet))
           {{ sprintf("%.2f",$user->wallet->balance) }} @else 0.00 @endif 
           @if(isset($user->wallet) && $defCurrency->currency->code != session()->get('currency')['id'])
@@ -215,7 +219,12 @@
 
               <div class="input-group">
                 <span class="input-group-addon wallet-cur-symbol" id="basic-addon1">
-                  <i class="{{ $defCurrency->currency_symbol }}"></i>
+                  
+                  @if ($defCurrency->currency_symbol == 'qar')
+                    <i class="">QAR</i>
+                  @else
+                    <i class="{{ $defCurrency->currency_symbol }}"></i>
+                  @endif
                 </span>
                 <input name="amount" required="" type="number" class="amountbox form-control" value="1.00"
                   placeholder="0.00" min="1" step="0.01" aria-describedby="basic-addon1">
