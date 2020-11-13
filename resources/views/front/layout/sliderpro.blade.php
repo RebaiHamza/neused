@@ -1,7 +1,9 @@
 
 @php
    $pro = App\Product::find($sliders->product_id)
+
 @endphp
+
 @foreach($pro->subvariants as $key=> $orivar)
   @if($orivar->def ==1)
 
