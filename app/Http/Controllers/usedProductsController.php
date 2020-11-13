@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Image;
 use Rap2hpoutre\FastExcel\FastExcel;
+use Carbon\Carbon ;
 
 class usedProductsController extends Controller
 {
@@ -561,6 +562,9 @@ class usedProductsController extends Controller
                 $relsetting->pro_id = $product->id;
                 $relsetting->status = '0';
                 $relsetting->save();
+
+
+
             }
 
             Session::flash('added', 'Your Data has successfully imported');
@@ -910,8 +914,9 @@ class usedProductsController extends Controller
         $input['is_used'] = 1;
         $input['is_new'] = 0;
         $data = Product::create($input);
-
+         
         $data->save();
+
 
         $relsetting = new Related_setting();
 
@@ -929,7 +934,32 @@ class usedProductsController extends Controller
         'main_image' => $main_image,
         'pro_id' => $data->id,
        ]);
+       $mytime = Carbon::now();
+ 
 
+
+
+       DB::insert('insert into add_sub_variants (
+       `main_attr_id`,
+       `main_attr_value`,
+       `price`,
+       `stock`,
+       `pro_id`,
+       `weight`,
+       `w_unit`,
+       `min_order_qty`,
+       `max_order_qty`,
+       `def`,
+       `created_at`,
+       `updated_at`,
+       `deleted_at`) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', ['["1"]', '{"1":"1"}',1,1,$data->id,1,1,1,1,1,$mytime->toDateTimeString(),$mytime->toDateTimeString(),$mytime->toDateTimeString()]);
+       DB::insert('insert into add_product_variants (
+        `attr_name`,
+        `attr_value`,
+        `pro_id`,
+        `created_at`,
+        `updated_at` ) values (?,?,?,?,?)', [1,'["1"]',$data->id,$mytime->toDateTimeString(),$mytime->toDateTimeString()]);
+ 
         return redirect()->route('used-products.index')->with('success', 'Product created ! ');
     }
 
