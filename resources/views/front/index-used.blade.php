@@ -346,10 +346,12 @@ $current_date = date('Y-m-d H:i:s');
           <!-- ============================================== SCROLL TABS ============================================== -->
           @php
           $abcd = App\FrontCat::first();
+         
           @endphp
           @if(isset($abcd) && $abcd->status == '1')
           <?php $parents = explode(",",$abcd->name);?>
           <div id="product-tabs-slider" class="scroll-tabs">
+
             <div class="more-info-tab clearfix ">
               <h3 class="new-product-title pull-left">{{ __('Used product') }}</h3>
               <div class="scroller scroller-left"><i class="fa fa-angle-left"></i></div>
@@ -374,54 +376,50 @@ $current_date = date('Y-m-d H:i:s');
               <!-- /.nav-tabs -->
             </div>
             <div class="tab-content outer-top-xs">
+        
+
               <div class="tab-pane in show active" id="all">
                 <div class="product-slider">
 
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-
-                    <!-- /.item -->
+             <!-- /.item -->
                     @if(isset($products))
-                    <?php $i = 0;
-                          $countP = 0;
-                         ?>
-                    @foreach($products as $pro)
+                              <?php $i = 0;
+                                    $countP = 0;
+                                    
+                                  ?>
+                              @foreach($products as $pro)
+          
+                              @if($genrals_settings->vendor_enable == 1)
+                            
+                              @if($pro->vender['role_id'] == 'a')
 
-                    @if($genrals_settings->vendor_enable != 1)
+                              @foreach($pro->subvariants as $key=> $orivar)
 
-                    @if($pro->vender['role_id'] == 'a')
+                              @if($orivar->def == 1)
 
-                    @foreach($pro->subvariants as $key=> $orivar)
+                              @php
+                              $var_name_count = count($orivar['main_attr_id']);
 
-                    @if($orivar->def == 1)
-
-                    @php
-                    $var_name_count = count($orivar['main_attr_id']);
-
-                    $name = array();
-                    $var_name;
-                    $newarr = array();
-                    for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
-                      $var_name[$i]=$orivar['main_attr_value'][$var_id];
-                      $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
-                      }
-
-
-                      try{
-                      $url =
-                      url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
-                      }catch(Exception $e)
-                      {
-                      $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
-                      }
-                      //vardump($products);
-                      @endphp
- @php
-vardump($products);
+                              $name = array();
+                              $var_name;
+                              $newarr = array();
+                              for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
+                                $var_name[$i]=$orivar['main_attr_value'][$var_id];
+                                $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
+                                }
 
 
-
-
-@endphp
+                                try{
+                                $url =
+                                url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+                                }catch(Exception $e)
+                                {
+                                $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+                                }
+                              
+                                @endphp
+          
                       <div class="item item-carousel">
                         <div class="products">
                           <div class="product">
@@ -4015,6 +4013,7 @@ vardump($products);
     <h3 class="section-title display-none">
       {{ __('staticwords.Featured') }}
     </h3>
+    
     <div class="feature-product-dtl">
       <div class="row no-pad">
         @foreach($featureds as $featured)
@@ -4023,7 +4022,9 @@ vardump($products);
 
         @php
         $var_name_count = count($orivar['main_attr_id']);
-
+       
+ 
+ 
         $name;
         $var_name;
         $newarr = array();
@@ -5738,7 +5739,7 @@ $getads = App\Adv::where('position','=','abovefeaturedproduct')->where('status',
 
                   @else
                   <img class="{{ $orivar->stock ==0 ? "filterdimage" : ""}}" title="{{ $featured->name }}"
-                    src="{{url('images/no-image.png')}}" alt="No Image" />
+                    src="{{url('images/no-imag.jpeg')}}" alt="No Image" />
 
                   @endif
 
@@ -5756,7 +5757,6 @@ $getads = App\Adv::where('position','=','abovefeaturedproduct')->where('status',
               <h6 align="center" class="oottext2"><span>{{ __('staticwords.ComingSoon') }}</span></h6>
               @endif
               <!-- /.image -->
-
 
 
               @if($featured->featured=="1")

@@ -117,8 +117,9 @@ class MainController extends Controller
         }
 
         Session::put('currencyChanged', 'no');
-        
-        return view('front.index-used', compact('slider', 'advs', 'products', 'featureds', 'home_slider', 'blogs', 'conversion_rate', 'conversion_rate'));
+       // dd($products);
+       //  dd($advs   );
+        return view('front.index-used', compact('slider', 'advs', 'products', 'featureds', 'home_slider', 'blogs', 'conversion_rate'));
 
     }
 
