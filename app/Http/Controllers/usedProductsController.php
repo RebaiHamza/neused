@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Image;
 use Rap2hpoutre\FastExcel\FastExcel;
+use Carbon\Carbon ;
 
 class usedProductsController extends Controller
 {
@@ -564,6 +565,9 @@ class usedProductsController extends Controller
                 $relsetting->pro_id = $product->id;
                 $relsetting->status = '0';
                 $relsetting->save();
+
+
+
             }
 
             Session::flash('added', 'Your Data has successfully imported');
@@ -913,7 +917,7 @@ class usedProductsController extends Controller
         $input['is_used'] = 1;
         $input['is_new'] = 0;
         $data = Product::create($input);
-
+         
         $data->save();
 
 
