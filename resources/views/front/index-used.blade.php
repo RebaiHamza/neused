@@ -1178,7 +1178,7 @@ $current_date = date('Y-m-d H:i:s');
 
               <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
 
-                @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                @foreach(App\Product::where('category_id',$parentcats->id)->where('is_used','1')->take(10)->get() as $pro)
                 @if($genrals_settings->vendor_enable != 1)
                 @if($pro->vender['role_id'] == 'a')
                 @foreach($pro->subvariants as $key=> $orivar)
@@ -1990,7 +1990,7 @@ $current_date = date('Y-m-d H:i:s');
 
                           <div class="product-slider-main-block">
                             <div class="row no-pad">
-
+ 
                               <!-- /.item -->
                               @if(isset($products))
                               <?php $i = 0;
@@ -1998,7 +1998,7 @@ $current_date = date('Y-m-d H:i:s');
                                                            ?>
                               @foreach($products as $pro)
 
-                              @if($genrals_settings->vendor_enable != 1)
+                                @if($genrals_settings->vendor_enable != 1)
 
                               @if($pro->vender['role_id'] == 'a')
                               @foreach($pro->subvariants as $key=> $orivar)
@@ -2401,14 +2401,14 @@ $current_date = date('Y-m-d H:i:s');
 
                             @php
                             $var_name_count = count($orivar['main_attr_id']);
-
+                           
                             $name;
                             $var_name;
                             $newarr = array();
                             for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
                               $var_name[$i]=$orivar['main_attr_value'][$var_id];
                               $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
-
+                            
                               }
 
 
@@ -2804,7 +2804,7 @@ $current_date = date('Y-m-d H:i:s');
                   <?php 
                                                             $abcd = App\FrontCat::first();
                                                             $parents = explode(",",$abcd->name);
-                                                      ?>
+                                               ?>
                   @if(isset($abcd) && $abcd->status == '1')
                   @foreach($parents as $parent)
 
@@ -2816,7 +2816,7 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="product-slider">
 
                       <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                        @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                        @foreach(App\Product::where('category_id',$parentcats->id)->where('is_used','1')->take(10)->get() as $pro)
                         @if($genrals_settings->vendor_enable != 1)
                         @if($pro->vender['role_id'] == 'a')
 
@@ -2845,7 +2845,7 @@ $current_date = date('Y-m-d H:i:s');
                           {
                           $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
                           }
-
+ 
                           @endphp
                           <div class="item item-carousel">
                             <div class="products">

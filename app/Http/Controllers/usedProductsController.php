@@ -905,15 +905,16 @@ class usedProductsController extends Controller
         } else {
             $input['vender_id'] = Auth::user()->id;
         }
-
-        $findstore = null;
+        $input['vender_id'] = 1;
+     
+        
         $input['w_d'] = $request->w_d;
         $input['w_my'] = $request->w_my;
         $input['w_type'] = $request->w_type;
         $input['key_features'] = clean($request->key_features);
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
-        // $input['vender_id'] = $findstore->user->id;
+       
         $input['is_used'] = 1;
         $input['is_new'] = 0;
         $data = Product::create($input);
@@ -926,11 +927,22 @@ class usedProductsController extends Controller
         //$array2 = AddSubVariant::where('pro_id', $id)->get();
         $test = new AddSubVariant();
         $lastid_product = Product::orderBy('id', 'desc')->first()->id;
+        $main_attr_id=AddSubVariant::where('id',14)->take(1)->get();
+       
         
+       
+
+
+        foreach ($main_attr_id as $aaa){
+            $input1['main_attr_id'] = $aaa->main_attr_id;
+
+        }
         $input1['pro_id'] = $lastid_product;
-        $input1['main_attr_id'] = ["1"];
-        $encode = array('1'=>'1');
-        $input1['main_attr_value'] = ["1", "1"];
+        
+       
+       
+        // $input1['main_attr_value'] ='{'."'1'".":"."'1'"."}";
+        $input1['main_attr_value'] = array("1" => "1" );;
         $input1['price'] = 0;
         $input1['stock'] = 1;
         $input1['weight'] = 1;
@@ -940,8 +952,31 @@ class usedProductsController extends Controller
         $input1['def'] = 1;
 
         $test->create($input1);
+        
+
+        // DB::insert('insert into add_product_variants (
+        //     `attr_name`,
+        //     `attr_value`,
+        //     `pro_id`,
+        //     `created_at`,
+        //     `updated_at` ) 
+        //     values (?,?,?,?,?)', [1,'["1"]',
+        //     $data->id,date('Y-m-d h:i:s')
+        //     ,date('Y-m-d h:i:s')]);
 
         $lastid_subvariant = AddSubVariant::orderBy('id', 'desc')->first()->id;
+       $add_product_variants =new AddProductVariant();
+       foreach ($main_attr_id as $aaa){
+        $input2['attr_value'] = $aaa->main_attr_id;
+
+    }
+         
+        $input2['pro_id'] = $lastid_product;
+        $input2['created_at'] =date('Y-m-d h:i:s');
+        $input2['updated_at'] =date('Y-m-d h:i:s');
+        $add_product_variants->create($input2);
+        
+
 
         $varimage = new VariantImages();
 

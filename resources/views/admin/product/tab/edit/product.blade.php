@@ -75,8 +75,30 @@
         @endif
       </select>
     </div>
-
+    <?php $ISadmin = App\User::where('role_id' , 'a') ->first();
+    $ISadmin=Auth::user()->role_id;
+    ?>
+    @if ($ISadmin=='a')
     <div class="last_btn col-md-12">
+      <label>
+        Select Store:
+      </label>
+      <select required="" name="owner_id" class="form-control select2">
+
+
+       
+        
+          <option {{     $ISadmin=Auth::user()->name  }} value="{{ $ISadmin=Auth::user()->name }}">
+            {{ $ISadmin=Auth::user()->name }}</option>
+        
+       
+
+
+      </select>
+      <small class="txt-desc">(Please Choose Owner Name )</small>
+    </div>
+    @endif
+    {{-- <div class="last_btn col-md-12">
       <label>
         Select Store:
       </label>
@@ -93,7 +115,7 @@
 
       </select>
       <small class="txt-desc">(Please Choose Owner Name )</small>
-    </div>
+    </div> --}}
 
 
     <div class="margin-top-15 col-md-12">
