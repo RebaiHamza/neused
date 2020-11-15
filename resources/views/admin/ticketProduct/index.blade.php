@@ -1,14 +1,14 @@
 @extends("admin/layouts.master")
-@section('title','All Products |')
+@section('title','All Tickets |')
 @section("body")
    <div class="box">
   
 
       <div class="box-header">
-        <h3 class="box-title">All Products</h3>
+        <h3 class="box-title">All Tickets</h3>
         <br><br>
-        <a title="Import products" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Products</a>
-        <a href="{{ url('admin/products/create') }}" class="btn btn-md btn-success">+ Add Product</a>
+        <a title="Import tickets" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Tickets</a>
+        <a href="{{ url('admin/ticket-products/create') }}" class="btn btn-md btn-success">+ Add Ticket</a>
 
         <a type="button" class="btn btn-danger btn-md z-depth-0" data-toggle="modal" data-target="#bulk_delete"><i class="fa fa-trash"></i> Delete Selected</a> 
   
@@ -32,7 +32,7 @@
                 </th>
 
                 <th>
-                  Product Detail
+                  Ticket Detail
                 </th>
 
                 <th>
@@ -94,10 +94,10 @@
       var table = $('#productTable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '{{ route("products.index") }}',
+          ajax: '{{ route("ticket-products.index") }}',
           columns: [
               
-              {data : 'checkbox', name : 'checkbox',searchable : false, orderable : false},
+              {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},
               {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
               {data : 'image', name : 'image',searchable : false},
               {data : 'prodetail', name : 'prodetail'},

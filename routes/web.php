@@ -329,12 +329,14 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('pincode-check', 'PinCodController@pincode_check');
         
+        Route::get('/bid', 'bid\MainController@index');
         Route::get('/ticket', 'ticket\MainController@index');
         Route::get('/used', 'used\MainController@index');
         Route::get('/', 'MainController@index');
 
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');
+        Route::get('details-bid/{id}', 'bid\MainController@details_product');
         Route::get('addtTocartfromWishList/{id}', 'MainController@addtTocartfromWishList');
         Route::get('AddToWishList/{id}', 'MainController@AddToWishList');
         Route::get('wishlist/', 'MainController@wishlist_show');
@@ -510,7 +512,11 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('/manage/stock/{id}', 'AddSubVariantController@getIndex')->name('manage.stock');
 
+        Route::get('/manage/ticketstock/{id}', 'AddTicketSubVariantController@getIndex')->name('ticketmanage.stock');
+
         Route::post('manage/stock/{id}', 'AddSubVariantController@post')->name('manage.stock.post');
+
+        Route::post('manage/ticketstock/{id}', 'AddTicketSubVariantController@post')->name('ticketmanage.stock.post');
 
         /*Product Attribute Routes*/
         Route::get('admin/product/attr', 'ProductAttributeController@index')->name('attr.index');
@@ -552,19 +558,29 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('admin/product/addvariant/{id}', 'AddProductVariantController@getPage')->name('add.var');
 
         Route::post('admin/product/addvariant/{id}', 'AddProductVariantController@store')->name('add.str');
+        Route::post('admin/ticket/addvariant/{id}', 'AddTicketVariantController@store')->name('ticketadd.str');
 
         Route::DELETE('admin/product/delete/variant/{id}', 'AddProductVariantController@destroy')->name('del.subvar');
+        Route::DELETE('admin/ticket/delete/variant/{id}', 'AddTicketVariantController@destroy')->name('ticketdel.subvar');
 
         Route::post('admin/product/update/variant/{id}', 'AddProductVariantController@update')->name('updt.var2');
+        Route::post('admin/ticket/update/variant/{id}', 'AddTicketVariantController@update')->name('ticketupdt.var2');
+
+        /*Ticket Add Variant Route*/
+        Route::get('admin/ticket/addvariant/{id}', 'AddTicketVariantController@getPage')->name('addticket.var');
+        
         /*AJAX ROUTE*/
 
         Route::get('admin/get/productvalues', 'AddProductVariantController@getProductValues');
 
         Route::get('admin/product/editvariant/{id}', 'AddSubVariantController@edit')->name('edit.var');
+        Route::get('admin/ticket/editvariant/{id}', 'AddTicketSubVariantController@edit')->name('ticketedit.var');
 
         Route::post('admin/product/editvariant/{id}', 'AddSubVariantController@update')->name('updt.var');
+        Route::post('admin/ticket/editvariant/{id}', 'AddTicketSubVariantController@update')->name('ticketupdt.var');
 
         Route::delete('admin/product/delete/var/{id}', 'AddSubVariantController@delete')->name('del.var');
+        Route::delete('admin/ticket/delete/var/{id}', 'AddTicketSubVariantController@delete')->name('ticketdel.var');
         /*END*/
 
         Route::delete('admin/product/bulk_delete', 'ProductController@bulk_delete')->name('pro.bulk.delete');
@@ -682,6 +698,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('admin/reletdProduct_update', 'RealatedProductController@setting_update');
         Route::resource('admin/products', 'ProductController');
         Route::resource('admin/used-products', 'usedProductsController');
+        Route::resource('admin/ticket-products', 'ticketProductsController');
+
         Route::resource('admin/adv', 'AdvController');
         Route::get('admin/shipping_update', 'ShippingController@shipping');
 
@@ -728,8 +746,10 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/admin/quick/get/order/detail', 'OrderController@QuickOrderDetails')->name('quickorderdtls');
 
         Route::post('/add/common/variant/{id}', 'AddProductVariantController@storeCommon')->name('add.common');
+        Route::post('/add/ticketcommon/variant/{id}', 'AddTicketVariantController@storeCommon')->name('ticketadd.common');
 
         Route::delete('/delete/common/variant/{id}', 'AddProductVariantController@delCommon')->name('del.common');
+        Route::delete('/delete/ticketcommon/variant/{id}', 'AddTicketVariantController@delCommon')->name('ticketdel.common');
 
         Route::resource('admin/product_faq', 'FaqProductController');
 
@@ -768,6 +788,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/admin/update/read-at/cancel/fullorder', 'TrackRefundController@readfullorder');
 
         Route::post('/update/commonvar/{id}', 'AddProductVariantController@updatecommon')->name('common.update');
+        Route::post('/update/ticketcommonvar/{id}', 'AddTicketVariantController@updatecommon')->name('ticketcommon.update');
     });
 
     /*End*/

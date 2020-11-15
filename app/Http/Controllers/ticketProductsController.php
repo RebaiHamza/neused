@@ -38,7 +38,7 @@ Author URI: https://mediacity.co.in
 =            Copyright (c) 2020            =
 ==========================================*/
 
-class ProductController extends Controller
+class ticketProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -611,12 +611,13 @@ class ProductController extends Controller
             })
             ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
             ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
-            ->select('products.id as proid','products.is_new as is_new', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), 'variant_images.main_image as mainimage', 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
+            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured','products.is_ticket as is_ticket', 'products.status as status', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), 'variant_images.main_image as mainimage', 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
             ->where('products.deleted_at', '=', null)
-            ->where('is_new', '=', 1)
+            ->where('is_ticket', '=', 1)
             ->get();
 
         if ($request->ajax()) {
+          
             return DataTables::of($products)
                 ->editColumn('checkbox', function ($row) {
                     $chk = "<div class='inline'>
@@ -669,7 +670,7 @@ class ProductController extends Controller
                 ->make(true);
         }
 
-        return view('admin.product.index');
+        return view('admin.ticketProduct.index');
     }
 
     /**
@@ -716,7 +717,7 @@ class ProductController extends Controller
 
         $product = Product::all();
 
-        return view('admin.product.create', compact('categorys', 'stores', 'brands', 'product'));
+        return view('admin.ticketProduct.create', compact('categorys', 'stores', 'brands', 'product'));
     }
 
     /**
@@ -872,6 +873,8 @@ class ProductController extends Controller
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
         $input['vender_id'] = $findstore->user->id;
+        $input['is_ticket'] = 1;
+        $input['is_new'] = 0;
         $data = Product::create($input);
 
         $data->save();
@@ -882,7 +885,7 @@ class ProductController extends Controller
         $relsetting->status = '0';
         $relsetting->save();
 
-        return redirect()->route('add.var', $data->id)->with('success', 'Product created !  create a variant now ');
+        return redirect()->route('addticket.var', $data->id)->with('success', 'Product created !  create a variant now ');
     }
 
     public function addSale(Request $request)

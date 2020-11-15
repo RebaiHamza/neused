@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTypeProductToProductsTable extends Migration
+class AddIsbidToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddTypeProductToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->boolean('is_new');
-            $table->boolean('is_used');
+            $table->boolean('is_bid');
         });
     }
 
