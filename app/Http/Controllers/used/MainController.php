@@ -441,7 +441,6 @@ class MainController extends Controller
 
     public function details_product($id)
     {
-
         require_once 'price.php';
 
         $mainproreviews = UserReview::where('pro_id', $id)->where('status', '1')

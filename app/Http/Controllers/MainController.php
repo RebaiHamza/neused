@@ -428,7 +428,7 @@ class MainController extends Controller
 
             if (!empty($mainproreviews[0])) {
                 $count = count($mainproreviews);
-
+                
                 foreach ($mainproreviews as $key => $r) {
                     $quality = $tq + $r->qty * 5;
                 }

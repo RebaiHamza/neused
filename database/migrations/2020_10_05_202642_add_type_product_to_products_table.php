@@ -14,7 +14,7 @@ class AddTypeProductToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->boolean('is_new')->default(1);
+            $table->boolean('is_new');
             $table->boolean('is_used');
         });
     }

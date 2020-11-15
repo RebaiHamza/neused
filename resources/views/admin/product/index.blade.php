@@ -97,7 +97,7 @@
           ajax: '{{ route("products.index") }}',
           columns: [
               
-              {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},
+              {data : 'checkbox', name : 'checkbox',searchable : false, orderable : false},
               {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
               {data : 'image', name : 'image',searchable : false},
               {data : 'prodetail', name : 'prodetail'},
