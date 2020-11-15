@@ -336,7 +336,6 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');
-        Route::get('useddetails/{id}', 'used\MainController@details_product');
         Route::get('details-bid/{id}', 'bid\MainController@details_product');
         Route::get('addtTocartfromWishList/{id}', 'MainController@addtTocartfromWishList');
         Route::get('AddToWishList/{id}', 'MainController@AddToWishList');
