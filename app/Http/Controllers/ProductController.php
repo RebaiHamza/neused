@@ -613,6 +613,7 @@ class ProductController extends Controller
             ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
             ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), 'variant_images.main_image as mainimage', 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
             ->where('products.deleted_at', '=', null)
+            ->where('products.is_used', '=', 1)
             ->get();
 
         if ($request->ajax()) {
