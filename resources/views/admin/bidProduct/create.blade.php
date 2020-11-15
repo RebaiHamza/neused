@@ -1,9 +1,9 @@
 @extends('admin/layouts.master')
-@section('title','Add New Used Product |')
+@section('title','Add New Bid |')
  @section('body')
     <div class="box" >
         <div class="box-header">
-            <h3>Add new Product</h3>
+            <h3>Add new Bid</h3>
         </div>
         <div class="box-body">
             
@@ -17,18 +17,11 @@
    
         
         <div class="tab-content">
-            
-
             <div role="tabpanel" class="tab-pane fade in active" id="lis">
                 <div class="col-md-8">
-                   @include('admin/usedProduct/tab.product') 
+                   @include('admin/bidProduct/tab.product') 
                 </div>      
             </div>
-        
-            
-            
-            
-        
         </div>
         </div>
 

@@ -441,8 +441,8 @@ class MainController extends Controller
 
     public function details_product($id)
     {
-
-        require_once 'price.php';
+        define('__ROOT__', dirname(dirname(__FILE__)));
+        require_once (__ROOT__.'/price.php');
 
         $mainproreviews = UserReview::where('pro_id', $id)->where('status', '1')
             ->get();

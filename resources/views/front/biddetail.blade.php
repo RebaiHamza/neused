@@ -4,7 +4,7 @@
 @endsection
 @section("body")
 <nav class="navbar navbar-light display-none navbarBlue stickCartNav fixed-top">
-{{dd($pro->name)}}
+  
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -83,15 +83,12 @@
         @endphp
         
         @if(isset($isad))
-        
         <div class="home-banner outer-top-n outer-bottom-xs">
             @if($isad->adsensecode != '')
               @php
                 html_entity_decode($isad->adsensecode);
               @endphp
-              
             @else
-                
                 @if($isad->show_btn == '1')
                    <h3 class="buy-heading" style="color:{{ $isad->hcolor }}">{{ $isad->top_heading }}</h3>
                    <h5 class="buy-sub-heading" style="color:{{ $isad->scolor }}">{{ $isad->sheading }}</h5>
@@ -151,7 +148,6 @@
 
         <!-- ============================================== HOT DEALS ============================================== -->
 @if(isset($enable_hotdeal) && $enable_hotdeal->shop == "1")
-
       <div class="sidebar-widget hot-deals outer-bottom-xs  display-none-block">
           <h3 class="section-title">{{ __('staticwords.Hotdeals') }}</h3>
           <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
@@ -775,7 +771,6 @@
                      <h1 class="name">{{$pro->name}} </h1>
                     <span class="productVars name-type"></span>
                     <div class="seller-info">{{ __('staticwords.by') }} <a href="#" class="lnk">
-                      
                       {{ $pro->store->name }} @if($pro->store->verified_store) <i title="Verified" class="text-green fa fa-check-circle"></i> @endif
                     </a>
                     </div>

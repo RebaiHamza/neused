@@ -7,7 +7,7 @@
     <li>Default image will be <b><i>Image #1</i></b></li>
   </ul>
 </div>
-<form action="{{url('admin/used-products/')}}" method="POST" enctype="multipart/form-data">
+<form action="{{url('admin/bid-products/')}}" method="POST" enctype="multipart/form-data">
   {{csrf_field()}}
 
   <div class="row">
@@ -369,7 +369,7 @@
     <div class="margin-top-15 col-md-12">
 
       <label>
-        Price: <span class="required">*</span>
+        Starting Price: <span class="required">*</span>
         <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
       </label>
 
@@ -540,7 +540,7 @@
   </div>
 
   <div class="margin-top-15 scol-md-6">
-    <button type="submit" class="col-md-4 btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Product</button>
+    <button type="submit" class="col-md-4 btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Bid</button>
   </div>
 
   <!-- Main row End-->

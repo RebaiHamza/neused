@@ -101,7 +101,8 @@
             </li>
             <li class="{{ Nav::isRoute('pro.vars.all') }} @if(Str::startsWith(Route::current()->getName(),'products.')) active @endif {{ Nav::isRoute('add.var') }} {{ Nav::isRoute('manage.stock') }} {{ Nav::isRoute('edit.var') }}"><a href="{{url('admin/products')}} "> <i class="fa fa-circle-o"></i>New Products</a></li>
             <li class="{{ Nav::isResource('used-products') }}"><a href="{{ url('admin/used-products') }} "> <i class="fa fa-circle-o"></i>Used Products</a></li>
-            <li class="{{ Nav::isResource('ticket-products') }}"><a href="{{ url('admin/ticket-products') }} "> <i class="fa fa-circle-o"></i>Add Tickets</a></li>
+            <li class="{{ Nav::isResource('ticket-products') }}"><a href="{{ url('admin/ticket-products') }} "> <i class="fa fa-circle-o"></i>Tickets</a></li>
+            <li class="{{ Nav::isResource('bid-products') }}"><a href="{{ url('admin/bid-products') }} "> <i class="fa fa-circle-o"></i>Bids</a></li>
             <li class="{{ Nav::isRoute('import.page') }}"><a href="{{ route('import.page') }}"><i class="fa fa-circle-o"></i>Import Products</a></li>
             <li class="{{ Nav::isRoute('pro.val') }} {{ Nav::isRoute('opt.edit') }} {{ Nav::isRoute('attr.add') }}{{ Nav::isRoute('attr.index') }}"><a href="{{route('attr.index')}} "> <i class="fa fa-circle-o"></i>Product Attributes </a></li>
             

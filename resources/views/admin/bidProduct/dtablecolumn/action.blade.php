@@ -4,8 +4,8 @@
         Action <span class="caret"></span>
       </a>
       <ul class="dropdown-menu dropdown-menu-right">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('admin/used-products/'.$proid.'/edit')}}">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Used Product</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('admin/bid-products/'.$proid.'/edit')}}">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Bid</a></li>
           
           
           <li role="presentation" class="divider"></li>
@@ -31,7 +31,7 @@
           <p>Do you really want to delete this product <b>{{ $productname }}</b>? This process cannot be undone.</p>
         </div>
         <div class="modal-footer">
-           <form method="post" action="{{url('admin/used-products/'.$proid)}}" class="pull-right">
+           <form method="post" action="{{url('admin/bid-products/'.$proid)}}" class="pull-right">
                          {{csrf_field()}}
                          {{method_field("DELETE")}}
             <button type="reset" class="btn btn-gray translate-y-3" data-dismiss="modal">No</button>

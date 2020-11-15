@@ -1,14 +1,14 @@
 @extends("admin/layouts.master")
-@section('title','All Used Products |')
+@section('title','All Bids |')
 @section("body")
    <div class="box">
   
 
       <div class="box-header">
-        <h3 class="box-title">All Used Products</h3>
+        <h3 class="box-title">All Bids</h3>
         <br><br>
-        <a title="Import used products" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Used Products</a>
-        <a href="{{ url('admin/used-products/create') }}" class="btn btn-md btn-success">+ Add Used Product</a>
+        <a title="Import Bids" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Bids</a>
+        <a href="{{ url('admin/bid-products/create') }}" class="btn btn-md btn-success">+ Add Bid</a>
 
         <a type="button" class="btn btn-danger btn-md z-depth-0" data-toggle="modal" data-target="#bulk_delete"><i class="fa fa-trash"></i> Delete Selected</a> 
   
@@ -32,7 +32,7 @@
                 </th>
 
                 <th>
-                  Used Product Detail
+                  Bid Detail
                 </th>
 
                 <th>
@@ -94,7 +94,7 @@
       var table = $('#usedProductTable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '{{ route("used-products.index") }}',
+          ajax: '{{ route("bid-products.index") }}',
           columns: [
               
               {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},

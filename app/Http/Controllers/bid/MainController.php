@@ -494,7 +494,7 @@ class MainController extends Controller
 
             $faqs = FaqProduct::where('pro_id', $id)->get();
 
-            return view("front.detailbid", compact("pro", "mainproreviews", 'conversion_rate', 'qualityprogress', 'valueprogress', 'priceprogress', 'faqs'));
+            return view("front.biddetail", compact("pro", "mainproreviews", 'conversion_rate', 'qualityprogress', 'valueprogress', 'priceprogress', 'faqs'));
 
         } else {
             notify()

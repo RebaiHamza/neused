@@ -336,6 +336,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');
+        Route::get('useddetails/{id}', 'used\MainController@details_product');
         Route::get('details-bid/{id}', 'bid\MainController@details_product');
         Route::get('addtTocartfromWishList/{id}', 'MainController@addtTocartfromWishList');
         Route::get('AddToWishList/{id}', 'MainController@AddToWishList');
@@ -699,6 +700,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::resource('admin/products', 'ProductController');
         Route::resource('admin/used-products', 'usedProductsController');
         Route::resource('admin/ticket-products', 'ticketProductsController');
+        Route::resource('admin/bid-products', 'bidProductsController');
 
         Route::resource('admin/adv', 'AdvController');
         Route::get('admin/shipping_update', 'ShippingController@shipping');
