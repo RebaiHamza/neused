@@ -9,6 +9,7 @@ return array (
   'subscribeword' => 'اشترك في نشرتنا الإخبارية',
   'Subscribe' => 'الإشتراك',
   'newprods' => 'منتجات جديدة',
+  'newtickets' => 'آخر تذاكر',
   'tpc' => 'أعلى الفئات',
   'Featured' => 'متميز',
   'fpro' => 'منتجات مميزة',
