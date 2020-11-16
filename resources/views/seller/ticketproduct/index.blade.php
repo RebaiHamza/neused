@@ -1,5 +1,5 @@
 @extends("admin/layouts.sellermaster")
-@section('title','All Tickets |')
+@section('title','All Products |')
 @section("body")
 
 
@@ -7,9 +7,9 @@
   
 
       <div class="box-header">
-        <h3 class="box-title">All Tickets</h3>
+        <h3 class="box-title">All Products</h3>
         <br><br>
-        <a title="Import Tickets" href="{{ url('seller/importproducts') }}" class="btn btn-md bg-olive">Import Products</a>
+        <a title="Import products" href="{{ url('seller/importproducts') }}" class="btn btn-md bg-olive">Import Products</a>
         <a href="{{ url('seller/products/create') }}" class="btn btn-md btn-success">+ Add Product</a>
 
         <a type="button" class="btn btn-danger btn-md z-depth-0" data-toggle="modal" data-target="#bulk_delete"><i class="fa fa-trash"></i> Delete Selected</a> 
