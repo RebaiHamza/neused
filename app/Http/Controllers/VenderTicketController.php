@@ -38,7 +38,7 @@ Author URI: https://mediacity.co.in
 =            Copyright (c) 2020            =
 ==========================================*/
 
-class VenderProductController extends Controller
+class VenderTicketController extends Controller
 {
     public function index(Request $request)
     {
@@ -53,88 +53,7 @@ class VenderProductController extends Controller
             })
             ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
             ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
-            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.is_new as is_new', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), "variant_images.main_image as mainimage", 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
-            ->where('products.vender_id', '=', FacadesAuth::user()->id)
-            ->where('stores.user_id', '=', FacadesAuth::user()->id)
-            ->where('products.deleted_at','=',NULL)
-            ->where('is_new', '=', 1)
-            ->get();
-
-        if ($request->ajax()) {
-            return DataTables::of($products)
-                ->addColumn('checkbox', function ($row) {
-
-                    $chk = "<div class='inline'>
-                          <input type='checkbox' form='bulk_delete_form' class='filled-in material-checkbox-input' name='checked[]'' value='$row->proid' id='checkbox$row->proid'>
-                          <label for='checkbox$row->proid' class='material-checkbox'></label>
-                        </div>";
-
-                    return $chk;
-                })
-                ->addIndexColumn()
-                ->addColumn('image', function ($row) {
-
-                    $image = '';
-
-                    if ($row->mainimage) {
-
-                        $image .= '<img title=' . str_replace('"', '', $row->productname) . ' class="pro-img" src=' . url('variantimages/thumbnails/' . $row->mainimage) . ' alt=' . $row->mainimage . '>';
-
-                    } else {
-
-                        $image = '<img title="Make a variant first !" src="' . Avatar::create(str_replace('"', '', $row->productname))->toBase64() . '"/>';
-
-                    }
-
-                    return $image;
-                })
-                ->addColumn('prodetail', function ($row) {
-                    $html = '';
-                    $html .= '<p><b>' . str_replace('"', '', $row->productname) . '</b></p>';
-                    $html .= "<p><b>Store:</b> $row->storename</p>";
-                    $html .= "<p><b>Brand:</b> $row->brandname</p>";
-                    return $html;
-                })
-                ->addColumn('price', 'admin.product.dtablecolumn.price')
-                ->addColumn('catdtl', function ($row) {
-
-                    $catdtl = '';
-                    $catdtl .= '<p><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->catname) . '</p>';
-
-                    $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->subcatname) . '</p>';
-
-                    if ($row->childname) {
-                        $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->childname) . '</p>';
-                    } else {
-                        $catdtl .= "--";
-                    }
-
-                    return $catdtl;
-                })
-                ->addColumn('status', 'seller.product.dtablecolumn.status')
-                ->addColumn('history', 'seller.product.dtablecolumn.history')
-                ->addColumn('action', 'seller.product.dtablecolumn.action')
-                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
-                ->make(true);
-        }
-
-        return view("seller.product.index");
-    }
-
-    public function index2(Request $request)
-    {
-        $lang = Session::get('changed_language');
-
-        $products = DB::table('products')->join('stores', 'stores.id', '=', 'products.store_id')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('subcategories', 'subcategories.id', '=', 'products.child')
-            ->leftJoin('add_sub_variants', function ($join) {
-                $join->on('products.id', '=', 'add_sub_variants.pro_id')->where('add_sub_variants.def', '=', '1');
-            })
-            ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
-            ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
-            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.is_new as is_new', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), "variant_images.main_image as mainimage", 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
+            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.is_ticket as is_ticket', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), "variant_images.main_image as mainimage", 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
             ->where('products.vender_id', '=', FacadesAuth::user()->id)
             ->where('stores.user_id', '=', FacadesAuth::user()->id)
             ->where('products.deleted_at','=',NULL)
@@ -176,7 +95,7 @@ class VenderProductController extends Controller
                     $html .= "<p><b>Brand:</b> $row->brandname</p>";
                     return $html;
                 })
-                ->addColumn('price', 'admin.product.dtablecolumn.price')
+                ->addColumn('price', 'admin.ticketproduct.dtablecolumn.price')
                 ->addColumn('catdtl', function ($row) {
 
                     $catdtl = '';
@@ -192,102 +111,21 @@ class VenderProductController extends Controller
 
                     return $catdtl;
                 })
-                ->addColumn('status', 'seller.product.dtablecolumn.status')
-                ->addColumn('history', 'seller.product.dtablecolumn.history')
-                ->addColumn('action', 'seller.product.dtablecolumn.action')
+                ->addColumn('status', 'seller.ticketproduct.dtablecolumn.status')
+                ->addColumn('history', 'seller.ticketproduct.dtablecolumn.history')
+                ->addColumn('action', 'seller.ticketproduct.dtablecolumn.action')
                 ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
                 ->make(true);
         }
 
-        return view("seller.product.index");
-    }
-
-    public function index3(Request $request)
-    {
-        $lang = Session::get('changed_language');
-
-        $products = DB::table('products')->join('stores', 'stores.id', '=', 'products.store_id')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('subcategories', 'subcategories.id', '=', 'products.child')
-            ->leftJoin('add_sub_variants', function ($join) {
-                $join->on('products.id', '=', 'add_sub_variants.pro_id')->where('add_sub_variants.def', '=', '1');
-            })
-            ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
-            ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
-            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.is_new as is_new', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), "variant_images.main_image as mainimage", 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
-            ->where('products.vender_id', '=', FacadesAuth::user()->id)
-            ->where('stores.user_id', '=', FacadesAuth::user()->id)
-            ->where('products.deleted_at','=',NULL)
-            ->where('is_bid', '=', 1)
-            ->get();
-
-        if ($request->ajax()) {
-            return DataTables::of($products)
-                ->addColumn('checkbox', function ($row) {
-
-                    $chk = "<div class='inline'>
-                          <input type='checkbox' form='bulk_delete_form' class='filled-in material-checkbox-input' name='checked[]'' value='$row->proid' id='checkbox$row->proid'>
-                          <label for='checkbox$row->proid' class='material-checkbox'></label>
-                        </div>";
-
-                    return $chk;
-                })
-                ->addIndexColumn()
-                ->addColumn('image', function ($row) {
-
-                    $image = '';
-
-                    if ($row->mainimage) {
-
-                        $image .= '<img title=' . str_replace('"', '', $row->productname) . ' class="pro-img" src=' . url('variantimages/thumbnails/' . $row->mainimage) . ' alt=' . $row->mainimage . '>';
-
-                    } else {
-
-                        $image = '<img title="Make a variant first !" src="' . Avatar::create(str_replace('"', '', $row->productname))->toBase64() . '"/>';
-
-                    }
-
-                    return $image;
-                })
-                ->addColumn('prodetail', function ($row) {
-                    $html = '';
-                    $html .= '<p><b>' . str_replace('"', '', $row->productname) . '</b></p>';
-                    $html .= "<p><b>Store:</b> $row->storename</p>";
-                    $html .= "<p><b>Brand:</b> $row->brandname</p>";
-                    return $html;
-                })
-                ->addColumn('price', 'admin.product.dtablecolumn.price')
-                ->addColumn('catdtl', function ($row) {
-
-                    $catdtl = '';
-                    $catdtl .= '<p><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->catname) . '</p>';
-
-                    $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->subcatname) . '</p>';
-
-                    if ($row->childname) {
-                        $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> ' . str_replace('"', '', $row->childname) . '</p>';
-                    } else {
-                        $catdtl .= "--";
-                    }
-
-                    return $catdtl;
-                })
-                ->addColumn('status', 'seller.product.dtablecolumn.status')
-                ->addColumn('history', 'seller.product.dtablecolumn.history')
-                ->addColumn('action', 'seller.product.dtablecolumn.action')
-                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
-                ->make(true);
-        }
-
-        return view("seller.product.index");
+        return view("seller.ticketproduct.index");
     }
 
     public function additionalPrice(Request $request)
     {
         $product = Product::find($request->productid);
         if ($product) {
-            return response()->json(['body' => View::make('admin.product.dtablecolumn.add_price_detail', compact('product'))->render()]);
+            return response()->json(['body' => View::make('admin.ticketproduct.dtablecolumn.add_price_detail', compact('product'))->render()]);
         } else {
             return response()->json(['msg' => 'No product found !']);
         }
@@ -296,12 +134,12 @@ class VenderProductController extends Controller
     public function allvariants($id)
     {
         $pro = Product::findOrFail($id);
-        return view('seller.product.allvar', compact('pro'));
+        return view('seller.ticketproduct.allvar', compact('pro'));
     }
 
     public function importPage()
     {
-        return view('seller.product.import');
+        return view('seller.ticketproduct.import');
     }
 
     public function bulk_delete(Request $request)
@@ -742,7 +580,7 @@ class VenderProductController extends Controller
         $brands = Brand::all();
         $categorys = Category::all();
 
-        return view('seller.product.create', compact('auth_name', 'brands', 'categorys', 'vender_id'));
+        return view('seller.ticketproduct.create', compact('auth_name', 'brands', 'categorys', 'vender_id'));
 
     }
 
@@ -897,6 +735,8 @@ class VenderProductController extends Controller
         $input['w_d'] = $request->w_d;
         $input['w_my'] = $request->w_my;
         $input['w_type'] = $request->w_type;
+        $input['is_ticket'] = 1;
+        $input['is_new'] = 0;
 
         $data = Product::create($input);
 
@@ -934,7 +774,7 @@ class VenderProductController extends Controller
             ->where('rd', '0')
             ->get();
         $pro_image = DB::table('pro_images')->where('pro_id', $id)->get();
-        return view("seller.product.edit_tab", compact('auth_name', 'stores', 'brands', 'categorys', 'vender_id', 'pro_image', 'products', 'child', 'grand'));
+        return view("seller.ticketproduct.edit_tab", compact('auth_name', 'stores', 'brands', 'categorys', 'vender_id', 'pro_image', 'products', 'child', 'grand'));
     }
 
     /**
@@ -979,7 +819,7 @@ class VenderProductController extends Controller
         $grand = Grandcategory::where('subcat_id', $cat_id->child)
             ->get();
 
-        return view("seller.product.edit_tab", compact('rel_setting', "products", "categorys", "store", "brands", "faqs", "child", "grand", "realateds"));
+        return view("seller.ticketproduct.edit_tab", compact('rel_setting', "products", "categorys", "store", "brands", "faqs", "child", "grand", "realateds"));
     }
 
     /**

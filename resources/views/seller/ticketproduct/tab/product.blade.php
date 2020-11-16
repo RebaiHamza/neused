@@ -1,15 +1,15 @@
 <br>
-   <form action="{{url('seller/products/')}}" method="POST" enctype="multipart/form-data">
+   <form action="{{url('seller/ticketproducts/')}}" method="POST" enctype="multipart/form-data">
                         {{csrf_field()}}
                         
                     <div class="row">
 
                       <div class="col-md-6">
                         <label for="first-name">
-                        Product Name: <span class="color-red" class="required">*</span>
+                        Ticket Title: <span class="color-red" class="required">*</span>
                        </label>
 
-                        <input required="" placeholder="Please enter product name" type="text" id="first-name" autofocus="" name="name" value="{{ old('name') }}" class="form-control">
+                        <input required="" placeholder="Please enter ticket title" type="text" id="first-name" autofocus="" name="name" value="{{ old('name') }}" class="form-control">
                       </div>
 
                       <div class="col-md-6">
@@ -204,7 +204,7 @@
                             <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
                          </label>
 
-                          <input title="Offer price Format must be in this format : 200 or 200.25" pattern="[0-9]+(\.[0-9][0-9]?)?" required="" type="text" id="first-name" name="price" value="{{ old('price') }}" placeholder="Please enter product price" class="form-control">
+                          <input title="Offer price Format must be in this format : 200 or 200.25" pattern="[0-9]+(\.[0-9][0-9]?)?" required="" type="text" id="first-name" name="price" value="{{ old('price') }}" placeholder="Please enter Ticket price" class="form-control">
 
                            <br>
                           <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
@@ -255,7 +255,7 @@
                               <option value="{{$tax->id}}">{{$tax->title}}</option>
                             @endforeach
                           </select>
-                          <small class="txt-desc">(Please Choose Yes Then Start Sale This Product )</small>
+                          <small class="txt-desc">(Please Choose Yes Then Start Sale This Ticket )</small>
                            <img src="{{(url('images/info.png'))}}" data-toggle="modal" data-target="#taxmodal" class="height-15"><br>
                         </div>
                           
@@ -276,7 +276,7 @@
                         <input name="free_shipping" class="tgl tgl-skewed" id="toggle-event5" type="checkbox"/>
                         <label class="tgl-btn" data-tg-off="No" data-tg-on="Yes" for="toggle-event5"></label>
 
-                       <small class="txt-desc">(If Enabled Then Free Shipping will enabled for this product) </small>
+                       <small class="txt-desc">(If Enabled Then Free Shipping will enabled for this ticket) </small>
 
                     </div>
 
@@ -291,7 +291,7 @@
 
 
                         <input type="hidden" name="featured" id="featured">
-                        <small class="txt-desc">(If enabled than product will be featured) </small>
+                        <small class="txt-desc">(If enabled than ticket will be featured) </small>
                       </div>
 
                       <div class="col-md-4 margin-top-15">
@@ -325,7 +325,7 @@
                         <input id="codcheck" name="codcheck" class="tgl tgl-skewed" type="checkbox">
                         <label class="tgl-btn" data-tg-off="Disable" data-tg-on="Enable" for="codcheck"></label>
                         
-                        <small class="txt-desc">(Please Choose Cash on Delivery Available On This Product or Not)</small>
+                        <small class="txt-desc">(Please Choose Cash on Delivery Available On This Ticket or Not)</small>
                        </div>
 
                        
@@ -342,7 +342,7 @@
                               <option  value="0">Return Not Available</option>
                             </select>
                             <br>
-                              <small class="text-desc">(Please choose an option that return will be available for this product or not)</small>
+                              <small class="text-desc">(Please choose an option that return will be available for this ticket or not)</small>
                        
 
                         </div>
@@ -356,7 +356,7 @@
                               @endforeach
                             </select>
                             <br>
-                              <small class="text-desc">(Please choose an option that return will be available for this product or not)</small>
+                              <small class="text-desc">(Please choose an option that return will be available for this ticket or not)</small>
                        
 
                         </div>
@@ -368,7 +368,7 @@
                       </div>
 
                       <div class="col-md-6 margin-top-15">
-                        <button type="submit" class="col-md-4 btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Product</button>
+                        <button type="submit" class="col-md-4 btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Ticket</button>
                       </div>
 
                       <!-- Main row End-->

@@ -26,17 +26,17 @@
 
         <div role="tabpanel" class="tab-pane fade in active" id="lis">
             <div class="col-md-8">
-               @include('admin/product/tab.product') 
+               @include('admin/ticketProduct/tab.product') 
             </div>      
         </div>
     
         
         <div role="tabpanel" class="fade tab-pane" id="tags">
-            @include('admin/product/tab.faq') 
+            @include('admin/ticketProduct/tab.faq') 
         </div> 
 
          <div role="tabpanel" class="fade tab-pane" id="rel">
-             @include('admin/product/tab.edit.show_related') 
+             @include('admin/ticketProduct/tab.edit.show_related') 
         </div>
         
     

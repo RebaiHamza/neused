@@ -7,7 +7,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Product</h3>
+              <h3 class="box-title">Ticket</h3>
                     <div class="panel-heading">
                           <a href=" {{url('vender/add_product/')}} " class="btn btn-success pull-right owtbtn">< Back</a> 
                         </div>   
@@ -17,11 +17,11 @@
                         <input type="hidden" name="vender_id" value="{{$vender_id}}">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                          Product name <span class="required">*</span>
+                          Ticket name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" name="name" value=" {{old('name')}}" class="form-control col-md-7 col-xs-12">
-                          <p class="txt-desc">Please Enter product </p>
+                          <p class="txt-desc">Please Enter Ticket </p>
                         </div>
                       </div>
                       <div class="form-group">
@@ -134,7 +134,7 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                         Product Image<span>
+                         Ticket Image<span>
                            *
                          </span>
                         </label>

@@ -1,5 +1,5 @@
 @extends('admin.layouts.sellermaster')
-@section('title',"Edit Product: $products->name" )
+@section('title',"Edit Ticket: $products->name" )
 @section('body')
   <div class="display-none" class="preL">
     <div class="display-none" class="preloader3"></div>
@@ -7,20 +7,20 @@
   
     <div class="box" >
         <div class="box-header with-border">
-            <h3>Edit Product : {{$products->name ?? ''}}</h3>
+            <h3>Edit Ticket : {{$products->name ?? ''}}</h3>
         </div>
         <div class="box-body">
           
           
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs" role="tablist" id="myTab">
-    <li role="presentation" class="active"><a href="#lis" aria-controls="home" role="tab" data-toggle="tab">Product</a></li>
+    <li role="presentation" class="active"><a href="#lis" aria-controls="home" role="tab" data-toggle="tab">Ticket</a></li>
     
-    <li role="presentation"><a href="#prospec" aria-controls="home" role="tab" data-toggle="tab">Product Specification</a></li>
+    <li role="presentation"><a href="#prospec" aria-controls="home" role="tab" data-toggle="tab">Ticket Specification</a></li>
    
     <li role="presentation"><a href="#tags" aria-controls="messages" role="tab" data-toggle="tab">Faq</a></li>
 
-    <li role="presentation"><a href="#rel" aria-controls="messages" role="tab" data-toggle="tab">Related Product Setting</a></li>
+    <li role="presentation"><a href="#rel" aria-controls="messages" role="tab" data-toggle="tab">Related Ticket Setting</a></li>
    
     
 
@@ -33,20 +33,20 @@
 
         <div role="tabpanel" class="tab-pane fade in active" id="lis">
             <div class="col-md-8">
-               @include('seller/product/tab.edit.product') 
+               @include('seller/ticketproduct/tab.edit.product') 
             </div>      
         </div>
         
         <div role="tabpanel" class="fade tab-pane" id="prospec">
-            @include('seller.product.tab.edit.productspec') 
+            @include('seller.ticketproduct.tab.edit.productspec') 
         </div>
          
          <div role="tabpanel" class="fade tab-pane" id="tags">
-             @include('seller/product/tab.edit.faq') 
+             @include('seller/ticketproduct/tab.edit.faq') 
         </div>
         
         <div role="tabpanel" class="fade tab-pane" id="rel">
-             @include('seller/product/tab.edit.show_related') 
+             @include('seller/ticketproduct/tab.edit.show_related') 
         </div>
     
     </div>
@@ -60,7 +60,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle">Product Tax Information(PTI)</h4>
+        <h4 class="modal-title" id="exampleModalCenterTitle">Ticket Tax Information(PTI)</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -138,13 +138,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Related Product for <b>{{ $products->name }}</b></h4>
+        <h4 class="modal-title" id="myModalLabel">Add Related Ticket for <b>{{ $products->name }}</b></h4>
       </div>
       <div class="modal-body">
         
           <form action="{{ route('rel.store',$products->id) }}" method="POST">
             @csrf
-            <label>Choose Products: <span class="required">*</span></label>
+            <label>Choose Tickets: <span class="required">*</span></label>
             <select class="js-example-basic-single width100" multiple="multiple" name="related_pro[]">
               @foreach($products->subcategory->products as $pro)
                 @if($products->id != $pro->id)
@@ -176,7 +176,7 @@
             </div>
             <div class="modal-body text-center">
               <h4 class="modal-heading">Are You Sure ?</h4>
-              <p>Do you really want to delete these products? This process cannot be undone.</p>
+              <p>Do you really want to delete these tickets? This process cannot be undone.</p>
             </div>
             <div class="modal-footer">
              <form id="bulk_delete_form" method="post" action="{{ route('pro.specs.delete',$products->id) }}">

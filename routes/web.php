@@ -878,6 +878,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
             Route::name('my.')->group(function () {
                 Route::resource('products', 'VenderProductController');
+                Route::resource('ticketproducts', 'VenderTicketController');
             });
 
             Route::get('commission', 'VenderController@commission')->name('seller.commission');

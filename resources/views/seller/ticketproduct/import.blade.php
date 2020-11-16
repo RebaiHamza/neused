@@ -1,9 +1,9 @@
 @extends("admin.layouts.sellermaster")
-@section('title','Import Product |')
+@section('title','Import Ticket |')
 @section("body")
 	<div class="box box-primary">
 		<div class="box-header with-header">
-			<div class="box-title">Import Products</div>
+			<div class="box-title">Import Tickets</div>
 		</div>
 
 		<div class="box-body">
@@ -87,50 +87,50 @@
 
 					<tr>
 						<td>6</td>
-						<td><b>Product Name</b> (Required)</td>
-						<td>Name of your product</td>
+						<td><b>Ticket Name</b> (Required)</td>
+						<td>Name of your Ticket</td>
 					</tr>
 
 					<tr>
 						<td>7</td>
-						<td><b>Product Description</b> (Optional)</td>
-						<td>Detail of your product</td>
+						<td><b>Ticket Description</b> (Optional)</td>
+						<td>Detail of your Ticket</td>
 					</tr>
 
 					<tr>
 						<td>8</td>
 						<td><b>Model</b> (Optional)</td>
-						<td>Model No. of your product</td>
+						<td>Model No. of your Ticket</td>
 					</tr>
 
 					<tr>
 						<td>9</td>
 						<td><b>SKU</b> (Optional)</td>
-						<td>Detail of your product</td>
+						<td>Detail of your Ticket</td>
 					</tr>
 
 					<tr>
 						<td>10</td>
 						<td><b>Price In</b> (Required)</td>
-						<td>Your Product price in currency (eg. INR,USD) </td>
+						<td>Your Ticket price in currency (eg. INR,USD) </td>
 					</tr>
 
 					<tr>
 						<td>11</td>
 						<td><b>Price</b> (Required)</td>
-						<td>Your Product price (No string or comma in price)</td>
+						<td>Your Ticket price (No string or comma in price)</td>
 					</tr>
 
 					<tr>
 						<td>12</td>
 						<td><b>Offer Price</b> [<b>Note:</b> Leave blank if you dont want offer price.]</td>
-						<td>Your Product offer price (No string or comma in price)</td>
+						<td>Your Ticket offer price (No string or comma in price)</td>
 					</tr>
 
 					<tr>
 						<td>13</td>
 						<td><b>Featured</b> (Optional)</td>
-						<td><p>Enable or disable product is featured or not.</p>
+						<td><p>Enable or disable Ticket is featured or not.</p>
 						<p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -138,7 +138,7 @@
 					<tr>
 						<td>14</td>
 						<td><b>Status</b> (Required)</td>
-						<td><p>Enable or disable product is active or not.</p>
+						<td><p>Enable or disable Ticket is active or not.</p>
 						<p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -153,7 +153,7 @@
 					<tr>
 						<td>16</td>
 						<td><b>Cash on delivery</b> (Required)</td>
-						<td><p>Enable cash on delivery on your product.</p>
+						<td><p>Enable cash on delivery on your Ticket.</p>
 						   <p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -161,7 +161,7 @@
 					<tr>
 						<td>17</td>
 						<td><b>Free Shipping</b> (Required)</td>
-						<td><p>Enable free shipping on your product.</p>
+						<td><p>Enable free shipping on your Ticket.</p>
 						   <p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -169,7 +169,7 @@
 					<tr>
 						<td>18</td>
 						<td><b>Return Available</b> (Required)</td>
-						<td><p>Enable Return available on your product.</p>
+						<td><p>Enable Return available on your Ticket.</p>
 						   <p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -177,7 +177,7 @@
 					<tr>
 						<td>19</td>
 						<td><b>Cancel Available</b> (Required)</td>
-						<td><p>Enable Cancel available on your product.</p>
+						<td><p>Enable Cancel available on your Ticket.</p>
 						   <p>(Yes = 1, No = 0)</p>
 						</td>
 					</tr>
@@ -185,7 +185,7 @@
 					<tr>
 						<td>20</td>
 						<td><b>Selling Start at</b> (Optional)</td>
-						<td><p>Enable if you want to start selling your product from specific date.</p>
+						<td><p>Enable if you want to start selling your Ticket from specific date.</p>
 						   <p><b>(Date Format : 2019-11-12 00:00:00)</b></p>
 						</td>
 					</tr>
@@ -193,7 +193,7 @@
 					<tr>
 						<td>21</td>
 						<td><b>Warranty In (Period)</b> (Optional)</td>
-						<td><p>Enter if your product have warranty else enter <b>None</b>.</p>
+						<td><p>Enter if your Ticket have warranty else enter <b>None</b>.</p>
 						   <p><b>(eg. 1)</b></p>
 						</td>
 					</tr>
@@ -201,7 +201,7 @@
 					<tr>
 						<td>22</td>
 						<td><b>Warranty in (months,year,days)</b> (Optional)</td>
-						<td><p>Enable if your product have warranty else enter <b>None</b>.</p>
+						<td><p>Enable if your Ticket have warranty else enter <b>None</b>.</p>
 						   <p><b>(Available format: days,year,months)</b></p>
 						</td>
 					</tr>
@@ -209,7 +209,7 @@
 					<tr>
 						<td>23</td>
 						<td><b>Warranty type</b> (Optional)</td>
-						<td><p>Enable if your product have warranty else enter <b>None</b>.</p>
+						<td><p>Enable if your Ticket have warranty else enter <b>None</b>.</p>
 						   <p><b>(Available types: Gurrantey, Warrantey)</b></p>
 						</td>
 					</tr>
@@ -238,7 +238,7 @@
 					<tr>
 						<td>27</td>
 						<td><b>Tags</b> (Optional)</td>
-						<td>Enter product tags by putting comma to seprate tags.</td>
+						<td>Enter Ticket tags by putting comma to seprate tags.</td>
 					</tr>
 
 				</tbody>

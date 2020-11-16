@@ -291,8 +291,8 @@ $g = App\Genral::first();
               <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/newproducts') }}"><a
                   href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>New Products</span></a></li>
               
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproducts') }}"><a
-                    href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
+              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproduct') }}"><a
+                    href="{{route('my.ticketproducts.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
               
                     <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
                       href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>

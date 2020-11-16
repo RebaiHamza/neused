@@ -3,12 +3,12 @@
  @section('body')
     <div class="box" >
         <div class="box-header">
-            <h3>Add new Product</h3>
+            <h3>Add new Ticket</h3>
         </div>
         <div class="box-body">
         <div class="nav-tabs-custom">     
     <ul class="nav nav-tabs" role="tablist" id="myTab">
-      <li role="presentation" class="active"><a href="#lis" aria-controls="home" role="tab" data-toggle="tab">Product</a></li>  
+      <li role="presentation" class="active"><a href="#lis" aria-controls="home" role="tab" data-toggle="tab">Ticket</a></li>  
     </ul>
    
         
@@ -17,7 +17,7 @@
 
         <div role="tabpanel" class="tab-pane fade in active" id="lis">
             <div class="col-md-8">
-               @include('seller.product.tab.product') 
+               @include('seller.ticketproduct.tab.product') 
             </div>      
         </div>
     
@@ -37,7 +37,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle">Product Tax Information(PTI)</h4>
+        <h4 class="modal-title" id="exampleModalCenterTitle">Ticket Tax Information(PTI)</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
