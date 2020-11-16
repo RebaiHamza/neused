@@ -906,6 +906,8 @@ class usedProductsController extends Controller
             $input['vender_id'] = Auth::user()->id;
         }
 
+        $input['store_id'] = Auth::user()->id;
+
         $findstore = null;
         $input['w_d'] = $request->w_d;
         $input['w_my'] = $request->w_my;
@@ -920,17 +922,29 @@ class usedProductsController extends Controller
          
         $data->save();
 
+        $lastid_product = Product::orderBy('id', 'desc')->first()->id;
 
+        $add_product_variants =new AddProductVariant();
+        
+        $ss['attr_value'] = ["4"];
+        $ss['attr_name']=2;
+        $ss['pro_id'] = $lastid_product;
+        $ss['created_at'] =date('Y-m-d h:i:s');
+        $ss['updated_at'] =date('Y-m-d h:i:s');
+        // dd($add_product_variants);
+
+        $add_product_variants->create($ss);
+        
         // add subvariant
 
         //$array2 = AddSubVariant::where('pro_id', $id)->get();
         $test = new AddSubVariant();
-        $lastid_product = Product::orderBy('id', 'desc')->first()->id;
+        
         
         $input1['pro_id'] = $lastid_product;
-        $input1['main_attr_id'] = ["1"];
+        $input1['main_attr_id'] = ["2"];
         $encode = array('1'=>'1');
-        $input1['main_attr_value'] = ["1", "1"];
+        $input1['main_attr_value'] = array('2'=>'4') ;
         $input1['price'] = 0;
         $input1['stock'] = 1;
         $input1['weight'] = 1;

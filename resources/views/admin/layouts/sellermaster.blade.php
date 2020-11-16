@@ -288,8 +288,14 @@ $g = App\Genral::first();
             <ul class="treeview-menu">
               <li class="{{ Nav::isRoute('seller.brand.index')  }}"><a href="{{ route('seller.brand.index') }}"><i
                     class="fa fa-circle-o"></i>Brands</a></li>
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/products') }}"><a
-                  href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Products</span></a></li>
+              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/newproducts') }}"><a
+                  href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>New Products</span></a></li>
+              
+              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproducts') }}"><a
+                    href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
+              
+                    <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
+                      href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
 
               <li
                 class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }}">

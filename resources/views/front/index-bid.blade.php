@@ -1553,7 +1553,7 @@ $current_date = date('Y-m-d H:i:s');
               @else
               @foreach($pro->subvariants as $key=> $orivar)
               @if($orivar->def ==1)
-
+                
               @php
               $var_name_count = count($orivar['main_attr_id']);
 
@@ -2840,10 +2840,10 @@ $current_date = date('Y-m-d H:i:s');
 
                           try{
                           $url =
-                          url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+                          url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
                           }catch(Exception $e)
                           {
-                          $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+                          $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
                           }
 
                           @endphp
@@ -3270,10 +3270,10 @@ $current_date = date('Y-m-d H:i:s');
 
               try{
               $url =
-              url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+              url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
               }catch(Exception $e)
               {
-              $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+              $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
               }
 
               @endphp
@@ -3642,10 +3642,10 @@ $current_date = date('Y-m-d H:i:s');
 
             try{
             $url =
-            url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+            url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
             }catch(Exception $e)
             {
-            $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+            $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
             }
 
             @endphp
@@ -4042,10 +4042,10 @@ $current_date = date('Y-m-d H:i:s');
 
           try{
           $url =
-          url('details').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+          url('details-bid').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
           }catch(Exception $e)
           {
-          $url = url('details').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+          $url = url('details-bid').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
           }
 
           @endphp
@@ -4648,10 +4648,10 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
 
         try{
         $url =
-        url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+        url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
         }catch(Exception $e)
         {
-        $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+        $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
         }
 
         @endphp
@@ -5015,10 +5015,10 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
 
       try{
       $url =
-      url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+      url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
       }catch(Exception $e)
       {
-      $url = url('details').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+      $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
       }
 
       @endphp
@@ -5717,10 +5717,10 @@ $getads = App\Adv::where('position','=','abovefeaturedproduct')->where('status',
 
       try{
       $url =
-      url('details').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+      url('details-bid').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
       }catch(Exception $e)
       {
-      $url = url('details').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+      $url = url('details-bid').'/'.$featured->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
       }
 
       @endphp
