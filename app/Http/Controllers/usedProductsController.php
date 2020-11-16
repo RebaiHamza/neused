@@ -926,8 +926,8 @@ class usedProductsController extends Controller
 
         $add_product_variants =new AddProductVariant();
         
-        $ss['attr_value'] = ["4"];
-        $ss['attr_name']=2;
+        $ss['attr_value'] = ["36"];
+        $ss['attr_name']=7;
         $ss['pro_id'] = $lastid_product;
         $ss['created_at'] =date('Y-m-d h:i:s');
         $ss['updated_at'] =date('Y-m-d h:i:s');
@@ -942,9 +942,9 @@ class usedProductsController extends Controller
         
         
         $input1['pro_id'] = $lastid_product;
-        $input1['main_attr_id'] = ["2"];
+        $input1['main_attr_id'] = ["7"];
         $encode = array('1'=>'1');
-        $input1['main_attr_value'] = array('2'=>'4') ;
+        $input1['main_attr_value'] = array('7'=>'36') ;
         $input1['price'] = 0;
         $input1['stock'] = 1;
         $input1['weight'] = 1;
