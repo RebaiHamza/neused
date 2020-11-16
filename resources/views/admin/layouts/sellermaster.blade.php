@@ -295,7 +295,7 @@ $g = App\Genral::first();
                     href="{{route('my.ticketproducts.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
               
                     <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
-                      href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
+                      href="{{route('my.bidproducts.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
 
               <li
                 class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }}">
