@@ -102,11 +102,11 @@ class MainController extends Controller
             ->get();
         if ($sellerSystem == 1) {
             $featureds = $productsquery->take(20)->orderBy('id', 'DESC')
-                ->where([['status', '1'], ['featured', '1'], ['is_used', '0']])
+                ->where([['status', '1'], ['featured', '1']])->where('is_new',1)
                 ->get();
         } else {
             $x = $productsquery->take(20)->orderBy('id', 'DESC')
-                ->where([['status', '1'], ['featured', '1'], ['is_used', '0']])
+                ->where([['status', '1'], ['featured', '1']])->where('is_new',1)
                 ->get();
 
             $featureds = [];

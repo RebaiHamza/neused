@@ -354,7 +354,7 @@ $current_date = date('Y-m-d H:i:s');
           <div id="product-tabs-slider" class="scroll-tabs">
 
             <div class="more-info-tab clearfix ">
-              <h3 class="new-product-title pull-left">{{ __('Used product') }}</h3>
+              <h3 class="new-product-title pull-left">{{ __('Bids') }}</h3>
               <div class="scroller scroller-left"><i class="fa fa-angle-left"></i></div>
               <div class="scroller scroller-right"><i class="fa fa-angle-right"></i></div>
               <div class="wrapper">

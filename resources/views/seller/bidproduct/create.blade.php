@@ -20,11 +20,8 @@
                @include('seller.bidproduct.tab.product') 
             </div>      
         </div>
-    
-        
-       
-           
-                </div> 
+               
+        </div> 
         
     
     </div>

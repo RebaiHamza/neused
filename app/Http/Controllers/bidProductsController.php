@@ -721,7 +721,7 @@ class bidProductsController extends Controller
 
         $product = Product::all();
 
-        return view('admin.bidProduct.create', compact('categorys', 'users', 'brands', 'product'));
+        return view('seller.bidProduct.create', compact('categorys', 'users', 'brands', 'product'));
     }
 
     public function saveImages(Request $request, $image)
