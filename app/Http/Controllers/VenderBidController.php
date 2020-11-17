@@ -30,6 +30,10 @@ use Illuminate\Support\Facades\Validator;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Session;
 use View;
+use App\VariantImages;
+use File;
+use Image;
+
 
 /*==========================================
 =            Author: Media City            =
@@ -743,12 +747,160 @@ class VenderBidController extends Controller
 
         $data->save();
 
-        $relsetting = new Related_setting;
-        $relsetting->pro_id = $data->id;
-        $relsetting->status = '0';
-        $relsetting->save();
+        $lastid_product = Product::orderBy('id', 'desc')->first()->id;
 
-        return redirect()->route('seller.add.var', $data->id)->with('success', 'Product created !  create a variant now ');
+        $add_product_variants =new AddProductVariant();
+        
+        $ss['attr_value'] = ["4"];
+        $ss['attr_name']=2;
+        $ss['pro_id'] = $lastid_product;
+        $ss['created_at'] =date('Y-m-d h:i:s');
+        $ss['updated_at'] =date('Y-m-d h:i:s');
+        // dd($add_product_variants);
+
+        $add_product_variants->create($ss);
+        
+        // add subvariant
+
+        //$array2 = AddSubVariant::where('pro_id', $id)->get();
+        $test = new AddSubVariant();
+        
+        
+        $input1['pro_id'] = $lastid_product;
+        $input1['main_attr_id'] = ["2"];
+        $encode = array('1'=>'1');
+        $input1['main_attr_value'] = array('2'=>'4') ;
+        $input1['price'] = 0;
+        $input1['stock'] = 1;
+        $input1['weight'] = 1;
+        $input1['w_unit'] = 1;
+        $input1['min_order_qty'] = 1;
+        $input1['max_order_qty'] = 1;
+        $input1['def'] = 1;
+
+        $test->create($input1);
+
+        $lastid_subvariant = AddSubVariant::orderBy('id', 'desc')->first()->id;
+
+        $varimage = new VariantImages();
+
+        $path = public_path() . '/variantimages/';
+        $thumbpath = public_path() . '/variantimages/thumbnails/';
+        $hoverthumbpath = public_path() . '/variantimages/hoverthumbnail/';
+
+        File::makeDirectory($path, $mode = 0777, true, true);
+        File::makeDirectory($thumbpath, $mode = 0777, true, true);
+        File::makeDirectory($hoverthumbpath, $mode = 0777, true, true);
+
+        if ($file = $request->file('image1')) {
+
+            $request->validate([
+                'image1' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image1 = $name;
+
+            $thumb = $name;
+
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save('../public/variantimages/thumbnails/' . $thumb, 95);
+
+            $varimage->main_image = $name;
+
+        }
+
+        if ($file = $request->file('image2')) {
+
+            $request->validate([
+                'image2' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image2 = $name;
+
+            $hoverthumb = $name;
+
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save('../public/variantimages/hoverthumbnail/' . $hoverthumb, 95);
+
+        }
+
+        if ($file = $request->file('image3')) {
+
+            $request->validate([
+                'image3' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image3 = $name;
+
+        }
+
+        if ($file = $request->file('image4')) {
+
+            $request->validate([
+                'image4' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image4 = $name;
+
+        }
+
+        if ($file = $request->file('image5')) {
+
+            $request->validate([
+                'image5' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image5 = $name;
+
+        }
+
+        if ($file = $request->file('image6')) {
+
+            $request->validate([
+                'image6' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image6 = $name;
+
+        }
+
+        $varimage->var_id = $lastid_subvariant;
+
+        $varimage->save();
+
+
+
+        return redirect()->route('my.bidproducts.index')->with('success', 'Product created !');
 
     }
 

@@ -334,6 +334,10 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/used', 'used\MainController@index');
         Route::get('/', 'MainController@index');
 
+        Route::get('/startpage', function(){
+            return view('index');
+        });
+
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');
         Route::get('useddetails/{id}', 'used\MainController@details_product');

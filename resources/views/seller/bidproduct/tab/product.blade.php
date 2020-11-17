@@ -109,6 +109,165 @@
                          </textarea>
                       </div>
 
+                      {{-- images --}}
+
+                      <div class="margin-top-15"><br>
+                        <label style="padding-top: 10px;padding-left:10px;">
+                          Images:
+                        </label><br>
+                        <div class="col-md-4">
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 1</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview1" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5 margin-bottom-10">
+                  
+                  
+                            </div>
+                  
+                            <div class="file-upload heyx">
+                              <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input required name="image1" type="file" name="chooseFile" id="image1">
+                              </div>
+                            </div>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                  
+                        <div class="col-md-4">
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 2</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview2" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5 margin-bottom-10">
+                  
+                  
+                            </div>
+                  
+                            <div class="file-upload2 heyx">
+                              <div class="file-select2">
+                                <div class="file-select-button2" id="fileName2">Choose File</div>
+                                <div class="file-select-name2" id="noFile2">No file chosen...</div>
+                                <input required name="image2" type="file" name="chooseFile" id="image2">
+                              </div>
+                            </div>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                  
+                        <div class="col-md-4">
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 3</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview3" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5">
+                  
+                  
+                            </div>
+                  
+                            <div class="file-upload3 heyx">
+                              <div class="file-select3">
+                                <div class="file-select-button3" id="fileName3">Choose File</div>
+                                <div class="file-select-name3" id="noFile3">No file chosen...</div>
+                                <input name="image3" type="file" name="chooseFile" id="image3">
+                              </div>
+                            </div>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                      </div>
+                      <div class="margin-top-15">
+                        <div class="col-md-4">
+                  
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 4</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview4" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5 margin-bottom-10">
+                  
+                  
+                            </div>
+                  
+                            <div class="file-upload4 heyx">
+                              <div class="file-select4">
+                                <div class="file-select-button4" id="fileName4">Choose File</div>
+                                <div class="file-select-name4" id="noFile4">No file chosen...</div>
+                                <input name="image4" type="file" name="chooseFile" id="image4">
+                              </div>
+                            </div>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                  
+                        <div class="col-md-4">
+                  
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 5</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview5" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5 margin-bottom-10">
+                  
+                  
+                            </div>
+                  
+                            <div class="file-upload5 heyx">
+                              <div class="file-select5">
+                                <div class="file-select-button5" id="fileName5">Choose File</div>
+                                <div class="file-select-name5" id="noFile5">No file chosen...</div>
+                                <input name="image5" type="file" name="chooseFile" id="image5">
+                              </div>
+                            </div>
+                  
+                  
+                          </div>
+                  
+                        </div>
+                  
+                  
+                        <div class="col-md-4">
+                  
+                          <div class="panel panel-primary bg-primary height-shadow">
+                            <p class="padding5-15">Select Image 6</p>
+                  
+                            <div align="center" class="panel-body padding-0">
+                  
+                              <img id="preview6" align="center" width="150" height="150" src="{{ url('images/imagechoosebg.png') }}"
+                                alt="" class="margin-top-5 margin-bottom-10">
+                            </div>
+                            <div class="file-upload6 heyx">
+                              <div class="file-select6">
+                                <div class="file-select-button6" id="fileName6">Choose File</div>
+                                <div class="file-select-name6" id="noFile6">No file chosen...</div>
+                                <input name="image6" type="file" name="chooseFile" id="image6">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
+                      </div>
+
+                      {{-- end images --}}
+
                       <div class="col-md-4 margin-top-15">
                         <label for="warranty_info">Warranty:</label>
 
