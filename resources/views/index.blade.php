@@ -9,14 +9,14 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div class="logo"></div>
+<div class="logo" onclick="window.location='http://google.com';"></div>
 
 <div class="wrapper">
 	<h1>Choose a type to start shopping</h1>
 	<br><br><br>
 	<div class="profile-wrap">
 		
-		<div class="profile">
+		<div class="profile" onclick="window.location='http://neused10.test/';">
 			<div class="profile-icon profile1">
 				<svg width="150" height="150" viewBox="0 40 500 500" xmlns="http://www.w3.org/2000/svg" style="background:#734fcc">
 				  <g id="Page-1" fill="none" fill-rule="evenodd">
@@ -36,7 +36,7 @@
 				New Products
 			</div>
 		</div>
-		<div class="profile">
+		<div class="profile" onclick="window.location='http://neused10.test/used';">
 			<div class="profile-icon profile2">
 				<svg width="150" height="150" viewBox="0 30 530 500" xmlns="http://www.w3.org/2000/svg" style="background:#734fcc">
 				  <g id="Page-1" fill="none" fill-rule="evenodd">
@@ -53,7 +53,7 @@
 				Used Products
 			</div>
 		</div>
-		<div class="profile">
+		<div class="profile" onclick="window.location='http://neused10.test/ticket';">
 			<div class="profile-icon profile3">
 				<svg width="150" height="150" viewBox="10 150 550 300" xmlns="http://www.w3.org/2000/svg" style="background:#734fcc">
 				  <g id="Page-1" fill="none" fill-rule="evenodd">
@@ -74,14 +74,14 @@
 				Tickets
 			</div>
 		</div>
-		<div class="profile">
+		<div class="profile" onclick="window.location='http://neused10.test/bid';">
 
 			<div class="profile-icon profile4">
 				<svg width="150" height="150" viewBox="10 150 550 300" xmlns="http://www.w3.org/2000/svg" style="background:#734fcc">
 					<g id="Page-1" fill="none" fill-rule="evenodd">
 					  <g id="Never-Users-Own-Profile" fill="#FCFDFF">
 						<g id="profile3" transform="translate(31 50)">
-	&						<path d="m276.48 186.234v18.847l-180.617 58.933v57.004l25.144 6.873v94.09h34.631c9.842 0 17.82-7.978 17.82-17.82v-61.933l103.022 28.162v18.847h43.724v-203.003z" fill="#a38cde" data-original="#b2f0fb" style=""/>
+							<path d="m276.48 186.234v18.847l-180.617 58.933v57.004l25.144 6.873v94.09h34.631c9.842 0 17.82-7.978 17.82-17.82v-61.933l103.022 28.162v18.847h43.724v-203.003z" fill="#a38cde" data-original="#b2f0fb" style=""/>
 							<path d="m475.294 28.481h-438.588c-20.24 0-36.706 16.501-36.706 36.784v387.819c0 16.782 13.601 30.435 30.317 30.435h451.365c16.717 0 30.317-13.653 30.317-30.435v-387.819c.001-20.283-16.465-36.784-36.705-36.784zm-455.294 36.784c0-9.254 7.494-16.783 16.706-16.783h438.588c9.212 0 16.706 7.529 16.706 16.783v59.432h-472zm472 387.818c0 5.754-4.628 10.435-10.317 10.435h-451.366c-5.689 0-10.317-4.681-10.317-10.435v-308.387h472z" fill="#ffffff" data-original="#020288" style="" class=""/>
 							<path d="m328.972 76.589h-13.433c-5.523 0-10 4.477-10 10s4.477 10 10 10h13.433c5.523 0 10-4.477 10-10s-4.477-10-10-10z" fill="#ffffff" data-original="#020288" style="" class=""/>
 							<path d="m391.104 76.589h-13.433c-5.523 0-10 4.477-10 10s4.477 10 10 10h13.433c5.523 0 10-4.477 10-10s-4.477-10-10-10z" fill="#ffffff" data-original="#020288" style="" class=""/>

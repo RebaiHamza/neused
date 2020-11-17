@@ -7,7 +7,7 @@ body {
   animation: fade-in 500ms ease 200ms 1 forwards;
 }
 body h1 {
-  color: #1f1f1f;
+  color: #fff;
   font-size: 50px;
 }
 body a {
@@ -35,11 +35,12 @@ body a:hover {
   }
 }
 .logo {
-  width: 110px;
-  height: 30px;
+  width: 120px;
+  height: 31px;
   margin: 15px 60px;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2000px-Netflix_2015_logo.svg.png");
+  background-image: url("images/neused.png");
   background-size: cover;
+  cursor: pointer;
 }
 
 .wrapper {
@@ -49,6 +50,7 @@ body a:hover {
 
 .profile {
   width: 150px;
+  cursor: pointer;
 }
 .profile-wrap {
   display: flex;

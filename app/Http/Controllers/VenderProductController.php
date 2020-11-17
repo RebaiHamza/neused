@@ -1209,27 +1209,27 @@ class VenderProductController extends Controller
             foreach ($subvar as $s) {
 
                 if ($s->variantimages['image1'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image1']);
+                    unlink('../public/variantimages/' . $s->variantimages['image1']);
                 }
 
                 if ($s->variantimages['image2'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image2']);
+                    unlink('../public/variantimages/' . $s->variantimages['image2']);
                 }
 
                 if ($s->variantimages['image3'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image3']);
+                    unlink('../public/variantimages/' . $s->variantimages['image3']);
                 }
 
                 if ($s->variantimages['image4'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image4']);
+                    unlink('../public/variantimages/' . $s->variantimages['image4']);
                 }
 
                 if ($s->variantimages['image5'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image5']);
+                    unlink('../public/variantimages/' . $s->variantimages['image5']);
                 }
 
                 if ($s->variantimages['image6'] != null) {
-                    unlink('../public/variantimages/' . $s->variantimages[0]['image6']);
+                    unlink('../public/variantimages/' . $s->variantimages['image6']);
                 }
 
                 DB::table('variant_images')
