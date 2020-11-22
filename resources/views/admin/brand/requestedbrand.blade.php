@@ -50,10 +50,15 @@
 							<td>
 								<form action="{{ route('brand.quick.update',$brand->id) }}" method="POST">
 								      {{csrf_field()}}
-								      <button type="submit" class="btn btn-xs {{ $brand->status==1 ? "btn-success" : "btn-danger" }}">
-								        {{ $brand->status ==1 ? 'Active' : 'Deactive' }}
-								      </button>
-								</form> 
+								      <button type="submit" class="btn btn-xs btn-primary">
+								        Accept
+									  </button>
+								</form> <br>
+								<form action="{{ route('brand.quick.delete',$brand->id) }}" method="POST">
+									{{csrf_field()}}
+									<button type="submit" class="btn btn-danger btn-xs">Delete</button>
+							  </form>
+								
 							</td>
 						</tr>
 					@endforeach

@@ -52,10 +52,11 @@
                 <input type="radio" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>{{__('staticwords.Rememberme')}}
             </label>
             <a href="{{ route('password.request') }}" class="forgot-password pull-right">{{__('staticwords.ForgotYourPassword')}}</a>
-            <a href="{{ route('register') }}" class="forgot-password pull-right">{{__('staticwords.NewUserRegisterNow')}}&nbsp;|&nbsp;&nbsp;</a>
+            
 
         </div>
     <button type="submit" class="signin btn-upper btn btn-primary checkout-page-button">{{__('staticwords.Login')}}</button>
+    <a href="{{ route('register') }}" class="signin btn-upper btn btn-primary checkout-page-button">{{__('staticwords.NewUserRegisterNow')}}</a>
     </form>                 
 </div>
 <!-- Sign-in -->

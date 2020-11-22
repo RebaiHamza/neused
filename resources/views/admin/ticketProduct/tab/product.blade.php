@@ -105,6 +105,15 @@
                          <textarea class="form-control" id="editor2" name="key_features">
                          </textarea>
                       </div>
+
+                      <div class="col-md-12">
+                        <br>
+                        <label for="ytlink">
+                        Youtube Link:
+                       </label>
+
+                        <input placeholder="Please enter Youtube link for the product" type="text" autofocus="" name="ytlink" value="{{ old('name') }}" class="form-control">
+                      </div>
                       
                       <div class="margin-top-15 col-md-12">
                         <label for="first-name"> Description:

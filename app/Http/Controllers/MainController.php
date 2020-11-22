@@ -938,6 +938,7 @@ class MainController extends Controller
     public function store_vender(Request $request)
     {
         $input = $request->all();
+        $input['othersite'] = $request->otherStores;
 
         if ($file = $request->file('store_logo')) {
             $optimizeImage = Image::make($file);

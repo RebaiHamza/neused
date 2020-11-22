@@ -1338,6 +1338,11 @@
       @else
         {{ __('No Description') }}
       @endif
+      
+      @if($pro->ytlink != '')
+        {!! $pro->ytlink !!}
+      @endif
+      
       <hr>
       <p><b>{{ __('Tags') }}:</b> 
       @php

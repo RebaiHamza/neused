@@ -956,6 +956,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
     Route::post('/admin/quickupdate/childcategory/{id}', 'QuickUpdateController@childUpdate')->name('child.quick.update');
 
     Route::post('/admin/quickupdate/brand/{id}', 'QuickUpdateController@brandUpdate')->name('brand.quick.update');
+    
+    Route::post('/admin/quickdelete/brand/{id}', 'QuickUpdateController@brandDelete')->name('brand.quick.delete');
 
     Route::post('/admin/quickupdate/detail_status/{id}', 'QuickUpdateController@detailUpdate')->name('detail_status.quick.update');
 

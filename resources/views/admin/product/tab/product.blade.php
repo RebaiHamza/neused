@@ -100,14 +100,23 @@
                       </div>
 
                       <div class="margin-top-15 col-md-12">
-                        <label for="first-name"> Key Features :
+                        <label for="key_features"> Key Features :
                         </label>
                          <textarea class="form-control" id="editor2" name="key_features">
                          </textarea>
                       </div>
                       
+                      <div class="col-md-12">
+                        <br>
+                        <label for="ytlink">
+                        Youtube Link:
+                       </label>
+
+                        <input placeholder="Please enter Youtube link for the product" type="text" autofocus="" name="ytlink" value="{{ old('name') }}" class="form-control">
+                      </div>
+                      
                       <div class="margin-top-15 col-md-12">
-                        <label for="first-name"> Description:
+                        <label for="des"> Description:
                         </label>
                          <textarea id="editor1" name="des">{{ old('des') }}</textarea>
                       </div>
@@ -258,26 +267,18 @@
                            <img src="{{(url('images/info.png'))}}" data-toggle="modal" data-target="#taxmodal" height="15px"><br>
                         </div>
                           
+                        </div>
+                        <div class="margin-top-15 col-md-4">
+                                <label>
+                                  Free Shipping:
+                                </label>
+
+                            <input name="free_shipping" class="tgl tgl-skewed" id="toggle-event5" type="checkbox"/>
+                            <label class="tgl-btn" data-tg-off="No" data-tg-on="Yes" for="toggle-event5"></label>
+
+                          <small class="txt-desc">(If Enabled Then Free Shipping will enabled for this product) </small>
 
                         </div>
-
-                     
-
-                     
-
-                    <div class="margin-top-15 col-md-4">
-                        
-                          
-                            <label>
-                              Free Shipping:
-                            </label>
-
-                        <input name="free_shipping" class="tgl tgl-skewed" id="toggle-event5" type="checkbox"/>
-                        <label class="tgl-btn" data-tg-off="No" data-tg-on="Yes" for="toggle-event5"></label>
-
-                       <small class="txt-desc">(If Enabled Then Free Shipping will enabled for this product) </small>
-
-                    </div>
 
             <div class="margin-top-15 col-md-4">
             <label for="first-name">

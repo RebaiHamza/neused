@@ -448,7 +448,7 @@ class UserController extends Controller
 
     public function appliedform(Request $request)
     {
-        $stores = \DB::table('stores')->join('allcities','allcities.id','=','stores.city_id')->join('allstates','stores.state_id','=','allstates.id')->join('allcountry','allcountry.id','=','stores.country_id')->join('users','users.id','=','stores.user_id')->select('stores.*','allcities.pincode as pincode','allcities.name as city','allstates.name as state','allcountry.name as country','users.name as username')->where('stores.apply_vender','=','0')->get();
+        $stores = \DB::table('stores')->join('allcities','allcities.id','=','stores.city_id')->join('allstates','stores.state_id','=','allstates.id')->join('allcountry','allcountry.id','=','stores.country_id')->join('users','users.id','=','stores.user_id')->select('stores.*','othersite as othersite', 'allcities.pincode as pincode','allcities.name as city','allstates.name as state','allcountry.name as country','users.name as username')->where('stores.apply_vender','=','0')->get();
 
         if($request->ajax()){
             return FacadesDataTables::of($stores)->addIndexColumn()
@@ -463,6 +463,10 @@ class UserController extends Controller
                         }else{
                             $html .= "<p><b>Pincode:</b> - </p>";
                         }
+                        if($row->othersite)
+                            $html .= "<p><b>Other website selling in: </b> $row->othersite</p>";
+                        else
+                            $html .= "<p><b>Other website selling in: </b> No other websites</p>";
                         
                         return $html;
                    })

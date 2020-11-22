@@ -184,6 +184,15 @@ class QuickUpdateController extends Controller
         }
     }
 
+    public function brandDelete($id)
+    {
+        $brand = Brand::findorfail($id);
+
+        $brand->delete();
+        
+        return back()->with('Deleted','Brand is deleted !');
+    }
+
     public function reviewUpdate($id)
     {
 

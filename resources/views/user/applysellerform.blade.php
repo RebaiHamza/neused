@@ -252,19 +252,28 @@
                           <div class="row">
                             <div class="col-md-2 col-xs-4">
                               <div class="custom-control custom-radio">
-                                <input required="" type="radio" id="yes" value="Yes" name="name1" class="custom-control-input">
+                                <input required type="radio" id="yes" value="Yes" name="name1" class="custom-control-input">
                                 <label class="custom-control-label" for="yes">{{ __('Yes') }}</label>
                               </div>
                               
                               
                             </div>
                             <div class="m-55 col-md-2 col-xs-4">
-                               <div class="custom-control custom-radio">
-                                <input required="" type="radio" id="No" value="No" name="name1" class="custom-control-input">
+                              <div class="custom-control custom-radio">
+                                <input required type="radio" id="No" value="No" name="name1" class="custom-control-input">
                                 <label class="custom-control-label" for="No">
                                   {{ __('No') }}
                                 </label>
                               </div>
+                            </div>                            
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="otherStores">If yes, what's the name of the website?</label>
+                          <div class="row">
+                            <div id="checkOtherStore" class=" col-md-2 col-xs-8">
+                              
+                              <input type="text" id="otherStores" name="otherStores" class="form-control">
                             </div>
                           </div>
                         </div>

@@ -285,7 +285,7 @@ return [
     'SignInwithGitLab' => 'Sign In with GitLab',
     'Rememberme' => 'Remember me!',
     'ForgotYourPassword' => 'Forgot Your Password?',
-    'NewUserRegisterNow' => 'New User? Register Now',
+    'NewUserRegisterNow' => 'Register',
     'Createanewaccount' => 'Create a new account',
     'Signintostartyoursession' => 'Sign in to start your session',
     'Password' => 'Password',

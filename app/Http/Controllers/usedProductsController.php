@@ -932,6 +932,7 @@ class usedProductsController extends Controller
         $input['w_my'] = $request->w_my;
         $input['w_type'] = $request->w_type;
         $input['key_features'] = clean($request->key_features);
+        $input['ytlink'] = $request->ytlink;
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
         // $input['vender_id'] = $findstore->user->id;

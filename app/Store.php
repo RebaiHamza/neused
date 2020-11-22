@@ -10,7 +10,7 @@ class Store extends Model
 
 
     protected $fillable = [
-        'user_id', 'name', 'address','phone','mobile','email','city_id','country_id','state_id','pin_code','store_logo','website','status','verified_store','featured','branch','ifsc','account','bank_name','account_name','paypal_email','paytem_mobile','preferd','apply_vender','vat_no'
+        'othersite', 'user_id', 'name', 'address','phone','mobile','email','city_id','country_id','state_id','pin_code','store_logo','website','status','verified_store','featured','branch','ifsc','account','bank_name','account_name','paypal_email','paytem_mobile','preferd','apply_vender','vat_no'
     ];
 
     public function state(){

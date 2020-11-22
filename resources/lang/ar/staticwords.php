@@ -281,7 +281,7 @@ return array (
   'SignInwithGitLab' => 'سجّل الدخول باستخدام GitLab',
   'Rememberme' => 'تذكرنى!',
   'ForgotYourPassword' => 'نسيت رقمك السري؟',
-  'NewUserRegisterNow' => 'مستخدم جديد؟ سجل الان',
+  'NewUserRegisterNow' => 'سجل الان',
   'Createanewaccount' => 'انشاء حساب جديد',
   'Signintostartyoursession' => 'تسجيل الدخول لبدء الجلسة الخاصة بك',
   'Password' => 'كلمه السر',
