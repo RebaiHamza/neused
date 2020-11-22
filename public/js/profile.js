@@ -1,6 +1,5 @@
 "use strict";
 // Define your library strictly...
-alert("dfhdh");
 
 $('#edit1').on('click', function() {
   $('#fname,#mail').removeAttr("disabled");

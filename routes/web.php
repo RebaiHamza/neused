@@ -251,6 +251,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('/myused', 'usedProductsController@myUsedIndex')->name('myusedlist');
         Route::get('/addused', 'usedProductsController@addUsedForm')->name('used.add');
+        Route::post('/submitused', 'usedProductsController@addUsed')->name('used.submit');
+
 
         // END COPYING for myused
 
@@ -894,6 +896,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
                 Route::resource('ticketproducts', 'VenderTicketController');
                 Route::resource('bidproducts', 'VenderBidController');
             });
+
+            
 
             Route::get('commission', 'VenderController@commission')->name('seller.commission');
             Route::get('myprofile', 'VenderController@profile')->name('get.profile');

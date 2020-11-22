@@ -193,7 +193,7 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
 
         <h4 class="user_m2">{{ __('staticwords.ADDUsedProduct') }}</h5>
           <hr>
-          <form method="post" action="{{url('user./'.$user->id)}}" enctype="multipart/form-data">
+          <form method="post" action="{{url('/submitused')}}" enctype="multipart/form-data">
             {{csrf_field()}}
 
             <div class="row">

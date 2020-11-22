@@ -489,5 +489,5 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
 @endsection
 @section('script')
 <script src="{{ url('js/profile.js') }}"></script>
-<script src="{{ url('js/bank.js') }}"></script>
+
 @endsection

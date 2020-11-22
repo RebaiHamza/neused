@@ -94,11 +94,11 @@
       var table = $('#usedProductTable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '{{ route("used-products.index") }}',
+          ajax: '{{ route('used-products.index') }}',
           columns: [
               
               {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},
-              {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
+              {data : 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
               {data : 'image', name : 'image',searchable : false},
               {data : 'prodetail', name : 'prodetail'},
               {data : 'price', name : 'price'},

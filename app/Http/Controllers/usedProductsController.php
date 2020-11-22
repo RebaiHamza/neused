@@ -677,8 +677,91 @@ class usedProductsController extends Controller
         return view('admin.usedProduct.index');
     }
 
-    public function myUsedIndex(){
+    public function myUsedIndex(Request $request){
         require_once('price.php');
+
+        $lang = Session::get('changed_language');
+
+        $products = DB::table('products')->join('users', 'users.id', '=', 'products.vender_id')
+            ->join('brands', 'brands.id', '=', 'products.brand_id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('subcategories', 'subcategories.id', '=', 'products.child')
+            ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
+            ->leftJoin('used_product_images', 'used_product_images.pro_id', '=', 'products.id')
+            ->select(
+                'products.id as proid',
+                'products.category_id as category_id',
+                FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"),
+                'products.featured as featured', 'products.status as status',
+                'products.created_at as createdat', 'products.updated_at as updateat',
+                'users.name as ownername',
+                'brands.name as brandname',
+                FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"),
+                FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"),
+                FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"),
+                'products.price as price',
+                'used_product_images.main_image as mainimage'
+                /*'products.vender_price as vender_price',
+                'products.vender_offer_price as vender_offer_price'*/
+            )
+            ->where('products.deleted_at', '=', null)
+            ->where('products.is_used', '=', 1)
+            //->where('products.is_new',"=",0)
+            ->get();
+        //dd($products);
+        if ($request->ajax()) {
+            return DataTables::of($products)
+                ->editColumn('checkbox', function ($row) {
+                    $chk = "<div class='inline'>
+                          <input type='checkbox' form='bulk_delete_form' class='filled-in material-checkbox-input' name='checked[]'' value='$row->proid' id='checkbox$row->proid'>
+                          <label for='checkbox$row->proid' class='material-checkbox'></label>
+                        </div>";
+
+                    return $chk;
+                })
+                ->addIndexColumn()
+                ->addColumn('image', function ($row) {
+                    $image = '';
+
+                    if ($row->mainimage) {
+                        $image .= '<img title='.str_replace('"', '', $row->productname).' class="pro-img" src='.url('usedProducts/thumbnails/'.$row->mainimage).' alt='.$row->mainimage.'>';
+                    } else {
+                        $image = '<img title="Make a variant first !" src="'.Avatar::create(str_replace('"', '', $row->productname))->toBase64().'"/>';
+                    }
+
+                    return $image;
+                })
+                ->addColumn('prodetail', function ($row) {
+                    $html = '';
+                    $html .= '<p><b>'.str_replace('"', '', $row->productname).'</b></p>';
+                    $html .= "<p><b>Owner:</b> $row->ownername</p>";
+                    $html .= "<p><b>Brand:</b> $row->brandname</p>";
+
+                    return $html;
+                })
+                //->editColumn('price', function ($row) { return $row->price;})
+                ->addColumn('catdtl', function ($row) {
+                    $catdtl = '';
+                    $catdtl .= '<p><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->catname).'</p>';
+
+                    $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->subcatname).'</p>';
+
+                    if ($row->childname) {
+                        $catdtl .= '<p class="font-weight600"><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->childname).'</p>';
+                    } else {
+                        $catdtl .= '--';
+                    }
+
+                    return $catdtl;
+                })
+                ->editColumn('featured', 'admin.usedProduct.dtablecolumn.featured')
+                ->editColumn('status', 'admin.usedProduct.dtablecolumn.status')
+                ->addColumn('history', 'admin.usedProduct.dtablecolumn.history')
+                ->editColumn('action', 'admin.usedProduct.dtablecolumn.action')
+                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
+                ->make(true);
+        }
+
         return view('user.myused',compact('conversion_rate'));
     }
 
@@ -693,7 +776,7 @@ class usedProductsController extends Controller
         return view('user.addMyUsed',compact('conversion_rate', 'categorys', 'users', 'brands', 'product'));
     }
 
-    public function addUsed(){
+    public function addUsed(Request $request){
         $data = $this->validate($request,
             [
                 'name' => 'required|string|max:255',
@@ -702,7 +785,7 @@ class usedProductsController extends Controller
                 'child' => 'required|not_in:0|exists:subcategories,id',
                 'grand_id' => 'required|not_in:0|exists:grandcategories,id',
                 'price' => 'required|numeric',
-                'user_id' => 'required|exists:users,id',
+                // 'user_id' => 'required|exists:users,id',
                 'key_features' => 'string',
                 'des' => 'string',
                 'image1' => 'required',
@@ -836,11 +919,11 @@ class usedProductsController extends Controller
             $input['return_avbl'] = 0;
             $input['return_policy'] = 0;
         }
-        if ($request->user_id) {
-            $input['vender_id'] = $request->user_id;
-        } else {
+        // if ($request->user_id) {
+            // $input['vender_id'] = $request->user_id;
+        // } else {
             $input['vender_id'] = Auth::user()->id;
-        }
+        // }
 
         $input['store_id'] = Auth::user()->id;
 
@@ -1029,7 +1112,7 @@ class usedProductsController extends Controller
     //     'pro_id' => $data->id,
     //    ]);
 
-        return redirect()->route('user.addMyUsed')->with('success', 'Product created ! ');
+        return redirect()->route('myusedlist')->with('success', 'Product created ! ');
     }
 
     /**
