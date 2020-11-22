@@ -35,7 +35,7 @@
                                     <div class="col-md-10">
                                         <i class="fa fa-cc-discover" aria-hidden="true"></i>
                                         </i>
-                                        Braintree Payment Settings
+                                        QPay Payment Settings
                                     </div>
                                     <div class="col-md-2">
                                         <i title="{{ $config->braintree_enable==1 ? "Active" : "Deactive" }}"
@@ -45,7 +45,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="#tab_3" data-toggle="tab">
+                        {{-- <li><a href="#tab_3" data-toggle="tab">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <i class="fa fa-cc-stripe" aria-hidden="true"></i>
@@ -132,7 +132,7 @@
                                 </div>
                             </a></li>
                         <li><a href="#tab_9" data-toggle="tab"><i class="fa fa-university" aria-hidden="true"></i>
-                                Bank Transfer Payment Settings </a></li>
+                                Bank Transfer Payment Settings </a></li> --}}
                     </ul>
                 </div>
 

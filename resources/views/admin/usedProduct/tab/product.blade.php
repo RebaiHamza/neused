@@ -38,7 +38,7 @@
 
 
     <div class="last_btn col-md-4">
-      <label for="first-name">
+      <label for="category_id">
         Category: <span class="required">*</span>
       </label>
 
@@ -63,10 +63,9 @@
       <select required="" name="child" id="upload_id" class="select2 form-control">
         <option value="">Please Select</option>
         @if(!empty($child))
-        @foreach($child as $category)
-        <option value="{{$category->id}}"> {{$category->title}}
-        </option>
-        @endforeach
+          @foreach($child as $category)
+            <option value="{{$category->id}}"> {{$category->title}} </option>
+          @endforeach
         @endif
       </select>
     </div>
@@ -80,10 +79,10 @@
       <select name="grand_id" id="grand" class="select2 form-control">
 
         @if(!empty($child))
-        @foreach($grand as $category)
-        <option value="{{$category->id}}"> {{$category->title}}
-        </option>
-        @endforeach
+          @foreach($grand as $category)
+          <option value="{{$category->id}}"> {{$category->title}}
+          </option>
+          @endforeach
         @endif
       </select>
 
@@ -321,7 +320,6 @@
 
     </div>
 
-
     <div class="margin-top-15 col-md-6">
       <label>
         Tags:
@@ -334,19 +332,19 @@
     <div class="margin-top-15 col-md-12">
       <div class="row">
         <div class="col-md-6">
-          <label>
+          <label for="model">
             Model:
           </label>
 
-          <input type="text" id="first-name" name="model" class="form-control" placeholder="Please Enter Model Number"
+          <input type="text" id="model" name="model" class="form-control" placeholder="Please Enter Model Number"
             value="{{ old('model') }}">
         </div>
 
         <div class="col-md-6">
-          <label for="first-name">
+          <label for="sku">
             SKU:
           </label>
-          <input type="text" id="first-name" name="sku" value="{{ old('sku') }}" placeholder="Please enter SKU"
+          <input type="text" id="sku" name="sku" value="{{ old('sku') }}" placeholder="Please enter SKU"
             class="form-control">
         </div>
 
@@ -374,7 +372,7 @@
       </label>
 
       <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25" required=""
-        type="text" id="first-name" name="price" value="{{ old('price') }}" placeholder="Please enter product price"
+        type="text" id="price" name="price" value="{{ old('price') }}" placeholder="Please enter product price"
         class="form-control">
       <br>
       <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
@@ -415,7 +413,6 @@
 
   <div class="margin-top-15 col-md-12">
 
-
     <div class="display-none" id="tax_class">
       <label>
         Tax Classes:
@@ -433,10 +430,6 @@
 
   </div>
 
-
-
-
-
   <div class="margin-top-15 col-md-4">
 
 
@@ -452,7 +445,7 @@
   </div>
 
   <div class="margin-top-15 col-md-4">
-    <label for="first-name">
+    <label for="featured">
       Featured:
     </label>
 
@@ -466,7 +459,7 @@
   </div>
 
   <div class="margin-top-15 col-md-4">
-    <label for="first-name">
+    <label for="status3">
       Status:
     </label>
 
@@ -479,7 +472,7 @@
   </div>
 
   <div class="col-md-12">
-    <label for="first-name">
+    <label for="status4">
       Cancel Available:
     </label>
 
@@ -490,7 +483,7 @@
   </div>
 
   <div class="margin-top-15 col-md-12">
-    <label for="first-name">
+    <label for="codcheck">
       Cash On Delivery:
     </label>
 

@@ -236,6 +236,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/return/product/process/{id}', 'ReturnController@returnWindow')->name('return.window');
 
         Route::post('/return/product/processed/{id}', 'ReturnController@process')->name('return.process');
+        
+        // what to Copy for myused for all users
 
         Route::get('/mybank', 'UserBankController@index')->name('mybanklist');
 
@@ -244,6 +246,13 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('/mybank/edit/{id}', 'UserBankController@update')->name('user.bank.update');
 
         Route::delete('mybank/{id}', 'UserBankController@delete')->name('user.bank.delete');
+
+        // END: what to Copy for myused for all users
+
+        Route::get('/myused', 'usedProductsController@myUsedIndex')->name('myusedlist');
+        Route::get('/addused', 'usedProductsController@addUsedForm')->name('used.add');
+
+        // END COPYING for myused
 
         Route::post('/cod/{token}', 'CodController@payviacod')->name('cod.process');
 

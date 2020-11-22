@@ -206,7 +206,7 @@ class SellerAddvariantController extends Controller
         $varimage->save();
 
         return redirect()
-            ->route('add.var', $id)->with('added', 'Variant Linked Successfully !');
+            ->route('seller.add.var', $id)->with('added', 'Variant Linked Successfully !');
 
     }
 

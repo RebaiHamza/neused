@@ -787,7 +787,6 @@
 
                 $orivar = App\AddSubVariant::withTrashed()->where('id','=',$row->variant_id)->first();
 
-
                 $var_name_count = count($orivar['main_attr_id']);
                 unset($name);
                 $name = array();
@@ -799,7 +798,6 @@
                   $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
 
                   }
-
 
                   try{
                   $url =

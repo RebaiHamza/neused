@@ -39,6 +39,8 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
           <a class="nav-link padding15 {{ Nav::isRoute('user.profile') }}" href="{{ url('/profile') }}"> <i
               class="fa fa-user-circle" aria-hidden="true"></i> {{ __('staticwords.MyAccount') }}</a>
 
+          <a class="nav-link padding15 {{ Nav::isRoute('myusedlist') }}" href="{{ route('myusedlist') }}"> <i class="fa fa-cube" aria-hidden="true"></i> {{ __('staticwords.MyUsedProducts') }}</a>
+
           <a class="nav-link padding15 {{ Nav::isRoute('user.order') }} {{ Nav::isRoute('user.view.order') }}"
             href="{{ url('/order') }}"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
             {{ __('staticwords.MyOrders') }}</a>

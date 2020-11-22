@@ -677,6 +677,361 @@ class usedProductsController extends Controller
         return view('admin.usedProduct.index');
     }
 
+    public function myUsedIndex(){
+        require_once('price.php');
+        return view('user.myused',compact('conversion_rate'));
+    }
+
+    public function addUsedForm(){
+        require_once('price.php');
+        $categorys = Category::all();
+        $brands = Brand::all();
+
+        $users = User::where('status', 1)->get();
+
+        $product = Product::all();
+        return view('user.addMyUsed',compact('conversion_rate', 'categorys', 'users', 'brands', 'product'));
+    }
+
+    public function addUsed(){
+        $data = $this->validate($request,
+            [
+                'name' => 'required|string|max:255',
+                'brand_id' => 'required|not_in:0|exists:brands,id',
+                'category_id' => 'required|not_in:0|exists:categories,id',
+                'child' => 'required|not_in:0|exists:subcategories,id',
+                'grand_id' => 'required|not_in:0|exists:grandcategories,id',
+                'price' => 'required|numeric',
+                'user_id' => 'required|exists:users,id',
+                'key_features' => 'string',
+                'des' => 'string',
+                'image1' => 'required',
+                'image2' => 'required',
+        ], [
+            'name.required' => 'Product Name is needed',
+            'price.required' => 'Price is needed',
+            'brand_id.required' => 'Please Choose Brand',
+        ]);
+
+        $input = $request->all();
+        $input['offer_price'] = $input['price'];
+        $currency_code = Genral::first()->currency_code;
+
+        if (isset($request->codcheck)) {
+            $input['codcheck'] = '1';
+        } else {
+            $input['codcheck'] = '0';
+        }
+
+        if (isset($request->featured)) {
+            $input['featured'] = '1';
+        } else {
+            $input['featured'] = '0';
+        }
+
+        if (isset($request->free_shipping)) {
+            $input['free_shipping'] = '1';
+        } else {
+            $sid = Shipping::where('default_status', '1')->first();
+            $input['shipping_id'] = $sid->id;
+            $input['free_shipping'] = '0';
+        }
+
+        $input['price_in'] = $currency_code;
+
+        if ($request->vender_price == '') {
+            $input['vender_price'] = $request->price;
+            $input['vender_offer_price'] = $request->offer_price;
+        }
+
+        $commissions = CommissionSetting::all();
+        foreach ($commissions as $commission) {
+            if ($commission->type == 'flat') {
+                if ($commission->p_type == 'f') {
+                    if (!isset($request->tax_r)) {
+                        $price = $input['price'] + $commission->rate;
+                        $offer = $input['offer_price'] + $commission->rate;
+
+                        $input['price'] = $price;
+                        $input['offer_price'] = $offer;
+                        $input['commission_rate'] = $commission->rate;
+                    } else {
+                        $cit = $commission->rate * $input['tax_r'] / 100;
+                        $price = $input['price'] + $commission->rate + $cit;
+                        $offer = $input['offer_price'] + $commission->rate + $cit;
+
+                        $input['price'] = $price;
+                        $input['offer_price'] = $offer;
+                        $input['commission_rate'] = $commission->rate + $cit;
+                    }
+                } else {
+                    $taxrate = $commission->rate;
+                    $price1 = $input['price'];
+                    $price2 = $input['offer_price'];
+                    $tax1 = $priceMinusTax = ($price1 * (($taxrate / 100)));
+                    $tax2 = $priceMinusTax = ($price2 * (($taxrate / 100)));
+                    $price = $input['price'] + $tax1;
+                    $offer = $input['offer_price'] + $tax2;
+                    $input['price'] = $price;
+                    $input['offer_price'] = $offer;
+                    if (!empty($tax2)) {
+                        $input['commission_rate'] = $tax2;
+                    } else {
+                        $input['commission_rate'] = $tax1;
+                    }
+                }
+            } else {
+                $comm = Commission::where('category_id', $request->category_id)
+                    ->first();
+                if (isset($comm)) {
+                    if ($comm->type == 'f') {
+                        if (!isset($request->tax_manual)) {
+                            $price = $input['price'] + $comm->rate;
+                            $offer = $input['offer_price'] + $comm->rate;
+                            $input['price'] = $price;
+                            $input['offer_price'] = $offer;
+                            $input['commission_rate'] = $comm->rate;
+                        } else {
+                            $cit = $commission->rate * $input['tax_r'] / 100;
+                            $price = $input['price'] + $comm->rate + $cit;
+                            $offer = $input['offer_price'] + $comm->rate + $cit;
+                            $input['price'] = $price;
+                            $input['offer_price'] = $offer;
+                            $input['commission_rate'] = $comm->rate + $cit;
+                        }
+                    } else {
+                        $taxrate = $comm->rate;
+                        $price1 = $input['price'];
+                        $price2 = $input['offer_price'];
+                        $tax1 = $priceMinusTax = ($price1 * (($taxrate / 100)));
+                        $tax2 = $priceMinusTax = ($price2 * (($taxrate / 100)));
+                        $price = $input['price'] + $tax1;
+                        $offer = $input['offer_price'] + $tax2;
+                        $input['price'] = $price;
+                        $input['offer_price'] = $offer;
+
+                        if (!empty($tax2)) {
+                            $input['commission_rate'] = $tax2;
+                        } else {
+                            $input['commission_rate'] = $tax1;
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($request->return_avbls == '1') {
+            $request->validate(['return_avbls' => 'required', 'return_policy' => 'required'], ['return_policy.required' => 'Please choose return policy']);
+
+            if ($request->return_policy === 'Please choose an option') {
+                return back()
+                    ->with('warning', 'Please choose a return policy !');
+            }
+        }
+
+        if ($request->return_avbls == '1') {
+            $input['return_avbl'] = '1';
+            $input['return_policy'] = $request->return_policy;
+        } else {
+            $input['return_avbl'] = 0;
+            $input['return_policy'] = 0;
+        }
+        if ($request->user_id) {
+            $input['vender_id'] = $request->user_id;
+        } else {
+            $input['vender_id'] = Auth::user()->id;
+        }
+
+        $input['store_id'] = Auth::user()->id;
+
+        $findstore = null;
+        $input['w_d'] = $request->w_d;
+        $input['w_my'] = $request->w_my;
+        $input['w_type'] = $request->w_type;
+        $input['key_features'] = clean($request->key_features);
+        $input['des'] = clean($request->des);
+        $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
+        // $input['vender_id'] = $findstore->user->id;
+        $input['is_used'] = 1;
+        $input['is_new'] = 0;
+        $data = Product::create($input);
+         
+        $data->save();
+
+        $lastid_product = Product::orderBy('id', 'desc')->first()->id;
+
+        $add_product_variants =new AddProductVariant();
+        
+        $ss['attr_value'] = ["24"];
+        $ss['attr_name']=6;
+        $ss['pro_id'] = $lastid_product;
+        $ss['created_at'] =date('Y-m-d h:i:s');
+        $ss['updated_at'] =date('Y-m-d h:i:s');
+        // dd($add_product_variants);
+
+        $add_product_variants->create($ss);
+        
+        // add subvariant
+
+        //$array2 = AddSubVariant::where('pro_id', $id)->get();
+        $test = new AddSubVariant();
+        
+        
+        $input1['pro_id'] = $lastid_product;
+        $input1['main_attr_id'] = ["6"];
+        $encode = array('1'=>'1');
+        $input1['main_attr_value'] = array('6'=>'24') ;
+        $input1['price'] = 0;
+        $input1['stock'] = 1;
+        $input1['weight'] = 1;
+        $input1['w_unit'] = 1;
+        $input1['min_order_qty'] = 1;
+        $input1['max_order_qty'] = 1;
+        $input1['def'] = 1;
+
+        $test->create($input1);
+
+        $lastid_subvariant = AddSubVariant::orderBy('id', 'desc')->first()->id;
+
+        $varimage = new VariantImages();
+
+        $path = public_path() . '/variantimages/';
+        $thumbpath = public_path() . '/variantimages/thumbnails/';
+        $hoverthumbpath = public_path() . '/variantimages/hoverthumbnail/';
+
+        File::makeDirectory($path, $mode = 0777, true, true);
+        File::makeDirectory($thumbpath, $mode = 0777, true, true);
+        File::makeDirectory($hoverthumbpath, $mode = 0777, true, true);
+
+        if ($file = $request->file('image1')) {
+
+            $request->validate([
+                'image1' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image1 = $name;
+
+            $thumb = $name;
+
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save('../public/variantimages/thumbnails/' . $thumb, 95);
+
+            $varimage->main_image = $name;
+
+        }
+
+        if ($file = $request->file('image2')) {
+
+            $request->validate([
+                'image2' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image2 = $name;
+
+            $hoverthumb = $name;
+
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save('../public/variantimages/hoverthumbnail/' . $hoverthumb, 95);
+
+        }
+
+        if ($file = $request->file('image3')) {
+
+            $request->validate([
+                'image3' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image3 = $name;
+
+        }
+
+        if ($file = $request->file('image4')) {
+
+            $request->validate([
+                'image4' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image4 = $name;
+
+        }
+
+        if ($file = $request->file('image5')) {
+
+            $request->validate([
+                'image5' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image5 = $name;
+
+        }
+
+        if ($file = $request->file('image6')) {
+
+            $request->validate([
+                'image6' => 'mimes:png,jpg,jpeg,gif|max:1024',
+            ]);
+
+            $name = 'variant_' . time() . str_random(10) . '.' . $file->getClientOriginalExtension();
+            $img = Image::make($file);
+
+            $img->save($path . '/' . $name, 95);
+            $varimage->image6 = $name;
+
+        }
+
+        $varimage->var_id = $lastid_subvariant;
+
+        $varimage->save();
+
+
+        //end adding to subvariant
+
+    //     $relsetting = new Related_setting();
+
+    //     $relsetting->pro_id = $data->id;
+    //     $relsetting->status = '0';
+    //     $relsetting->save();
+    //     $main_image = $this->saveImages($request, 'image1');
+    //     usedProductImage::create([
+    //     'image1' => $main_image,
+    //     'image2' => $this->saveImages($request, 'image2'),
+    //     'image3' => $this->saveImages($request, 'image3'),
+    //     'image4' => $this->saveImages($request, 'image4'),
+    //     'image5' => $this->saveImages($request, 'image5'),
+    //     'image6' => $this->saveImages($request, 'image6'),
+    //     'main_image' => $main_image,
+    //     'pro_id' => $data->id,
+    //    ]);
+
+        return redirect()->route('user.addMyUsed')->with('success', 'Product created ! ');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -926,8 +1281,8 @@ class usedProductsController extends Controller
 
         $add_product_variants =new AddProductVariant();
         
-        $ss['attr_value'] = ["36"];
-        $ss['attr_name']=7;
+        $ss['attr_value'] = ["24"];
+        $ss['attr_name']=6;
         $ss['pro_id'] = $lastid_product;
         $ss['created_at'] =date('Y-m-d h:i:s');
         $ss['updated_at'] =date('Y-m-d h:i:s');
@@ -942,9 +1297,9 @@ class usedProductsController extends Controller
         
         
         $input1['pro_id'] = $lastid_product;
-        $input1['main_attr_id'] = ["7"];
+        $input1['main_attr_id'] = ["6"];
         $encode = array('1'=>'1');
-        $input1['main_attr_value'] = array('7'=>'36') ;
+        $input1['main_attr_value'] = array('6'=>'24') ;
         $input1['price'] = 0;
         $input1['stock'] = 1;
         $input1['weight'] = 1;

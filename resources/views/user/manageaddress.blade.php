@@ -33,6 +33,8 @@
        <div class="nav flex-column nav-pills" aria-orientation="vertical">
           <a class="nav-link padding15 {{ Nav::isRoute('user.profile') }}" href="{{ url('/profile') }}"> <i class="fa fa-user-circle" aria-hidden="true"></i> {{ __('staticwords.MyAccount') }}</a>
           
+          <a class="nav-link padding15 {{ Nav::isRoute('myusedlist') }}" href="{{ route('myusedlist') }}"> <i class="fa fa-cube" aria-hidden="true"></i> {{ __('staticwords.MyUsedProducts') }}</a>
+
           <a class="nav-link padding15 {{ Nav::isRoute('user.order') }}" href="{{ url('/order') }}"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i> {{ __('staticwords.MyOrders') }}</a>
 
           @if($wallet_system == 1)

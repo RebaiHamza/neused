@@ -82,7 +82,7 @@ class MainController extends Controller
 
             $products = [];
 
-            $x = $productsquery->orderBy('id', 'DESC')->where('status', '1')
+            $x = $productsquery->orderBy('id', 'DESC')->where('status', '1')->where('is_used','1')
                 ->take(20)
                 ->get();
 
