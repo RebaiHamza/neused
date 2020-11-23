@@ -275,6 +275,7 @@ return array (
   'PleaseEnterAccountName' => 'الرجاء إدخال اسم الحساب',
   'PleaseEnterAccountNumber' => 'الرجاء إدخال رقم الحساب',
   'Signin' => 'تسجيل الدخول',
+  'SignInwithTwitter' => 'قم بتسجيل الدخول باستخدام التويتر',
   'LoginWelcome' => 'مرحبا ، مرحبا بك في حسابك.',
   'SignInwithFacebook' => 'قم بتسجيل الدخول باستخدام الفيسبوك',
   'SignInwithGoogle' => 'الدخول مع جوجل',

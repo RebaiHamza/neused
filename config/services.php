@@ -61,6 +61,12 @@ return [
             'redirect' => env('FB_CALLBACK_URL'),
         ],
 
+        'twitter' => [
+            'client_id' => env('TWITTER_API_KEY'),
+            'client_secret' => env('TWITTER_SECRET_KEY'),
+            'redirect' => env('TWITTER_CALLBACK_URL'),
+        ],
+
         'google' => [
             'client_id' => env('GOOGLE_CLIENT_ID'),
             'client_secret' => env('GOOGLE_CLIENT_SECRET'),

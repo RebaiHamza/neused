@@ -75,7 +75,10 @@ class Configcontroller extends Controller
     public function socialget()
     {
         $setting = Config::first();
-        $env_files = ['FACEBOOK_CLIENT_ID' => env('FACEBOOK_CLIENT_ID') , 'FACEBOOK_CLIENT_SECRET' => env('FACEBOOK_CLIENT_SECRET') , 'FB_CALLBACK_URL' => env('FB_CALLBACK_URL') , 'GOOGLE_CLIENT_ID' => env('GOOGLE_CLIENT_ID') , 'GOOGLE_CLIENT_SECRET' => env('GOOGLE_CLIENT_SECRET') , 'GOOGLE_CALLBACK_URL' => env('GOOGLE_CALLBACK_URL') , 'GITLAB_CLIENT_ID' => env('GITLAB_CLIENT_ID') , 'GITLAB_CLIENT_SECRET' => env('GITLAB_CLIENT_SECRET') , 'GITLAB_CALLBACK_URL' => env('GITLAB_CALLBACK_URL')
+        $env_files = [
+            'FACEBOOK_CLIENT_ID' => env('FACEBOOK_CLIENT_ID') , 'FACEBOOK_CLIENT_SECRET' => env('FACEBOOK_CLIENT_SECRET') , 'FB_CALLBACK_URL' => env('FB_CALLBACK_URL') , 
+            'GOOGLE_CLIENT_ID' => env('GOOGLE_CLIENT_ID') , 'GOOGLE_CLIENT_SECRET' => env('GOOGLE_CLIENT_SECRET') , 'GOOGLE_CALLBACK_URL' => env('GOOGLE_CALLBACK_URL') , 
+            'TWITTER_API_KEY' => env('TWITTER_API_KEY') , 'TWITTER_SECRET_KEY' => env('TWITTER_SECRET_KEY') , 'TWITTER_CALLBACK_URL' => env('TWITTER_CALLBACK_URL')
 
         ];
         return view('admin.mailsetting.social', compact('env_files', 'setting'));
@@ -113,6 +116,25 @@ class Configcontroller extends Controller
         return redirect()
             ->route('gen.set')
             ->with('updated', 'Google Login Setting Updated !');
+    }
+    public function twitterSettings(Request $request)
+    {
+        $setting = Config::first();
+        $setting->twitter_login_enable = $request->twitter_enable;
+
+        $env_update = $this->changeEnv([
+
+            'TWITTER_API_KEY' => $request->TWITTER_API_KEY, 
+            'TWITTER_SECRET_KEY' => $request->TWITTER_SECRET_KEY, 
+            'TWITTER_CALLBACK_URL' => $request->TWITTER_CALLBACK_URL
+
+        ]);
+
+        $setting->save();
+
+        return redirect()
+            ->route('gen.set')
+            ->with('updated', 'Twitter Login Settings Updated !');
     }
 
     protected function changeEnv($data = array())

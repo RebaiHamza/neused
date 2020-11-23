@@ -618,6 +618,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('setting/sociallogin/fb', 'Configcontroller@slfb')->name('sl.fb');
 
         Route::post('setting/sociallogin/gl', 'Configcontroller@slgl')->name('sl.gl');
+
+        Route::post('setting/sociallogin/tw', 'Configcontroller@twitterSettings')->name('sl.tw');
         Route::post('setting/sociallogin/gitlab', 'Configcontroller@gitlabupdate')->name('gitlab.update');
 
         Route::get('/admin/paytoseller/{id}', 'SellerPaymenyController@show')->name('seller.payfororder');

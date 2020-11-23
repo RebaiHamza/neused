@@ -139,64 +139,60 @@
 			</div>
 
 			<div class="col-md-6">
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h3 class="panel-title"><i class="fa fa-gitlab"></i> GitLab Login Setting</h3>
+				<div class="panel panel-warning" style="border-color: #00ACEE">
+					<div class="panel-heading" style="background-color: #00ACEE">
+						<h3 class="panel-title" style="color: aliceblue"><i class="fa fa-twitter"></i> Twitter Login Setting</h3>
 					</div>
 					<div class="panel-body">
-						<form action="{{ route('gitlab.update') }}" method="POST">
+						<form action="{{ route('sl.tw','twitter') }}" method="POST">
 							{{ csrf_field() }}
-
-							<label for="">Gitlab Client ID:</label>
-							<input type="text" placeholder="enter gitlab client ID" class="form-control"
-								name="GITLAB_CLIENT_ID" value="{{ $env_files['GITLAB_CLIENT_ID'] }}">
+		
+							<label for="">Client ID:</label>
+							<input type="text" placeholder="enter client ID" class="form-control"
+								name="TWITTER_API_KEY" value="{{ env('TWITTER_API_KEY') }}">
 							<br>
-
-							<div class="eyeCy">
-
-								<label for="">Gitlab Client Secret Key:</label>
-								<input type="password" placeholder="enter gitlab client secret key" class="form-control"
-									id="gitlab_secret" name="GITLAB_CLIENT_SECRET"
-									value="{{ $env_files['GITLAB_CLIENT_SECRET'] }}">
-
-								<span toggle="#gitlab_secret"
+		
+							<div class="form-group eyeCy">
+		
+								<label for="">Client Secret Key:</label>
+								<input type="password" placeholder="enter secret key" class="form-control"
+									id="tw_secret" name="TWITTER_SECRET_KEY"
+									value="{{ env('TWITTER_SECRET_KEY') }}">
+		
+								<span toggle="#tw_secret"
 									class="inline-flex fa fa-fw fa-eye field-icon toggle-password2"></span>
-
+		
 							</div>
-
-							<br>
-							<label for="">Gitlab Callback URL:</label>
+							<label for="">Callback URL:</label>
 							<div class="input-group">
-								<input  type="text"
-									placeholder="https://yoursite.com/public/login/gitlab/callback"
-									name="GITLAB_CALLBACK_URL" value="{{ route('social.login.callback','gitlab') }}"
+								<input value="{{ route('social.login.callback','twitter') }}" type="text"
+									placeholder="https://yoursite.com/public/login/twitter/callback"
+									name="FB_CALLBACK_URL" value="{{ env('FB_CALLBACK_URL') }}"
 									class="callback-url form-control">
 								<span class="input-group-addon" id="basic-addon2">
 									<button title="Copy" type="button" class="copy btn btn-xs btn-default">
 										<i class="fa fa-clipboard" aria-hidden="true"></i>
 									</button>
 								</span>
-								
 							</div>
-								<small class="text-muted">
-									<i class="fa fa-question-circle"></i> Copy the callback url and paste in your app
-								</small>
+							<small class="text-muted">
+								<i class="fa fa-question-circle"></i> Copy the callback url and paste in your app
+							</small>
 							<br><br>
-							<label for=""><i class="fa fa-gitlab"></i> Enable GitLab Login: </label>
-							&nbsp;&nbsp;
-							<input {{ env('ENABLE_GITLAB') ==1 ? "checked" : "" }} class="tgl tgl-skewed"
-								id="gitlab_enable" name="ENABLE_GITLAB" type="checkbox" />
-							<label class="tgl-btn" data-tg-off="Disable" data-tg-on="Enable"
-								for="gitlab_enable"></label>
-
-							<br>
-
-
+							<div class="form-group">
+								<label for=""><i class="fa fa-twitter"></i> Enable Twitter Login: </label>
+								<br>
+								<label class="switch">
+									<input id="twitter_enable" type="checkbox" name="twitter_enable"
+										{{ $setting->twitter_login_enable==1 ? "checked" : "" }}>
+									<span class="knob"></span>
+								</label>
+							</div>
 							<button @if(env('DEMO_LOCK')==0) type="submit" @else disabled
 								title="This action is disabled in demo !" @endif class="btn btn-md btn-primary"><i
-									class="fa fa-save"></i> Save Setting</button>
-
-
+									class="fa fa-save"></i> Save Setting
+							</button>
+							<br><br>
 						</form>
 
 					</div>

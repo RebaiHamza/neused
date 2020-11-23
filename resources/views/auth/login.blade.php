@@ -17,6 +17,9 @@
          @if($config->fb_login_enable=='1')
             <a href="{{url('login/facebook')}}" title="{{__('staticwords.SignInwithFacebook')}}" class="facebook-sign-in"><i class="fa fa-facebook"></i> {{__('staticwords.SignInwithFacebook')}}</a>
         @endif
+        @if($config->twitter_login_enable == '1')
+                <a title="Sign in with Twitter" href="{{url('login/twitter')}}" style="background-color: #55acee; margin-right:10px" class="twitter-sign-in"><i class="fa fa-twitter"></i>Sign in with Twitter</a>
+        @endif
         @if($config->google_login_enable=='1')
             <a title="{{__('staticwords.SignInwithGoogle')}}" href="{{url('login/google')}}" class="twitter-sign-in"><i class="fa fa-google"></i> {{__('staticwords.SignInwithGoogle')}}</a>
         @endif

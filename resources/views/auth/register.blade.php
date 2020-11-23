@@ -35,9 +35,15 @@
                        <p class="text-success">{{ __('Quick Sign up with') }} :</p>
                        <div class="social-sign-in outer-top-xs">
                         @if($config->fb_login_enable=='1')
-                        <a href="{{url('login/facebook')}}" title="{{__('staticwords.SignUpwithFacebook')}}" class="btn btn-outline-primary"><i class="fa fa-facebook"></i> {{__('staticwords.SignUpwithFacebook')}}</a> @endif @if($config->google_login_enable=='1')
-                        <a title="{{__('staticwords.SignUpwithGoogle')}}" href="{{url('login/google')}}" class="btn btn-outline-dark"><i class="fa fa-google"></i> {{__('staticwords.SignUpwithGoogle')}}</a> @endif @if(env('ENABLE_GITLAB') == 1 )
-                        <a title="{{__('staticwords.SignUpwithGitLab')}}" href="{{url('login/gitlab')}}" class="btn btn-outline-info"><i class="fa fa-gitlab"></i> {{__('staticwords.SignUpwithGitLab')}}</a> @endif
+                            <a href="{{url('login/facebook')}}" title="{{__('staticwords.SignUpwithFacebook')}}" class="btn btn-outline-primary"><i class="fa fa-facebook"></i> {{__('staticwords.SignUpwithFacebook')}}</a>
+                        @endif
+                        
+                        @if($config->google_login_enable=='1')
+                            <a title="{{__('staticwords.SignUpwithGoogle')}}" href="{{url('login/google')}}" class="btn btn-outline-dark"><i class="fa fa-google"></i> {{__('staticwords.SignUpwithGoogle')}}</a>
+                        @endif
+                        @if($config->twitter_login_enable=='1')
+                            <a href="{{url('login/twitter')}}" title="Sign in with Twitter" class="btn btn-outline-primary"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+                        @endif
                     </div>
                     <hr>
                   </div>
