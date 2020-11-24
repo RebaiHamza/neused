@@ -63,7 +63,7 @@
               </ul>
          </li>
 
-         <li id="prom" class="treeview {{ Nav::isResource('admin/return_policy') }} {{ Nav::isResource('brand') }} {{ Nav::isResource('coupan') }} {{ Nav::isResource('category') }} {{ Nav::isResource('subcategory') }} {{ Nav::isResource('grandcategory') }} {{ Nav::isResource('products') }} {{ Nav::isResource('unit') }} {{ Nav::isResource('special') }} {{ Nav::isRoute('attr.index') }} {{ Nav::isRoute('attr.add') }} {{ Nav::isRoute('opt.edit') }} {{ Nav::isRoute('pro.val') }} {{ Nav::isRoute('add.var') }} {{ Nav::isRoute('manage.stock') }} {{ Nav::isRoute('edit.var') }} {{ Nav::isRoute('pro.vars.all') }} {{ Nav::isRoute('import.page') }} {{ Nav::isRoute('requestedbrands.admin') }}">
+         <li id="prom" class="treeview {{ Nav::isResource('used-products') }} {{ Nav::isResource('ticket-products') }} {{ Nav::isResource('admin/return_policy') }} {{ Nav::isResource('brand') }} {{ Nav::isResource('coupan') }} {{ Nav::isResource('category') }} {{ Nav::isResource('subcategory') }} {{ Nav::isResource('grandcategory') }} {{ Nav::isResource('products') }} {{ Nav::isResource('unit') }} {{ Nav::isResource('special') }} {{ Nav::isRoute('attr.index') }} {{ Nav::isRoute('attr.add') }} {{ Nav::isRoute('opt.edit') }} {{ Nav::isRoute('pro.val') }} {{ Nav::isRoute('add.var') }} {{ Nav::isRoute('manage.stock') }} {{ Nav::isRoute('edit.var') }} {{ Nav::isRoute('pro.vars.all') }} {{ Nav::isRoute('import.page') }} {{ Nav::isRoute('requestedbrands.admin') }}">
           <a href="#">
            <i class="fa fa-shopping-basket" aria-hidden="true"></i> <span>Products Management</span>
             <span class="pull-right-container">
@@ -99,10 +99,59 @@
                 <li class="{{ Nav::isResource('grandcategory') }}"><a href="{{url('admin/grandcategory')}}"><i class="fa fa-circle-o"></i>Childcategories</a></li>
               </ul>
             </li>
-            <li class="{{ Nav::isRoute('pro.vars.all') }} @if(Str::startsWith(Route::current()->getName(),'products.')) active @endif {{ Nav::isRoute('add.var') }} {{ Nav::isRoute('manage.stock') }} {{ Nav::isRoute('edit.var') }}"><a href="{{url('admin/products')}} "> <i class="fa fa-circle-o"></i>New Products</a></li>
-            <li class="{{ Nav::isResource('used-products') }}"><a href="{{ url('admin/used-products') }} "> <i class="fa fa-circle-o"></i>Used Products</a></li>
-            <li class="{{ Nav::isResource('ticket-products') }}"><a href="{{ url('admin/ticket-products') }} "> <i class="fa fa-circle-o"></i>Tickets</a></li>
-            <li class="{{ Nav::isResource('bid-products') }}"><a href="{{ url('admin/bid-products') }} "> <i class="fa fa-circle-o"></i>Bids</a></li>
+
+            <li class="treeview {{ Nav::isResource('products') }} {{ Nav::isRoute('requested.products') }}">
+              <a href="#"><i class="fa fa-circle-o"></i>New Products
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Nav::isRoute('pro.vars.all') }} @if(Str::startsWith(Route::current()->getName(),'products.')) active @endif {{ Nav::isRoute('add.var') }} {{ Nav::isRoute('manage.stock') }} {{ Nav::isRoute('edit.var') }}"><a href="{{url('admin/products')}} "> <i class="fa fa-circle-o"></i>New Products</a></li>
+                
+                <li class="{{ Nav::isRoute('requested.products') }}"><a href="{{url('admin/requested/products')}}"><i class="fa fa-circle-o"></i>Requested Products</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview {{ Nav::isResource('used-products') }} {{ Nav::isRoute('requested.used-products') }}">
+              <a href="#"><i class="fa fa-circle-o"></i>Used Products
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Nav::isRoute('used-products') }}"><a href="{{ url('admin/used-products') }} "> <i class="fa fa-circle-o"></i>Used Products</a></li>
+                
+                <li class="{{ Nav::isRoute('requested.used-products') }}"><a href="{{url('admin/requested/used-products')}}"><i class="fa fa-circle-o"></i>Requested used products</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview {{ Nav::isResource('ticket-products') }} {{ Nav::isRoute('requested.ticket-products') }}">
+              <a href="#"><i class="fa fa-circle-o"></i>Tickets
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Nav::isRoute('ticket-products') }}"><a href="{{ url('admin/ticket-products') }} "> <i class="fa fa-circle-o"></i>Tickets</a></li>
+                
+                <li class="{{ Nav::isRoute('requested.ticket-products') }}"><a href="{{url('admin/requested/ticket-products')}}"><i class="fa fa-circle-o"></i>Requested Tickets</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview {{ Nav::isResource('bid-products') }} {{ Nav::isRoute('requested.bid-products') }}">
+              <a href="#"><i class="fa fa-circle-o"></i>Bids
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Nav::isRoute('bid-products') }}"><a href="{{ url('admin/bid-products') }} "> <i class="fa fa-circle-o"></i>Bids</a></li>
+                
+                <li class="{{ Nav::isRoute('requested.bid-products') }}"><a href="{{url('admin/requested/bid-products')}}"><i class="fa fa-circle-o"></i>Requested Bids</a></li>
+              </ul>
+            </li>
+            
             <li class="{{ Nav::isRoute('import.page') }}"><a href="{{ route('import.page') }}"><i class="fa fa-circle-o"></i>Import Products</a></li>
             <li class="{{ Nav::isRoute('pro.val') }} {{ Nav::isRoute('opt.edit') }} {{ Nav::isRoute('attr.add') }}{{ Nav::isRoute('attr.index') }}"><a href="{{route('attr.index')}} "> <i class="fa fa-circle-o"></i>Product Attributes </a></li>
             
@@ -267,13 +316,16 @@
      </li>
     </ul>
 </li>
+      
+       <li class="{{ Nav::isResource('blog') }}"><a href="{{url('admin/blog')}}"><i class="fa fa-circle-o"></i>Blogs</a></li>
 
+       <li class="{{ Nav::isRoute('blogrequests') }}"><a href="{{url('admin/blogrequests')}}"><i class="fa fa-circle-o"></i>Blog Requests</a></li>
  
        <li id="faqs" class="{{ Nav::isResource('faq') }}"><a href="{{url('admin/faq')}} "><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>FAQ's</span></a></li>
 
        <li class="{{ Nav::isRoute('pwa.setting.index') }}"><a title="Progressive Web App Setting" href="{{route('pwa.setting.index')}} "><i class="fa fa-delicious" aria-hidden="true"></i><span>PWA Settings</span></a></li>
 
-        <li id="sitesetting" class="treeview {{ Nav::isRoute('get.view.m.mode') }} {{ Nav::isRoute('customstyle') }} {{ Nav::isRoute('site.lang') }} {{ Nav::isResource('admin/abuse') }} {{ Nav::isResource('admin/bank_details') }} {{ Nav::isRoute('genral.index') }} {{ Nav::isRoute('mail.getset') }} {{ Nav::isRoute('gen.set') }} {{ Nav::isRoute('footer.index') }} {{ Nav::isResource('social') }} {{ Nav::isResource('page') }} {{ Nav::isResource('blog') }} {{ Nav::isRoute('seo.index') }} {{ Nav::isRoute('api.setApiView') }} {{ Nav::isRoute('get.paytm.setting') }} {{ Nav::isResource('page') }} {{ Nav::isRoute('admin.dash') }} {{ Nav::isRoute('static.trans')  }}">
+        <li id="sitesetting" class="treeview {{ Nav::isRoute('get.view.m.mode') }} {{ Nav::isRoute('customstyle') }} {{ Nav::isRoute('site.lang') }} {{ Nav::isResource('admin/abuse') }} {{ Nav::isResource('admin/bank_details') }} {{ Nav::isRoute('genral.index') }} {{ Nav::isRoute('mail.getset') }} {{ Nav::isRoute('gen.set') }} {{ Nav::isRoute('footer.index') }} {{ Nav::isResource('social') }} {{ Nav::isResource('page') }} {{ Nav::isRoute('seo.index') }} {{ Nav::isRoute('api.setApiView') }} {{ Nav::isRoute('get.paytm.setting') }} {{ Nav::isResource('page') }} {{ Nav::isRoute('admin.dash') }} {{ Nav::isRoute('static.trans')  }}">
           <a href="#">
             <i class="fa fa-cog" aria-hidden="true"></i><span>Site Settings</span>
             <span class="pull-right-container">
@@ -303,7 +355,7 @@
             
             <li class="{{ Nav::isRoute('footer.index') }}"><a href="{{url('admin/footer')}} "><i class="fa fa-circle-o"></i>Footer Customizations</a></li>
             <li class="{{ Nav::isResource('social') }}"><a href="{{url('admin/social')}} "><i class="fa fa-circle-o"></i>Social Handler Settings</a></li>
-            <li class="{{ Nav::isResource('blog') }}"><a href="{{url('admin/blog')}}"><i class="fa fa-circle-o"></i>Blogs</a></li>
+            
             <li class="{{ Nav::isResource('admin/bank_details') }}"><a href="{{url('admin/bank_details')}} "><i class="fa fa-circle-o" aria-hidden="true"></i><span>Bank Details</span></a></li>
             <li class="{{ Nav::isResource('page') }}"><a href="{{url('admin/page')}}"><i class="fa fa-circle-o"></i>Pages</a></li>
             <li class="{{ Nav::isRoute('seo.index') }}"><a href="{{url('admin/seo')}} "><i class="fa fa-circle-o"></i>SEO</a></li>

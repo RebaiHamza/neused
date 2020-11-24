@@ -94,7 +94,7 @@
       var table = $('#usedProductTable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '{{ route("bid-products.index") }}',
+          ajax: '{{ route("requested.bid-products") }}',
           columns: [
               
               {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},

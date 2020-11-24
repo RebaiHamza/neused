@@ -293,20 +293,8 @@
                         <input type="hidden" name="featured" id="featured">
                         <small class="txt-desc">(If enabled than ticket will be featured) </small>
                       </div>
-
-                      <div class="col-md-4 margin-top-15">
-                         <label for="first-name">
-                            Status:
-                          </label>
-                          
-                        <input id="toggle-event3" class="tgl tgl-skewed" type="checkbox">
-                        <label class="tgl-btn" data-tg-off="Deactive" data-tg-on="Active" for="toggle-event3"></label>
-                        <input @if(!empty($products)) value="{{ $products->status }}" @else  value="0" @endif type="hidden" name="status" id="status3">
-                        <small class="txt-desc">(Please Choose Status )</small>
-                      
-                      </div>
                         
-                      <div class="col-md-12">
+                      <div class="col-md-4 margin-top-15">
                          <label for="first-name">
                             Cancel Available:
                           </label>

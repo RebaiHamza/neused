@@ -7,6 +7,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
+use Auth;
 
 /*==========================================
 =            Author: Media City            =
@@ -15,7 +16,7 @@ Author URI: https://mediacity.co.in
 =            Copyright (c) 2020            =
 ==========================================*/
 
-class BlogController extends Controller
+class SellerBlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,14 +25,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::where('status', '1')->get();
-        return view('admin.blog.index', compact('blogs'));
-    }
 
-    public function requestedIndex()
-    {
-        $blogs = Blog::where('status', '0')->get();
-        return view('admin.blog.requested', compact('blogs'));
+        $blogs = Blog::where('user_id', Auth::user()->id)->get();
+        return view('seller.blog.index', compact('blogs'));
     }
 
     public function search(Request $request)
@@ -122,7 +118,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view("admin.blog.add");
+        return view("seller.blog.add");
     }
 
     public function loadcommentsOneditpost(Request $request, $id)
@@ -187,6 +183,8 @@ class BlogController extends Controller
         $input['des'] = clean($request->des);
 
         $input['slug'] = Str::slug($request->heading, '-');
+
+        $input['user_id'] = Auth::user()->id;
 
         if ($file = $request->file('image')) {
 

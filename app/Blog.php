@@ -12,10 +12,10 @@ class Blog extends Model implements Viewable
 
 	use HasTranslations;
 
-	public $translatable = ['heading','user','about','post','des'];
+	public $translatable = ['heading', 'user', 'about', 'post', 'des'];
 
     protected $fillable = [
-        'heading', 'image', 'des','user','status','about','post','slug'
+        'user_id', 'heading', 'image', 'des','user','status','about','post','slug'
     ];
 
     public function comments(){

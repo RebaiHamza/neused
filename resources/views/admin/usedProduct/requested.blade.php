@@ -1,14 +1,14 @@
 @extends("admin/layouts.master")
-@section('title','All Bids |')
+@section('title','All Used Products |')
 @section("body")
    <div class="box">
   
 
       <div class="box-header">
-        <h3 class="box-title">All Bids</h3>
+        <h3 class="box-title">All Used Products</h3>
         <br><br>
-        <a title="Import Bids" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Bids</a>
-        <a href="{{ url('admin/bid-products/create') }}" class="btn btn-md btn-success">+ Add Bid</a>
+        <a title="Import used products" href="{{ route('import.page') }}" class="btn btn-md bg-olive">Import Used Products</a>
+        <a href="{{ url('admin/used-products/create') }}" class="btn btn-md btn-success">+ Add Used Product</a>
 
         <a type="button" class="btn btn-danger btn-md z-depth-0" data-toggle="modal" data-target="#bulk_delete"><i class="fa fa-trash"></i> Delete Selected</a> 
   
@@ -32,7 +32,7 @@
                 </th>
 
                 <th>
-                  Bid Detail
+                  Used Product Detail
                 </th>
 
                 <th>
@@ -94,15 +94,15 @@
       var table = $('#usedProductTable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: '{{ route("bid-products.index") }}',
+          ajax: '{{ route('requested.used-products') }}',
           columns: [
               
               {data : 'checkbox', name : 'checkbox',searchable : false,orderable : false},
-              {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
+              {data : 'DT_RowIndex', name: 'DT_RowIndex', searchable : false},
               {data : 'image', name : 'image',searchable : false},
               {data : 'prodetail', name : 'prodetail'},
               {data : 'price', name : 'price'},
-              {data : 'catdtl', name : 'catdtl', searchable: true},
+              {data : 'catdtl', name : 'catdtl'},
               {data : 'featured', name : 'featured'},
               {data : 'status', name : 'status'},
               {data : 'history', name : 'history'},

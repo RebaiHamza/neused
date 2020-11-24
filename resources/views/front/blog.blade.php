@@ -30,11 +30,12 @@
                   <span class="views"><i class="fa fa-eye"></i> {{ views($value)->unique()->count() }} </span> | 
                   <span class=""><i class="fa fa-clock-o" aria-hidden="true"></i> {{ read_time($value->des ) }}</span>
                   {!! $value->des !!}
+                  
+                  <p>Share:</p>
                    @php
                       echo Share::currentPage(null,[],'<div class="row">', '</div>')
                       ->facebook()
                       ->twitter()
-                      ->telegram()
                       ->whatsapp();
                      @endphp
                </div>

@@ -715,9 +715,13 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('admin/reletdProduct_setting', 'RealatedProductController@setting_show');
         Route::post('admin/reletdProduct_update', 'RealatedProductController@setting_update');
         Route::resource('admin/products', 'ProductController');
+        Route::get('admin/requested/products', 'ProductController@productRequest')->name('requested.products');
         Route::resource('admin/used-products', 'usedProductsController');
+        Route::get('admin/requested/used-products', 'usedProductsController@productRequest')->name('requested.used-products');
         Route::resource('admin/ticket-products', 'ticketProductsController');
+        Route::get('admin/requested/ticket-products', 'ticketProductsController@productRequest')->name('requested.ticket-products');
         Route::resource('admin/bid-products', 'bidProductsController');
+        Route::get('admin/requested/bid-products', 'bidProductsController@productRequest')->name('requested.bid-products');
 
         Route::resource('admin/adv', 'AdvController');
         Route::get('admin/shipping_update', 'ShippingController@shipping');
@@ -730,6 +734,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::resource('admin/bank_details', 'BankDetailController');
         Route::resource('admin/blog', 'BlogController');
+        Route::get('admin/blogrequests', 'BlogController@requestedIndex')->name('blogrequests');
         Route::resource('admin/blog_comment', 'BlogController');
         Route::resource('admin/footer', 'FooterController');
         Route::resource('admin/widget_footer', 'WidgetFooterController');
@@ -761,7 +766,6 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
     /*Admin + Seller Routes */
     Route::group(['middleware' => ['web', 'isActive', 'IsInstalled', 'auth', 'SellerAdminMix']], function () {
         Route::post('/additonal/price/detail', 'VenderProductController@additionalPrice')->name('add.price.product');
-
         Route::get('/admin/quick/get/order/detail', 'OrderController@QuickOrderDetails')->name('quickorderdtls');
 
         Route::post('/add/common/variant/{id}', 'AddProductVariantController@storeCommon')->name('add.common');
@@ -816,6 +820,12 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     Route::group(['middleware' => ['web', 'isActive', 'IsInstalled', 'auth', 'is_vendor', 'switch_lang']], function () {
         Route::prefix('seller')->group(function () {
+
+            Route::get('blog', 'SellerBlogController@index');
+            Route::post('blog/store', 'SellerBlogController@store');
+
+            Route::get('blog/create', 'SellerBlogController@create');
+
             Route::get('categories', 'ShippingInfoController@getcategories')->name('seller.get.categories');
 
             Route::get('subcategories', 'ShippingInfoController@getsubcategories')->name('seller.get.subcategories');
@@ -895,6 +905,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
             Route::name('my.')->group(function () {
                 Route::resource('products', 'VenderProductController');
+                
                 Route::resource('ticketproducts', 'VenderTicketController');
                 Route::resource('bidproducts', 'VenderBidController');
             });
