@@ -8,6 +8,7 @@
 			All Categories
 
 		</div>
+		<a href=" {{url('seller/requestcategories')}} " class="btn btn-success pull-right">Request New Category</a>
 	
 	</div>
 

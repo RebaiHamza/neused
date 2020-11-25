@@ -8,6 +8,8 @@ use App\ShippingWeight;
 use Session;
 use DataTables;
 use Avatar;
+use App\Category;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /*==========================================
 =            Author: Media City            =
@@ -53,6 +55,49 @@ class ShippingInfoController extends Controller
 
 
             return view('seller.category.cat');
+    }
+
+    public function create()
+    {
+        return view("seller.category.add_category");
+    }
+
+    public function store(Request $request)
+    {
+
+        $request->validate(["title" => "required"], [
+            "title.required" => "Category Name is required"
+        ]);
+
+        $input = $request->all();
+
+        $input['description'] = clean($request->description);
+
+        $input['status'] = '0';
+
+        $cat = new Category();
+
+        if ($file = $request->file('image')) {
+
+            $optimizeImage = Image::make($file);
+            $optimizePath = public_path() . '/images/category/';
+            $image = time() . $file->getClientOriginalExtension();
+            $optimizeImage->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $optimizeImage->save($optimizePath . $image, 90);
+
+            $input['image'] = $image;
+
+        }
+
+        $input['position'] = (Category::count() + 1);
+
+        
+
+        $cat->create($input);
+
+        return back()->with("added", "Category Has Been requested !");
     }
 
     public function getsubcategories(Request $request){

@@ -605,6 +605,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('admin/update/paystack/settings', 'KeyController@paystackUpdate')->name('store.paystackupdate.settings');
         Route::resource('admin/users', 'UserController');
         Route::resource('admin/category', 'CategoryController');
+        Route::get('admin/requestedcategory', 'CategoryController@requested')->name('requested.category');
         Route::resource('admin/grandcategory', 'GrandcategoryController');
         Route::resource('admin/subcategory', 'SubCategoryController');
         Route::resource('admin/country', 'CountryController');
@@ -827,6 +828,10 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
             Route::get('blog/create', 'SellerBlogController@create');
 
             Route::get('categories', 'ShippingInfoController@getcategories')->name('seller.get.categories');
+
+            Route::get('requestcategories', 'ShippingInfoController@create')->name('seller.request.categories');
+
+            Route::post('categories', 'ShippingInfoController@store');
 
             Route::get('subcategories', 'ShippingInfoController@getsubcategories')->name('seller.get.subcategories');
 

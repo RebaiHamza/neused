@@ -17,8 +17,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category = Category::orderBy('position', 'asc')->get();
+        $category = Category::orderBy('position', 'asc')->where('status', '=', '1')->get();
         return view("admin.category.index", compact("category"));
+    }
+
+    public function requested()
+    {
+        $category = Category::orderBy('position', 'asc')->where('status', '=', '0')->get();
+        return view("admin.category.requested", compact("category"));
     }
 
     /**

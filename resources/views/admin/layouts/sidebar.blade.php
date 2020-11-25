@@ -97,6 +97,7 @@
                 <li class="{{ Nav::isRoute('category.index') }} {{ Nav::isRoute('category.create') }} {{ Nav::isRoute('category.edit') }}" ><a href="{{url('admin/category')}}"><i class="fa fa-circle-o"></i>Categories</a></li>
                 <li class="{{ Nav::isResource('subcategory') }}"><a href="{{url('admin/subcategory')}}"><i class="fa fa-circle-o"></i>Subcategories</a></li>
                 <li class="{{ Nav::isResource('grandcategory') }}"><a href="{{url('admin/grandcategory')}}"><i class="fa fa-circle-o"></i>Childcategories</a></li>
+                <li class="{{ Nav::isRoute('requested.category') }} {{ Nav::isRoute('admin/requestedcategory') }}" ><a href="{{url('admin/requestedcategory')}}"><i class="fa fa-circle-o"></i>Requested Categories</a></li>
               </ul>
             </li>
 
