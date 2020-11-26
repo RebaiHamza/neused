@@ -1446,6 +1446,8 @@ class usedProductsController extends Controller
         // $input['vender_id'] = $findstore->user->id;
         $input['is_used'] = 1;
         $input['is_new'] = 0;
+
+        return $input;
         $data = Product::create($input);
          
         $data->save();

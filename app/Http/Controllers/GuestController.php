@@ -62,6 +62,13 @@ class GuestController extends Controller
         return view('seller.login');
     }
 
+    public function sellerregisterview()
+    {
+        require_once 'price.php';
+        $country = Country::all();
+        return view('seller.register', compact('country', 'conversion_rate'));
+    }
+
     public function dosellerlogin(Request $request)
     {
         if (Auth::attempt(['email' => $request->get('email') , 'password' => $request->get('password') ,

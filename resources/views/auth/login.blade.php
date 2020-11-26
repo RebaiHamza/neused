@@ -23,9 +23,6 @@
         @if($config->google_login_enable=='1')
             <a title="{{__('staticwords.SignInwithGoogle')}}" href="{{url('login/google')}}" class="twitter-sign-in"><i class="fa fa-google"></i> {{__('staticwords.SignInwithGoogle')}}</a>
         @endif
-        @if(env('ENABLE_GITLAB') == 1 )
-            <a title="{{__('staticwords.SignInwithGitLab')}}" href="{{url('login/gitlab')}}" class="gitlab"><i class="fa fa-gitlab"></i>{{__('staticwords.SignInwithGitLab')}}</a>
-        @endif
     </div>
     <form id="loginform" method="POST" class="register-form outer-top-xs" role="form" action="{{ route('normal.login') }}">
                         @csrf

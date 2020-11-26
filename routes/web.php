@@ -73,7 +73,9 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         /*Custom Seller Login*/
         Route::get('/seller/login', 'GuestController@sellerloginview')->name('seller.login.page');
+        Route::get('/seller/register', 'GuestController@sellerregisterview')->name('seller.register.page');
         Route::post('/seller/secure/login', 'GuestController@dosellerlogin')->name('seller.login.do');
+        Route::post('/seller/secure/register', 'GuestController@dosellerregister')->name('seller.register.do');
 
         /*Login Routes*/
 
@@ -101,6 +103,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     //Installer Routes //
     Route::group(['middleware' => ['web', 'switch_lang']], function () {
+        
         Route::get('/changelang', 'GuestController@changelang')->name('changelang');
 
         Route::post('/cart/removecoupan/{cpnid}', 'CouponApplyController@remove')->name('removecpn');
@@ -758,6 +761,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     Route::get('admin/gcat', 'ProductController@gcato');
     Route::get('admin/dropdown', 'ProductController@upload_info');
+
+
 
     Route::get('admin/choose_state', 'UserController@choose_country');
     Route::get('admin/choose_city', 'UserController@choose_city');

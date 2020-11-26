@@ -24,7 +24,7 @@ class CustomLoginController extends Controller
     {
        if (Auth::attempt(['email' => $request->get('email') , 'password' => $request->get('password') ,
 
-        'is_verified' => 1], $request->remember)){
+        'is_verified' => 1, 'role_id' => 'u'], $request->remember)){
             
             /*Check if user has item in his cart*/
         if (!empty(Session::get('cart'))){
