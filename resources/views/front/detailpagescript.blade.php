@@ -655,6 +655,7 @@ var setdefvariant = null;
        var selling_date = '{{$pro->selling_start_at}}';
       
        var current_date = '{{date("Y-m-d H:i:s")}}';
+       var IsBid ='{{$pro->is_bid}}'
 
 
        varid = [];
@@ -672,12 +673,19 @@ var setdefvariant = null;
          if(stock > 0 && stock <= 5)
                  {
 
+                  if (IsBid==0){
+                        $('.stockval').text("Hurry Up ! Only "+data['stock']+" left");
 
-                   $('.stockval').text("Hurry Up ! Only "+data['stock']+" left");
+                        $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('staticwords.AddtoCart') }}</button></div></div></form></div>');
+                        $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
+                 
+                  }else
+                  $('.stockval').text("Hurry Up ! Only "+data['stock']+" left");
 
-                   $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('staticwords.AddtoCart') }}</button></div></div></form></div>');
-                   $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
-                 }
+$('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('Add Your Bid') }}</button></div></div></form></div>');
+$('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
+
+                  }
                  else if(stock == 0){
 
                    $('.notifymeblock').html('<button type="button" data-target="#notifyMe" data-toggle="modal" class="m-1 p-2 btn btn-md btn-block btn-primary">NOTIFY ME</button>');
@@ -692,7 +700,7 @@ var setdefvariant = null;
                    @if($price_login != 1)
                    $('.stockval').text("In Stock");
                     $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('staticwords.AddtoCart') }}</button></div></div></form></div>');
-                    $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ __('staticwords.AddtoCart') }} <span class="sr-only">(current)</span></button></form>');
+                    $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <input  type="hidden"  value="1"  name="idp"   >  <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ __('staticwords.AddtoCart') }} <span class="sr-only">(current)</span></button></form>');
                    @endif
                  }
        }else{
@@ -700,21 +708,44 @@ var setdefvariant = null;
           $('.quantity-block').hide();
        }
 
-
+       if (IsBid==0){
 
      $('.quant-input').html('<input type="number" id="nmovimentos" name="quantity" value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'">');
 
       $('.quant-input').html('');
       $('.quant-input').append('<input type="number" value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'" value="1" class="qty-section">');
+       }else{
 
+        $('.quant-input').html('<input type="hidden"  id="nmovimentos" name="quantity" value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'">');
+
+      $('.quant-input').html('');
+      $('.quant-input').append('<input type="hidden"  value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'" value="1" class="qty-section">');
+       
+      $('.quant-input').html('<input style="width: 100px;" type="number"   name="bidPrice"   >');
+
+ 
+ 
+    }
      varqty =  [];
-     var tx = $('.quant-input input').val();
+     if (IsBid==1){
+     var tx = 1;
+     }else{
+      var tx = $('.quant-input input').val();
+     }
      varqty.push(tx);
-     var formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
-
+    
+     if (IsBid==0){
+      var formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
      $('.quantity-container form').attr("action",formurl);
-     $('#cartForm form').attr("action",formurl);
 
+     $('#cartForm form').attr("action",formurl);
+     }else{
+
+      var formurl = '{{ url("MyBid")}}';
+     $('.quantity-container form').attr("action",formurl);
+
+     $('#cartForm form').attr("action",formurl);
+     }
      @auth 
      checkwish(varid);
 
@@ -744,6 +775,8 @@ var setdefvariant = null;
               $(this).val(maxOrder);
                 formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+maxOrder;
          
+                if (IsBid==0){
+      var formurl = '{{ url("MyBid")}}';}
                $('.quantity-container form').attr("action",formurl);
                $('#cartForm form').attr("action",formurl);     
               return false;
@@ -759,7 +792,8 @@ var setdefvariant = null;
              });
 
              formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
-         
+             if (IsBid==0){
+      var formurl = '{{ url("MyBid")}}';}
              $('.quantity-container form').attr("action",formurl);
              $('#cartForm form').attr("action",formurl);     
              return false;
@@ -773,12 +807,15 @@ var setdefvariant = null;
              });
              $(this).val(minOrder);
              formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+minOrder;
+             if (IsBid==0){
+      var formurl = '{{ url("MyBid")}}';}
              $('.quantity-container form').attr("action",formurl);
              $('#cartForm form').attr("action",formurl);     
              return false;
          }
 
          formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
+         
          
          $('.quantity-container form').attr("action",formurl);
          $('#cartForm form').attr("action",formurl);     

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AddSubVariant;
 use App\Adv;
+use App\BidProduct;
 use App\AutoDetectGeo;
 use App\BankDetail;
 use App\Blog;
@@ -503,6 +504,21 @@ class MainController extends Controller
         }
 
     }
+  public function UserBid(Request $request){
+    $newuser = Auth::user();
+    $price_total =$request->bidPrice;
+    $id=$request->idp;
+
+    DB::insert('insert into bidproduct (user_id, pro_id,price_total) values (?,?, ?)', [1, 1,$price_total]);
+
+    return redirect("details-bid",$id);
+
+  }
+
+  
+
+
+
 
     public function AddToWishList($id)
     {

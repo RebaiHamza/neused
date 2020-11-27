@@ -341,6 +341,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('pincode-check', 'PinCodController@pincode_check');
         
         Route::get('/bid', 'bid\MainController@index');
+        Route::post('/MyBid','bid\MainController@UserBid');
         Route::get('/ticket', 'ticket\MainController@index');
         Route::get('/used', 'used\MainController@index');
         Route::get('/', 'MainController@index');

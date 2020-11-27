@@ -879,7 +879,7 @@
                         margin-bottom: 10px;
                         color: #fff;" 
                       ><span id="demo"></span></div>
-                     
+                      {{-- {{$pro->is_bid==1}} --}}
                       <div class="quantity-heading">{{ __('staticwords.bid') }}</div>
                       <div class="qty-parent-cont">
                         <div class="quantity-container info-container">
@@ -893,9 +893,11 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="add-btn">
+                         
+                            <div   class="add-btn">
 
                             </div>
+                          
                             </div><!-- /.row -->
                         </div>
                       </div>
@@ -4221,6 +4223,7 @@
 
 
   <script>
+ 
     // Set the date we're counting down to
     var d = new Date();
   d.setMinutes(d.getMinutes() + 3);
