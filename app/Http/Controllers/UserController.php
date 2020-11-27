@@ -448,7 +448,8 @@ class UserController extends Controller
 
     public function appliedform(Request $request)
     {
-        $stores = \DB::table('stores')->join('allcities','allcities.id','=','stores.city_id')->join('allstates','stores.state_id','=','allstates.id')->join('allcountry','allcountry.id','=','stores.country_id')->join('users','users.id','=','stores.user_id')->select('stores.*','othersite as othersite', 'allcities.pincode as pincode','allcities.name as city','allstates.name as state','allcountry.name as country','users.name as username')->where('stores.apply_vender','=','0')->get();
+        $stores = \DB::table('stores')->join('allcities','allcities.id','=','stores.city_id')->join('allstates','stores.state_id','=','allstates.id')->join('allcountry','allcountry.id','=','stores.country_id')->join('users','users.id','=','stores.user_id')
+        ->select('stores.*','othersite as othersite', 'stores.patent as patent', 'stores.register as register', 'allcities.pincode as pincode','allcities.name as city','allstates.name as state','allcountry.name as country','users.name as username')->where('stores.apply_vender','=','0')->get();
 
         if($request->ajax()){
             return FacadesDataTables::of($stores)->addIndexColumn()
@@ -468,10 +469,15 @@ class UserController extends Controller
                         else
                             $html .= "<p><b>Other website selling in: </b> No other websites</p>";
                         
+
                         return $html;
                    })
                    ->addColumn('requested_at',function($row){
-                        return  '<b>'.date("d-M-Y | h:i A",strtotime($row->created_at)).'</b>';
+                       $html1 = '';
+                       $html1 .= '<b>'.date("d-M-Y | h:i A",strtotime($row->created_at)).'</b><hr>';
+                       $html1 .= '<a href="/files/downloadregister/'.$row->register.'">Download Trade Register</a><hr>';
+                       $html1 .= '<a href="/files/downloadpatent/'.$row->patent.'">Download Store Patent</a>'; 
+                        return  $html1;
                    })
                    ->addColumn('action','admin.user.requestaction')
                    ->rawColumns(['detail','requested_at','action'])

@@ -22,6 +22,8 @@ use App\AddSubVariant;
 use Hash;
 use App\Page;
 use App\Country;
+use App\Store;
+use Image;
 
 /*==========================================
 =            Author: Media City            =
@@ -94,6 +96,106 @@ class GuestController extends Controller
             return Redirect::back()->withErrors($errors)->withInput($request->except('password'));
             return Redirect::back();
         }
+    }
+
+    public function dosellerregister(Request $request)
+    {
+        $data = $this->validate($request,[
+
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'mobile' => 'numeric|unique:users,mobile',
+            'storename'=>"required",
+            'address'=>"required",
+            'country_id' => 'required|not_in:0',
+            'state_id' => 'required|not_in:0',
+            'city_id' => 'required|not_in:0',
+            'store_logo' => 'required | max:1000',  
+
+        ], [
+            'mobile.unique' => 'Mobile number is already taken !',
+            'mobile.numeric' => 'Mobile number should be numeric !',
+            "storename.required"=>"Store Name is Required",
+        ]);
+
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'mobile' => $request['mobile'],
+            'role_id' => 'v',
+            'password' => Hash::make($request['password']),
+            'is_verified' => 1,
+        ]);
+
+
+        $input = $request->all();
+        
+    
+         $image = $request->file('store_logo');
+         $optimizeImage = Image::make($image);
+         $optimizePath = public_path().'/images/store/';
+         $store_logo = time().$image->getClientOriginalName();
+         $optimizeImage->resize(300, 300, function ($constraint) {
+           $constraint->aspectRatio();
+         });
+         $optimizeImage->save($optimizePath.$store_logo, 72);
+
+         $input['store_logo'] = $store_logo;
+    
+
+            $register = $request->file('register');
+            $path = 'files/register/';
+            $filename = time().'.'.$register->getClientOriginalExtension();
+            $register->move($path, $filename);
+            $input['register'] = $filename;
+   
+
+            $patent = $request->file('patent');
+            $path = 'files/patent/';
+            $filename = time().'.'.$patent->getClientOriginalExtension();
+            $patent->move($path, $filename);
+            $input['patent'] = $filename;
+
+       $inputstore = ([
+        'user_id' => $user->id,
+        'name' => $request['storename'],
+        'address' => $request['address'],
+        'mobile' => $request['mobile'],
+        'email' => $request['email'],
+        'city_id' => $request['city_id'],
+        'country_id' => $request['country_id'],
+        'state_id' => $request['state_id'],
+        'pin_code' => $request['pin_code'],
+        'status' => '0',
+        'verified_store' => $request['verified_store'],
+        'store_logo' => $request['store_logo'],
+        'branch' => $request['branch'],
+        'ifsc' => $request['ifsc'],
+        'account' => $request['account'],
+        'account_name' => $request['account_name'],
+        'bank_name' => $request['bank_name'],
+        'preferd' => $request['preferd'],
+        'name1' => $request['name1'],
+        'otherStores' => $request['otherStores'],
+        'register' => $input['register'],
+        'patent' => $input['patent'],
+        'verified_store' => '0',
+        ]);
+
+        $data = Store::create($inputstore);
+       
+        $data->save();
+        Auth::logout($user);
+        return redirect('/');
+    }
+
+    public function downloadregister($file){
+        return response()->download('files/register/'.$file, 'Content-Type: application/docx');
+    }
+
+    public function downloadpatent($file){
+        return response()->download('files/patent/'.$file, 'Content-Type: application/pdf');
     }
 
     public function referfromcheckoutwindow(Request $request)

@@ -26,9 +26,9 @@ require_once(base_path().'/app/Http/Controllers/price.php');
 <div class="body-content">
     <div class="container">
         <div class="sign-in-page">
-            <h4 class="checkout-subtitle">{{ __('staticwords.Createanewaccount') }}</h4>
+            <h4 class="checkout-subtitle">{{ __('Create seller account') }}</h4>
             <form class="register-form outer-top-xs" role="form" method="POST"
-                action="{{ route('seller.register.do') }}">
+                action="{{ route('seller.register.do') }}" enctype="multipart/form-data">
                 @csrf
                 <!-- create a new account -->
 
@@ -42,8 +42,9 @@ require_once(base_path().'/app/Http/Controllers/price.php');
                                 for="exampleInputEmail1">{{ __('staticwords.Name') }}<span>*</span></label>
                             <input name="name" type="text" value="{{ old('name') }}"
                                 class="form-control unicase-form-control text-input{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                id="name" autofocus> @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
+                                id="name" autofocus required> 
+                                @if ($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('name') }}</strong>
                             </span> @endif
                         </div>
@@ -53,35 +54,34 @@ require_once(base_path().'/app/Http/Controllers/price.php');
                         <div class="form-group">
                             <label class="info-title">{{ __('staticwords.StoreName') }} <small
                                     class="required">*</small></label>
-                            <input id="firstname" type="text" name="name" value="{{old('name')}}"
-                                class="form-control unicase-form-control">
+                            <input id="storename" type="text" name="storename" class="form-control unicase-form-control" required>
                         </div>
                     </div>
 
                     <div class="offset-md-3 col-md-6">
                         <div class="form-group">
                             <label for="store_logo">{{ __('Store Logo') }}</label>
-                            <input type="file" name="store_logo" id="wizard-picture"
-                                class="form-control unicase-form-control"> </div>
+                            <input type="file" name="store_logo" id="wizard-picture" class="form-control unicase-form-control" required>
+                        </div>
 
                         <span class="required">{{$errors->first('store_logo')}}</span>
                     </div>
 
                     <div class="offset-md-3 col-md-6">
                         <div class="form-group">
-                            <label for="store_logo">{{ __('Trade Register') }}
+                            <label for="register">{{ __('Trade Register') }}
                                 <small class="required">*</small>
                             </label>
-                            <input type="file" name="store_regiter" class="form-control unicase-form-control"> 
+                            <input type="file" name="register" class="form-control unicase-form-control" required> 
                         </div>
                     </div>
 
                     <div class="offset-md-3 col-md-6">
                         <div class="form-group">
-                            <label for="store_logo">{{ __('Store Patent') }}
+                            <label for="patent">{{ __('Store Patent') }}
                                 <small class="required">*</small>
                             </label>
-                            <input type="file" name="store_patent" class="form-control unicase-form-control">
+                            <input type="file" name="patent" class="form-control unicase-form-control" required>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ require_once(base_path().'/app/Http/Controllers/price.php');
                         <label class="info-title">{{ __('staticwords.StoreAddress') }} <small
                                 class="required">*</small></label>
                         <input type="text" id="first-name" name="address" value="{{old('address')}}"
-                            class="form-control unicase-form-control"> <span
+                            class="form-control unicase-form-control" required> <span
                             class="required">{{$errors->first('address')}}</span>
                     </div>
                 </div>
@@ -225,7 +225,7 @@ require_once(base_path().'/app/Http/Controllers/price.php');
                         <label class="info-title">{{ __('staticwords.Pincode') }}
                             ({{ __('staticwords.optional') }}) </label>
                         <input pattern="[0-9]+" title="Invalid pincode" type="text" id="first-name" name="pin_code"
-                            value="{{old('pin_code')}}" class="form-control unicase-form-control" />
+                            value="{{old('pin_code')}}" class="form-control unicase-form-control" required/>
                     </div>
                 </div>
 
