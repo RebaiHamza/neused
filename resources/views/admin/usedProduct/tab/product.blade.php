@@ -386,6 +386,34 @@
       <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
     </div>
 
+    <div class="margin-top-15 col-md-12">
+
+      <label>
+        Price: <span class="required">(the official price after 2 weeks if the item wasn't sold.)</span>
+        <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
+      </label>
+
+      <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25"
+        type="text" id="price1" name="price1" value="{{ old('price') }}" placeholder="Please enter product price"
+        class="form-control">
+      <br>
+      <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
+    </div>
+
+    <div class="margin-top-15 col-md-12">
+
+      <label>
+        Price: <span class="required">(the official price after 1 month if the item wasn't sold.)</span>
+        <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
+      </label>
+
+      <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25"
+        type="text" id="price2" name="price2" value="{{ old('price') }}" placeholder="Please enter product price"
+        class="form-control">
+      <br>
+      <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
+    </div>
+
     {{-- <div class="margin-top-15 col-md-6">
 
                         <label>

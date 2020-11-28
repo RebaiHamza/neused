@@ -887,6 +887,8 @@ class usedProductsController extends Controller
 
         $input = $request->all();
         $input['offer_price'] = $input['price'];
+        $input['price1'] = $request->price1;
+        $input['price2'] = $request->price2;
         $currency_code = Genral::first()->currency_code;
 
         if (isset($request->codcheck)) {
@@ -1307,6 +1309,8 @@ class usedProductsController extends Controller
 
         $input = $request->all();
         $input['offer_price'] = $input['price'];
+        $input['price1'] = $request->price1;
+        $input['price2'] = $request->price2;
         $currency_code = Genral::first()->currency_code;
 
         if (isset($request->codcheck)) {
@@ -1447,7 +1451,6 @@ class usedProductsController extends Controller
         $input['is_used'] = 1;
         $input['is_new'] = 0;
 
-        return $input;
         $data = Product::create($input);
          
         $data->save();

@@ -372,10 +372,10 @@
                                               ?> @if(!empty($reviews[0]))<?php
                                               $count =  App\UserReview::where('pro_id',$value->pro->id)->count();
                                                 foreach($reviews as $review){
-                                                $review_t = $review->price*5;
-                                                $price_t = $review->price*5;
-                                                $value_t = $review->value*5;
-                                                $sub_total = $sub_total + $review_t + $price_t + $value_t;
+                                                  $review_t = $review->price*5;
+                                                  $price_t = $review->price*5;
+                                                  $value_t = $review->value*5;
+                                                  $sub_total = $sub_total + $review_t + $price_t + $value_t;
                                                 }
                                                 $count = ($count*3) * 5;
                                                 $rat = $sub_total/$count;
@@ -486,10 +486,7 @@
                                                   $convert_price = $offer;
                                                   $show_price = $price;
                                                   }
-
                                                   }else{
-
-
                                                   $price = $value->pro->vender_price + $comm->rate + $orivar->price;
 
                                                   if($value->pro->vender_offer_price != null){
@@ -497,7 +494,6 @@
                                                   }else{
                                                     $offer =  $value->pro->vender_offer_price;
                                                   }
-
                                                   if($value->pro->vender_offer_price == 0 || $value->pro->vender_offer_price == null){
                                                     $show_price = $price;
                                                   }else{
@@ -505,10 +501,7 @@
                                                     $convert_price = $offer;
                                                     $show_price = $price;
                                                   }
-
                                                   }
-                                       
-                                        
                                      }
                                      else{
 
@@ -765,6 +758,7 @@
                     <div class="pull-left">
                       <div class="stock-box">
                         <span class="label">{{ __('staticwords.Availability') }} :</span>
+                        
                       </div>
                     </div>
                    <div class="pull-left">

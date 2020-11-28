@@ -342,12 +342,88 @@ var setdefvariant = null;
 
        if(saleprice == 0)
        {
-         $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+" "+buyerprice);
+        @php
+          if((is_null($pro->price1)) && (is_null($pro->price2))){
+        @endphp
+            $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+            @php
+              echo $pro->price;
+            @endphp
+            );
+        @php
+          } else if ((is_null($pro->price1)) && (is_null($pro->price2) == false)){
+            $month = (date("Y-m-d H:i:s", strtotime($pro->created_at . '+ 30 days')));
 
-         variantofferprice = [];
-         variantprice = [];
+            if ($month > Carbon\Carbon::now()) {
+        @endphp
+              $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+              @php
+                echo $pro->price;
+              @endphp
+              );
+        @php
+            } else if($month <= Carbon\Carbon::now()){
+        @endphp
+              $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+              @php
+                echo $pro->price2;
+              @endphp
+              );
+        @php
+            }
+          } else if ((is_null($pro->price1) == false) && (is_null($pro->price2))){
+            $halfmonth = (date("Y-m-d H:i:s", strtotime($pro->created_at . '+ 14 days')));
+            if($halfmonth > Carbon\Carbon::now()){
+        @endphp
+              $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+              @php
+                echo $pro->price;
+              @endphp
+              );
+        @php
+            } else if($halfmonth <= Carbon\Carbon::now()) {
+        @endphp
+              $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+              @php
+                echo $pro->price1;
+              @endphp
+              );
+        @php
+            }
+          } else {
+            $halfmonth = (date("Y-m-d H:i:s", strtotime($pro->created_at . '+ 14 days')));
+            $month = (date("Y-m-d H:i:s", strtotime($pro->created_at . '+ 30 days')));
 
-         variantprice.push(buyerprice);
+            if ($halfmonth > Carbon\Carbon::now()) {
+        @endphp
+              $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+              @php
+                echo $pro->price;
+              @endphp
+              );
+        @php
+            } else if (($halfmonth <= Carbon\Carbon::now()) && ($month >= Carbon\Carbon::now())){
+        @endphp
+                $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+                @php
+                  echo $pro->price1;
+                @endphp
+                );
+        @php
+              } else if ($month < Carbon\Carbon::now()){
+        @endphp
+                $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+
+                @php
+                  echo $pro->price2;
+                @endphp
+                );
+        @php
+              }
+          }
+        @endphp
+        variantofferprice = [];
+        variantprice = [];
+        variantprice.push(buyerprice);
 
        }else{
 

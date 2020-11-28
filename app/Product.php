@@ -14,7 +14,7 @@ class Product extends Model
     public $translatable = ['name', 'des', 'tags', 'key_features', 'tax_name'];
 
     protected $fillable = [
-          'ytlink', 'is_new','is_used', 'is_ticket', 'is_bid', 'category_id', 'child', 'grand_id', 'store_id', 'name', 'des', 'tags', 'model', 'sku', 'price', 'offer_price', 'website', 'dimension', 'weight', 'status', 'featured', 'brand_id', 'vender_id', 'sale', 'tax', 'free_shipping', 'return_avbl', 'cancel_avl', 'vender_price', 'vender_offer_price', 'commission_rate', 'return_policy', 'selling_start_at', 'key_features', 'codcheck', 'shipping_id', 'price_in', 'w_d', 'w_my', 'w_type', 'tax_r', 'tax_name',
+        'price1', 'price2', 'ytlink', 'is_new','is_used', 'is_ticket', 'is_bid', 'category_id', 'child', 'grand_id', 'store_id', 'name', 'des', 'tags', 'model', 'sku', 'price', 'offer_price', 'website', 'dimension', 'weight', 'status', 'featured', 'brand_id', 'vender_id', 'sale', 'tax', 'free_shipping', 'return_avbl', 'cancel_avl', 'vender_price', 'vender_offer_price', 'commission_rate', 'return_policy', 'selling_start_at', 'key_features', 'codcheck', 'shipping_id', 'price_in', 'w_d', 'w_my', 'w_type', 'tax_r', 'tax_name',
       ];
     protected $dates = ['deleted_at'];
 

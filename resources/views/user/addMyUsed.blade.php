@@ -516,6 +516,41 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                Price: <span class="required">(the official price after 2 weeks if the item wasn't sold.)</span><br>
+                                <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
+                            </label>
+                        
+                            <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25" 
+                                type="text" id="price1" name="price1" value="{{ old('price') }}" placeholder="Please enter product 2nd price"
+                                class="form-control">
+                            <br>
+                            <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
+                        </div>
+                    </div>
+                </div>
+
+              <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label>
+                              Price: <span class="required">(the official price after 1 month if the item wasn't sold.)</span><br>
+                              <span class="help-block">(Price you entering is in {{ $genrals_settings->currency_code }})</span>
+                          </label>
+                      
+                          <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25" 
+                              type="text" id="price2" name="price2" value="{{ old('price') }}" placeholder="Please enter product 3rd price"
+                              class="form-control">
+                          <br>
+                          <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
+                      </div>
+                  </div>
+              </div>
+
                 <div class="col-md-12">
                     <br>
                     <div class="row">
@@ -543,18 +578,7 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                               <br>
                               <small class="txt-desc">(If enabled than product will be featured) </small>
                         </div>
-                        <div class="col-md-3">
-                            <label for="status3">
-                                Status:
-                              </label>
-                          
-                              <input id="toggle-event3" class="tgl tgl-skewed" type="checkbox">
-                              <label class="tgl-btn" data-tg-off="Deactive" data-tg-on="Active" for="toggle-event3"></label>
-                              <input @if(!empty($products)) value="{{ $products->status }}" @else value="0" @endif type="hidden" name="status"
-                                id="status3">
-                                <br>
-                              <small class="txt-desc">(Please Choose Status )</small>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-3">
