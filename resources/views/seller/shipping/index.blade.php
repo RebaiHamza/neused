@@ -8,6 +8,9 @@
 			Available Shipping Methods
 
 		</div>
+
+		<a href="{{ url('seller/shipping/request') }}" class="btn btn-success owtbtn" style="margin-left: 15px">
+			Request new Shipping Method</a>
 	
 	</div>
 

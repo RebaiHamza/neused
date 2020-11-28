@@ -11,6 +11,7 @@ use DB;
 use Auth;
 use App\Order;
 use App\Product;
+use App\Zone;
 
 /*==========================================
 =            Author: Media City            =
@@ -28,9 +29,9 @@ class ShippingController extends Controller
      */
    public function index()
     {
-       
-        $shippings = Shipping::all();
-        return view("admin.shipping.index",compact("shippings"));
+        $zones = Zone::all();
+        $shippings = Shipping::orderBy('id','desc')->get();
+        return view("admin.shipping.index",compact("shippings", "zones"));
     }
 
     /**
@@ -40,7 +41,8 @@ class ShippingController extends Controller
      */
     public function create()
     {
-        return view("admin.shipping.add");
+        $zones = Zone::where('status', '=', '1')->get();
+        return view("admin.shipping.add", compact('zones'));
     }
 
     /**
@@ -64,10 +66,12 @@ class ShippingController extends Controller
             
           ]);
 
-        $input = $request->all(); 
+        $input = $request->all();
+        $shipping = Shipping::orderBy('id','desc')->select('id', 'id as id')->first();
+        $input['id'] = $shipping['id'] + 1;
         $data = shipping::create($input);
         $data->save();
-        return back()->with('category_message', 'Shipping has been updated'); 
+        return back()->with('category_message', 'Shipping method has been added'); 
     }
     
 

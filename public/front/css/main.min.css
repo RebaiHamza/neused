@@ -17,7 +17,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Barlow, sans-serif;
-    background-color: #f3f3f3
+    background-color: #f3f3f3;
+    top: 0px !important; 
 }
 
 button:focus {
@@ -16955,6 +16956,10 @@ input[type=text] {
         height: 0;
         border-radius: 5px
     }
+}
+
+body > .skiptranslate {
+    display: none;
 }
 
 body>header>div.main-header>div>div>div.col-6.col-md-2.col-sm-2.col-lg-2.logo-holder>div>a>img {

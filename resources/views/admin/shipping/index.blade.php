@@ -7,9 +7,11 @@
     <div class="box" >
       <div class="box-header">
         <h3 class="box-title">Shipping</h3>
+        <br><br>
+      <a href="{{ url('admin/shipping/create') }}" class="btn btn-success owtbtn">
+          +  Add new Shipping Method</a>
       </div>
 
-       
               <div class="box-body">
                 <div id="flash-message" class="display-none flash-message">
                   
@@ -20,6 +22,7 @@
                   <tr>
                     <th>Default</th>
                     <th>Shipping Title</th>
+                    <th>Zone</th>
                     <th>Price</th>
                     <th>Status</th>
                      <th>Action</th>
@@ -33,6 +36,16 @@
                   <tr>
                   <td><input {{ $shipping->name == 'Local Pickup' || $shipping->name == 'UPS Shipping' ? "disabled" : ""}} type="radio" class="kk" id="{{$shipping->id}}" {{$shipping->default_status=='1'?'checked':''}} name="radio"></td>
                   <td>{{$shipping->name}}</td>
+                  @if ($shipping->zone_id)
+                    @foreach ($zones as $zone)
+                        @if ($shipping->zone_id == $zone->id)
+                          <td>{{$zone->title}}</td>
+                        @endif
+                    @endforeach
+                  @else
+                    <td>--</td>
+                  @endif
+                  
                   <td>{{$shipping->price ?? '---'}}</td>
                  
                   <td>

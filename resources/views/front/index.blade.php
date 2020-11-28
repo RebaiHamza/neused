@@ -6228,6 +6228,7 @@ $getads = App\Adv::where('position','=','afterfeaturedproduct')->where('status',
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
 </div>
 <!-- /.container -->
+{{-- <div id="google_translate_element"></div> --}}
 </div>
 <!-- /#top-banner-and-menu -->
 
@@ -6242,5 +6243,14 @@ $getads = App\Adv::where('position','=','afterfeaturedproduct')->where('status',
 <script>
   var baseUrl = "<?= url('/') ?>";
 </script>
-<script src="{{ url('js/wishlist.min.js') }}"></script>
+{{-- <script src="{{ url('js/wishlist.min.js') }}"></script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+</script>
+  
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> --}}
+
 @endsection

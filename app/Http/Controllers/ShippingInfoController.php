@@ -10,6 +10,7 @@ use DataTables;
 use Avatar;
 use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Zone;
 
 /*==========================================
 =            Author: Media City            =
@@ -24,6 +25,27 @@ class ShippingInfoController extends Controller
     	$shippings = Shipping::all();
     	$sw = ShippingWeight::first();
     	return view('seller.shipping.index',compact('shippings','sw'));
+    }
+
+    public function requestShipping(){
+        $zones = Zone::where('status', '=', '1')->get();
+        return view("seller.shipping.add", compact('zones'));
+    }
+
+    public function createRequest(){
+        $data = $this->validate($request,[
+            "name"=>"required",
+        ],[
+            "name.required"=>"Shipping Fild is Required",
+          ]);
+
+        $input = $request->all();
+        $shipping = Shipping::orderBy('id','desc')->select('id', 'id as id')->first();
+        $input['id'] = $shipping['id'] + 1;
+        $input['status'] = '0';
+        $data = shipping::create($input);
+        $data->save();
+        return back()->with('category_message', 'Shipping method has been requested'); 
     }
 
     public function getcategories(Request $request){

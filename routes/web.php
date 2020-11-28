@@ -650,6 +650,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('admin/recipt_show/', 'SellerPaymenyController@recipt_show');
         Route::get('admin/subcat', 'MenuController@upload_info');
         Route::resource('admin/shipping', 'ShippingController');
+        Route::get('admin/shipping/create', 'ShippingController@create');
         Route::get('/admin/shipping-price-weight', 'ShippingWeightController@get')->name('get.wt');
         Route::post('admin/shipping-price-weight/update', 'ShippingWeightController@update')->name('update.ship.wt');
         Route::resource('admin/order', 'OrderController');
@@ -840,6 +841,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
             Route::get('requestcategories', 'ShippingInfoController@create')->name('seller.request.categories');
 
             Route::post('categories', 'ShippingInfoController@store');
+
+            Route::get('shipping/request', 'ShippingInfoController@requestshipping');
 
             Route::get('subcategories', 'ShippingInfoController@getsubcategories')->name('seller.get.subcategories');
 

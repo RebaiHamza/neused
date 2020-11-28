@@ -8,6 +8,5 @@ class Shipping extends Model
 {
     public $timestamps = false;
 
-    
-    protected $fillable = ['name', 'price','type','login','free','default_status'];
+    protected $fillable = ['id', 'name', 'price','type','login','free','default_status', 'zone_id'];
 }

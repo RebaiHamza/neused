@@ -246,10 +246,8 @@
                     title="Wishlist"><span>{{ __('staticwords.Wishlist') }}(<span
                         id="wishcount">{{$wishcount}}</span>)</a></li>
                 @endif
-                @if(Auth::user()->role_id == "u")
                 <li class="first"><a target="_blank" title="become a vender" href="{{route('seller.register.page')}}"
                     title="vendor">Become a vendor</a></li>
-                @endif
                 @if(Auth::check())
                 <li class="login">
 
