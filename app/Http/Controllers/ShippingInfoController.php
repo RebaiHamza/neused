@@ -22,7 +22,7 @@ use App\Zone;
 class ShippingInfoController extends Controller
 {
     public function getinfo(){
-    	$shippings = Shipping::all();
+    	$shippings = Shipping::where('status', '=', '1')->get();
     	$sw = ShippingWeight::first();
     	return view('seller.shipping.index',compact('shippings','sw'));
     }
@@ -32,7 +32,7 @@ class ShippingInfoController extends Controller
         return view("seller.shipping.add", compact('zones'));
     }
 
-    public function createRequest(){
+    public function createRequest(Request$request){
         $data = $this->validate($request,[
             "name"=>"required",
         ],[

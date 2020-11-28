@@ -49,7 +49,7 @@
                   <td>{{$shipping->price ?? '---'}}</td>
                  
                   <td>
-                    @if($shipping->login=='1')
+                    @if($shipping->status=='1')
                         {{'Yes'}}
                         @else
                         {{'No'}}

@@ -53,18 +53,11 @@ class ShippingController extends Controller
      */
     public function store(Request $request)
     {
-        
-         
-
         $data = $this->validate($request,[
             "name"=>"required",
-            
-            
         ],[
-
             "name.required"=>"Shipping Fild is Required",
-            
-          ]);
+        ]);
 
         $input = $request->all();
         $shipping = Shipping::orderBy('id','desc')->select('id', 'id as id')->first();
@@ -88,9 +81,8 @@ class ShippingController extends Controller
      */
     public function edit($id)
     {
-        
-        
         $shipping = Shipping::findOrFail($id);
+        $zones = Zone::all();
 
         if($shipping->name == 'Shipping Price')
         {
@@ -98,7 +90,7 @@ class ShippingController extends Controller
         }
         else
         {
-            return view("admin.shipping.edit",compact("shipping"));
+            return view("admin.shipping.edit",compact("shipping", "zones"));
         }
     }
 
@@ -111,13 +103,9 @@ class ShippingController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
-        
-        
-
-        
           $shipping = shipping::findOrFail($id);
-          $input = $request->all();  
+          $input = $request->all();
+          $input['status'] = $request->status;
           $shipping->update($input);
 
           return redirect('admin/shipping')->with('category_message', 'Shipping has been updated');

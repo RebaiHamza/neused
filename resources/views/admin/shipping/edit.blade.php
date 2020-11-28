@@ -24,6 +24,27 @@
                           
                         </div>
                       </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                          Zone
+                        </label>
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="zone_id" id="zone_id" class="select2 form-control">
+                            <option value="">Please Select</option>
+                           
+                            @if(!empty($zones))
+                              @foreach($zones as $zone)
+                                <option value="{{$zone->id}}"> {{$zone->title}} </option>
+                              @endforeach
+                            @endif
+                            
+                          </select>
+                          <p class="txt-desc">Please Enter Shipping Zone </p>
+                        </div>
+                      </div>
+
                        @if($shipping->id != 1)
                        <div class="form-group">
                        
@@ -45,7 +66,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                          <input <?php echo ($shipping->login=='1')?'checked':'' ?> id="toggle-event3" type="checkbox" class="tgl tgl-skewed">
                          <label class="tgl-btn" data-tg-off="Deactive" data-tg-on="Active" for="toggle-event3"></label>
-                        <input type="hidden" name="login" value="{{$shipping->login ?? ''}}" id="status3">
+                        <input type="hidden" name="status" value="{{$shipping->login ?? ''}}" id="status3">
                          <small class="txt-desc">(Please Choose Status) </small>
                         </div>
                       </div>

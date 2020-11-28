@@ -844,6 +844,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
             Route::get('shipping/request', 'ShippingInfoController@requestshipping');
 
+            Route::post('shipping/createRequest', 'ShippingInfoController@createRequest');
+
             Route::get('subcategories', 'ShippingInfoController@getsubcategories')->name('seller.get.subcategories');
 
             Route::get('childcategories', 'ShippingInfoController@getchildcategories')->name('seller.get.childcategories');

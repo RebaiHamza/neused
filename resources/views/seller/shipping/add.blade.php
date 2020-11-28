@@ -10,7 +10,7 @@
                           <a href=" {{url('seller/available/shipping')}} " class="btn btn-success pull-right owtbtn">< Back</a> 
                         </div>   
                     
-                    <form id="demo-form2" method="post" enctype="multipart/form-data" action="{{url('seller/shipping')}}" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" method="post" enctype="multipart/form-data" action="{{url('seller/shipping/createRequest')}}" data-parsley-validate class="form-horizontal form-label-left">
                         {{csrf_field()}}
                      
                       <div class="form-group">
