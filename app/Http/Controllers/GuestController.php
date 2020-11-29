@@ -183,12 +183,12 @@ class GuestController extends Controller
         return redirect('/');
     }
 
-    public function downloadregister($file){
-        return response()->download('files/register/'.$file, 'Content-Type: application/docx');
+    public function register($file){
+        return response()->download('files/register/'.$file);
     }
 
-    public function downloadpatent($file){
-        return response()->download('files/patent/'.$file, 'Content-Type: application/pdf');
+    public function patent($file){
+        return response()->download('files/patent/'.$file);
     }
 
     public function referfromcheckoutwindow(Request $request)

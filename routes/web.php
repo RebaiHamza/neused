@@ -76,8 +76,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/seller/register', 'GuestController@sellerregisterview')->name('seller.register.page');
         Route::post('/seller/secure/login', 'GuestController@dosellerlogin')->name('seller.login.do');
         Route::post('/seller/secure/register', 'GuestController@dosellerregister')->name('seller.register.do');
-        Route::get('/files/downloadregister/{file}', 'GuestController@downloadregister');
-        Route::get('/files/downloadpatent/{file}', 'GuestController@downloadpatent');
+        Route::get('/files/register/{file}', 'GuestController@downloadregister');
+        Route::get('/files/patent/{file}', 'GuestController@downloadpatent');
         
 
         /*Login Routes*/

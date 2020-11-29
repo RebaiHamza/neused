@@ -468,8 +468,8 @@ class UserController extends Controller
                    ->addColumn('requested_at',function($row){
                        $html1 = '';
                        $html1 .= '<b>'.date("d-M-Y | h:i A",strtotime($row->created_at)).'</b><hr>';
-                       $html1 .= '<a href="/files/downloadregister/'.$row->register.'">Download Trade Register</a><hr>';
-                       $html1 .= '<a href="/files/downloadpatent/'.$row->patent.'">Download Store Patent</a>'; 
+                       $html1 .= '<a target="_blank" href="/files/register/'.$row->register.'">Download Trade Register</a><hr>';
+                       $html1 .= '<a target="_blank" href="/files/patent/'.$row->patent.'">Download Store Patent</a>'; 
                         return  $html1;
                    })
                    ->addColumn('action','admin.user.requestaction')

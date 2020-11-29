@@ -47,6 +47,8 @@ class StoreController extends Controller
                     $html .='<p><b>Email:</b> <span class="font-weight500">'.$store->email.'</span></p>';
                     $html .= '<p><b>Mobile:</b> <span class="font-weight500">'.$store->mobile.'</span></p>';
                     $html .= '<p><b>Address:</b> <span class="font-weight500">'.$store->address.' ,'.$store->city.' ,'.$store->state.' ,'.$store->country.'</p>';
+                    $html .= '<p><a target="_blank" href="/files/register/'.$store->register.'">Download Trade Register</a></p>';
+                    $html .= '<p><a target="_blank" href="/files/patent/'.$store->patent.'">Download Store Patent</a></p>'; 
                   
                     if($store->verified_store==1){
                         $html .= '<p><b>Verfied Store: </b> <span class="label label-success"><i class="fa fa-check-circle"></i> Verified</span></p>';
