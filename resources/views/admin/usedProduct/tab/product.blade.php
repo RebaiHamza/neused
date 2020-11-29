@@ -409,9 +409,21 @@
 
       <input pattern="[0-9]+(\.[0-9][0-9]?)?" title="Price Format must be in this format : 200 or 200.25"
         type="text" id="price2" name="price2" value="{{ old('price') }}" placeholder="Please enter product price"
-        class="form-control">
+        class="form-control"><i class='{{session()->get('currency')['value']}}'></i>
       <br>
       <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
+    </div>
+
+    <div class="last_btn col-md-6">
+      <label>
+        Pickup by :
+      </label>
+      <select required="" name="pickup_type" class="form-control">
+        <option value="0">Neused</option>
+        <option value="1">You</option>
+      </select>
+      <small class="text-muted"><i class="fa fa-question-circle"></i> By Neused: We come to take the product from you. <span style="color: red">(Paid)</span></small><br>
+      <small class="text-muted"><i class="fa fa-question-circle"></i> By You: You bring the product to our inventory. <span style="color: red">(Free)</span></small>
     </div>
 
     {{-- <div class="margin-top-15 col-md-6">

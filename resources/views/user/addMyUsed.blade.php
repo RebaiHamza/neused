@@ -514,7 +514,7 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                             <br>
                             <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
                         </div>
-                    </div>
+                    </div><br>
                 </div>
 
                 <div class="col-md-12">
@@ -531,7 +531,7 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                             <br>
                             <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
                         </div>
-                    </div>
+                    </div><br>
                 </div>
 
               <div class="col-md-12">
@@ -548,7 +548,19 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                           <br>
                           <small class="text-muted"><i class="fa fa-question-circle"></i> Don't put comma whilt entering PRICE</small>
                       </div>
-                  </div>
+                  </div><br>
+              </div>
+
+              <div class="last_btn col-md-6">
+                <label>
+                  Pickup by :
+                </label>
+                <select required="" name="user_id" class="form-control select2">
+                  <option value="0">Neused</option>
+                  <option value="1">You</option>
+                </select>
+                <small class="text-muted"><i class="fa fa-question-circle"></i> By Neused: We come to take the product from you. <span style="color: red">(Paid)</span></small><br>
+                <small class="text-muted"><i class="fa fa-question-circle"></i> By You: You bring the product to our inventory. <span style="color: red">(Free)</span></small>
               </div>
 
                 <div class="col-md-12">

@@ -44,6 +44,10 @@
                 </th>
 
                 <th>
+                  Pickup type
+                </th>
+
+                <th>
                   Featured
                 </th>
 
@@ -103,6 +107,7 @@
               {data : 'prodetail', name : 'prodetail'},
               {data : 'price', name : 'price'},
               {data : 'catdtl', name : 'catdtl'},
+              {data : 'pickup_type', name : 'pickup_type'},
               {data : 'featured', name : 'featured'},
               {data : 'status', name : 'status'},
               {data : 'history', name : 'history'},

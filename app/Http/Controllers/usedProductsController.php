@@ -106,9 +106,6 @@ class usedProductsController extends Controller
             $pro = Product::find($checked);
 
             if ($pro) {
-                // $provar = AddProductVariant::where('pro_id', $checked)->first();
-
-                // $subvar = AddSubVariant::where('pro_id', $checked)->get();
 
                 DB::table('add_sub_variants')
                     ->where('pro_id', $checked)->delete();
@@ -603,6 +600,7 @@ class usedProductsController extends Controller
             ->select(
                 'products.id as proid',
                 'products.category_id as category_id',
+                'products.pickup_type as pickup_type',
                 FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"),
                 'products.featured as featured', 'products.status as status',
                 'products.created_at as createdat', 'products.updated_at as updateat',
@@ -613,15 +611,11 @@ class usedProductsController extends Controller
                 FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"),
                 'products.price as price',
                 'used_product_images.main_image as mainimage'
-                /*'products.vender_price as vender_price',
-                'products.vender_offer_price as vender_offer_price'*/
             )
             ->where('products.deleted_at', '=', null)
             ->where('products.status', '=', '1')
             ->where('products.is_used', '=', 1)
-            //->where('products.is_new',"=",0)
             ->get();
-        //dd($products);
         if ($request->ajax()) {
             return DataTables::of($products)
                 ->editColumn('checkbox', function ($row) {
@@ -652,7 +646,6 @@ class usedProductsController extends Controller
 
                     return $html;
                 })
-                //->editColumn('price', function ($row) { return $row->price;})
                 ->addColumn('catdtl', function ($row) {
                     $catdtl = '';
                     $catdtl .= '<p><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->catname).'</p>';
@@ -667,11 +660,22 @@ class usedProductsController extends Controller
 
                     return $catdtl;
                 })
+                ->addColumn('pickup_type', function ($row) {
+                    if($row->pickup_type =='0'){
+                        $pickup_type = '<p>Pickup by Neused</p>';
+                    } else if($row->pickup_type =='1'){
+                        $pickup_type = '<p>He will bring it to Neused inventory</p>';
+                    } else {
+                        $pickup_type = '<p>--</p>';
+                    }
+
+                    return $pickup_type;
+                })
                 ->editColumn('featured', 'admin.usedProduct.dtablecolumn.featured')
                 ->editColumn('status', 'admin.usedProduct.dtablecolumn.status')
                 ->addColumn('history', 'admin.usedProduct.dtablecolumn.history')
                 ->editColumn('action', 'admin.usedProduct.dtablecolumn.action')
-                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
+                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl','pickup_type', 'featured', 'status', 'history', 'action'])
                 ->make(true);
         }
 
@@ -691,6 +695,7 @@ class usedProductsController extends Controller
             ->select(
                 'products.id as proid',
                 'products.category_id as category_id',
+                'products.pickup_type as pickup_type',
                 FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"),
                 'products.featured as featured', 'products.status as status',
                 'products.created_at as createdat', 'products.updated_at as updateat',
@@ -701,15 +706,11 @@ class usedProductsController extends Controller
                 FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"),
                 'products.price as price',
                 'used_product_images.main_image as mainimage'
-                /*'products.vender_price as vender_price',
-                'products.vender_offer_price as vender_offer_price'*/
             )
             ->where('products.deleted_at', '=', null)
             ->where('products.status', '=', '0')
             ->where('products.is_used', '=', 1)
-            //->where('products.is_new',"=",0)
             ->get();
-        //dd($products);
         if ($request->ajax()) {
             return DataTables::of($products)
                 ->editColumn('checkbox', function ($row) {
@@ -740,7 +741,6 @@ class usedProductsController extends Controller
 
                     return $html;
                 })
-                //->editColumn('price', function ($row) { return $row->price;})
                 ->addColumn('catdtl', function ($row) {
                     $catdtl = '';
                     $catdtl .= '<p><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->catname).'</p>';
@@ -755,11 +755,22 @@ class usedProductsController extends Controller
 
                     return $catdtl;
                 })
+                ->addColumn('pickup_type', function ($row) {
+                    if($row->pickup_type =='0'){
+                        $pickup_type = '<p>Pickup by Neused</p>';
+                    } else if($row->pickup_type =='1'){
+                        $pickup_type = '<p>He will bring it to Neused inventory</p>';
+                    } else {
+                        $pickup_type = '<p>-</p>';
+                    }
+
+                    return $pickup_type;
+                })
                 ->editColumn('featured', 'admin.usedProduct.dtablecolumn.featured')
                 ->editColumn('status', 'admin.usedProduct.dtablecolumn.status')
                 ->addColumn('history', 'admin.usedProduct.dtablecolumn.history')
                 ->editColumn('action', 'admin.usedProduct.dtablecolumn.action')
-                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
+                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'pickup_type', 'featured', 'status', 'history', 'action'])
                 ->make(true);
         }
 
@@ -780,6 +791,7 @@ class usedProductsController extends Controller
             ->select(
                 'products.id as proid',
                 'products.category_id as category_id',
+                'products.pickup_type as pickup_type',
                 FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"),
                 'products.featured as featured', 'products.status as status',
                 'products.created_at as createdat', 'products.updated_at as updateat',
@@ -790,14 +802,10 @@ class usedProductsController extends Controller
                 FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"),
                 'products.price as price',
                 'used_product_images.main_image as mainimage'
-                /*'products.vender_price as vender_price',
-                'products.vender_offer_price as vender_offer_price'*/
             )
             ->where('products.deleted_at', '=', null)
             ->where('products.is_used', '=', 1)
-            //->where('products.is_new',"=",0)
             ->get();
-        //dd($products);
         if ($request->ajax()) {
             return DataTables::of($products)
                 ->editColumn('checkbox', function ($row) {
@@ -828,7 +836,6 @@ class usedProductsController extends Controller
 
                     return $html;
                 })
-                //->editColumn('price', function ($row) { return $row->price;})
                 ->addColumn('catdtl', function ($row) {
                     $catdtl = '';
                     $catdtl .= '<p><i class="fa fa-angle-double-right"></i> '.str_replace('"', '', $row->catname).'</p>';
@@ -843,11 +850,22 @@ class usedProductsController extends Controller
 
                     return $catdtl;
                 })
+                ->addColumn('pickup_type', function ($row) {
+                    if($row->pickup_type =='0'){
+                        $pickup_type = '<p>Pickup by Neused</p>';
+                    } else if($row->pickup_type =='1'){
+                        $pickup_type = '<p>He will bring it to Neused inventory</p>';
+                    } else {
+                        $pickup_type = '<p>-</p>';
+                    }
+
+                    return $pickup_type;
+                })
                 ->editColumn('featured', 'admin.usedProduct.dtablecolumn.featured')
                 ->editColumn('status', 'admin.usedProduct.dtablecolumn.status')
                 ->addColumn('history', 'admin.usedProduct.dtablecolumn.history')
                 ->editColumn('action', 'admin.usedProduct.dtablecolumn.action')
-                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'featured', 'status', 'history', 'action'])
+                ->rawColumns(['checkbox', 'image', 'prodetail', 'price', 'catdtl', 'pickup_type', 'featured', 'status', 'history', 'action'])
                 ->make(true);
         }
 
@@ -874,11 +892,11 @@ class usedProductsController extends Controller
                 'child' => 'required|not_in:0|exists:subcategories,id',
                 'grand_id' => 'required|not_in:0|exists:grandcategories,id',
                 'price' => 'required|numeric',
-                // 'user_id' => 'required|exists:users,id',
                 'key_features' => 'string',
                 'des' => 'string',
                 'image1' => 'required',
                 'image2' => 'required',
+                'pickup_type'
         ], [
             'name.required' => 'Product Name is needed',
             'price.required' => 'Price is needed',
@@ -887,6 +905,7 @@ class usedProductsController extends Controller
 
         $input = $request->all();
         $input['offer_price'] = $input['price'];
+        $input['pickup_type'] = $request->pickup_type;
         $input['price1'] = $request->price1;
         $input['price2'] = $request->price2;
         $currency_code = Genral::first()->currency_code;
@@ -1010,11 +1029,9 @@ class usedProductsController extends Controller
             $input['return_avbl'] = 0;
             $input['return_policy'] = 0;
         }
-        // if ($request->user_id) {
-            // $input['vender_id'] = $request->user_id;
-        // } else {
-            $input['vender_id'] = Auth::user()->id;
-        // }
+        
+        $input['vender_id'] = Auth::user()->id;
+
 
         $input['store_id'] = Auth::user()->id;
 
@@ -1026,7 +1043,6 @@ class usedProductsController extends Controller
         $input['ytlink'] = $request->ytlink;
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
-        // $input['vender_id'] = $findstore->user->id;
         $input['is_used'] = 1;
         $input['is_new'] = 0;
         $data = Product::create($input);
@@ -1042,13 +1058,10 @@ class usedProductsController extends Controller
         $ss['pro_id'] = $lastid_product;
         $ss['created_at'] =date('Y-m-d h:i:s');
         $ss['updated_at'] =date('Y-m-d h:i:s');
-        // dd($add_product_variants);
 
         $add_product_variants->create($ss);
         
         // add subvariant
-
-        //$array2 = AddSubVariant::where('pro_id', $id)->get();
         $test = new AddSubVariant();
         
         
@@ -1187,23 +1200,6 @@ class usedProductsController extends Controller
 
         //end adding to subvariant
 
-    //     $relsetting = new Related_setting();
-
-    //     $relsetting->pro_id = $data->id;
-    //     $relsetting->status = '0';
-    //     $relsetting->save();
-    //     $main_image = $this->saveImages($request, 'image1');
-    //     usedProductImage::create([
-    //     'image1' => $main_image,
-    //     'image2' => $this->saveImages($request, 'image2'),
-    //     'image3' => $this->saveImages($request, 'image3'),
-    //     'image4' => $this->saveImages($request, 'image4'),
-    //     'image5' => $this->saveImages($request, 'image5'),
-    //     'image6' => $this->saveImages($request, 'image6'),
-    //     'main_image' => $main_image,
-    //     'pro_id' => $data->id,
-    //    ]);
-
         return redirect()->route('myusedlist')->with('success', 'Product created ! ');
     }
 
@@ -1287,7 +1283,6 @@ class usedProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $data = $this->validate($request,
             [
                 'name' => 'required|string|max:255',
@@ -1309,6 +1304,7 @@ class usedProductsController extends Controller
 
         $input = $request->all();
         $input['offer_price'] = $input['price'];
+        $input['pickup_type'] = $request->pickup_type;
         $input['price1'] = $request->price1;
         $input['price2'] = $request->price2;
         $currency_code = Genral::first()->currency_code;
@@ -1447,7 +1443,6 @@ class usedProductsController extends Controller
         $input['key_features'] = clean($request->key_features);
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
-        // $input['vender_id'] = $findstore->user->id;
         $input['is_used'] = 1;
         $input['is_new'] = 0;
 
@@ -1464,13 +1459,10 @@ class usedProductsController extends Controller
         $ss['pro_id'] = $lastid_product;
         $ss['created_at'] =date('Y-m-d h:i:s');
         $ss['updated_at'] =date('Y-m-d h:i:s');
-        // dd($add_product_variants);
 
         $add_product_variants->create($ss);
         
         // add subvariant
-
-        //$array2 = AddSubVariant::where('pro_id', $id)->get();
         $test = new AddSubVariant();
         
         
@@ -1609,22 +1601,7 @@ class usedProductsController extends Controller
 
         //end adding to subvariant
 
-    //     $relsetting = new Related_setting();
-
-    //     $relsetting->pro_id = $data->id;
-    //     $relsetting->status = '0';
-    //     $relsetting->save();
-    //     $main_image = $this->saveImages($request, 'image1');
-    //     usedProductImage::create([
-    //     'image1' => $main_image,
-    //     'image2' => $this->saveImages($request, 'image2'),
-    //     'image3' => $this->saveImages($request, 'image3'),
-    //     'image4' => $this->saveImages($request, 'image4'),
-    //     'image5' => $this->saveImages($request, 'image5'),
-    //     'image6' => $this->saveImages($request, 'image6'),
-    //     'main_image' => $main_image,
-    //     'pro_id' => $data->id,
-    //    ]);
+    
 
         return redirect()->route('used-products.index')->with('success', 'Product created ! ');
     }
@@ -1655,7 +1632,6 @@ class usedProductsController extends Controller
         $faqs = FaqProduct::where('pro_id', $id)->get();
         $cat_id = Product::where('id', $id)->first();
         $child = Subcategory::where('parent_cat', $cat_id->category_id)->get();
-        // $realateds = RealatedProduct::get();
         $rel_setting = $products->relsetting;
         $grand = Grandcategory::where('subcat_id', $cat_id->child)
             ->get();
@@ -1670,7 +1646,6 @@ class usedProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd('hello');
         $products = Product::findOrFail($id);
         $currency_code = Genral::first()->currency_code;
         $data = $this->validate($request, [
@@ -1729,11 +1704,8 @@ class usedProductsController extends Controller
                     $taxrate = $commission->rate;
                     $price1 = $input['price'];
                     $tax1 = $priceMinusTax = ($price1 * (($taxrate / 100)));
-                    //$tax2 = $priceMinusTax = ($price2 * (($taxrate / 100)));
                     $price = $input['price'] + $tax1;
-                    //$offer = $input['offer_price'] + $tax2;
                     $input['price'] = $price;
-                    //$input['offer_price'] = $offer;
                     if (!empty($tax2)) {
                         $input['commission_rate'] = $tax2;
                     } else {
@@ -1812,8 +1784,6 @@ class usedProductsController extends Controller
             $input['shipping_id'] = $sid->id;
             $input['free_shipping'] = '0';
         }
-
-        //$findstore = Store::find($request->store_id);
 
         $input['price_in'] = $currency_code;
         $input['w_d'] = $request->w_d;
