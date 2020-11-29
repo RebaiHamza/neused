@@ -589,12 +589,18 @@ class VenderBidController extends Controller
     public function store(Request $request)
     {
 
-        $data = $this->validate($request, ["name" => "required", "price" => "required", 'brand_id' => 'required|not_in:0', 'category_id' => 'required|not_in:0', 'child' => 'required|not_in:0',
-
+        $data = $this->validate($request, [
+            "name" => "required",
+            "price" => "required",
+            'brand_id' => 'required|not_in:0',
+            'category_id' => 'required|not_in:0',
+            'child' => 'required|not_in:0',
+            'bid_auth' => 'required',
         ], [
-
-            "name.required" => "Product Name is needed", "price.required" => "Price is needed", "brand_id.required" => "Please Choose Brand",
-
+            "name.required" => "Product Name is needed",
+            "price.required" => "Price is needed",
+            "brand_id.required" => "Please Choose Brand",
+            "bid_auth.required" => "Please attach a Government Authorization to bid",
         ]);
 
         $input = $request->all();
@@ -735,6 +741,12 @@ class VenderBidController extends Controller
         $input['is_bid'] = 1;
         $input['is_new'] = 0;
 
+        $bid_auth = $request->file('bid_auth');
+        $path = 'files/bid_auth/';
+        $filename = time().'.'.$bid_auth->getClientOriginalExtension();
+        $bid_auth->move($path, $filename);
+        $input['bid_auth'] = $filename;
+
         $data = Product::create($input);
 
         $data->save();
@@ -748,13 +760,10 @@ class VenderBidController extends Controller
         $ss['pro_id'] = $lastid_product;
         $ss['created_at'] =date('Y-m-d h:i:s');
         $ss['updated_at'] =date('Y-m-d h:i:s');
-        // dd($add_product_variants);
 
         $add_product_variants->create($ss);
         
         // add subvariant
-
-        //$array2 = AddSubVariant::where('pro_id', $id)->get();
         $test = new AddSubVariant();
         
         

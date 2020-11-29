@@ -608,6 +608,7 @@ class bidProductsController extends Controller
                 'products.created_at as createdat', 'products.updated_at as updateat',
                 'users.name as ownername',
                 'brands.name as brandname',
+                'products.bid_auth as bid_auth',
                 FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"),
                 FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"),
                 FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"),
@@ -649,6 +650,7 @@ class bidProductsController extends Controller
                     $html .= '<p><b>'.str_replace('"', '', $row->productname).'</b></p>';
                     $html .= "<p><b>Owner:</b> $row->ownername</p>";
                     $html .= "<p><b>Brand:</b> $row->brandname</p>";
+                    $html .= '<p><a target="_blank" href="/files/bid_auth/'. $row->bid_auth . '"> Download Gov Authorization </a></p>';
 
                     return $html;
                 })
@@ -854,6 +856,7 @@ class bidProductsController extends Controller
                 'category_id' => 'required|not_in:0|exists:categories,id',
                 'child' => 'required|not_in:0|exists:subcategories,id',
                 'grand_id' => 'required|not_in:0|exists:grandcategories,id',
+                'bid_auth' => 'required',
                 'price' => 'required|numeric',
                 'user_id' => 'required|exists:users,id',
                 'key_features' => 'string',
@@ -864,6 +867,7 @@ class bidProductsController extends Controller
             'name.required' => 'Product Name is needed',
             'price.required' => 'Price is needed',
             'brand_id.required' => 'Please Choose Brand',
+            'bid_auth.required' => 'Please attach a Government Authorization to bid',
         ]);
 
         $input = $request->all();
@@ -1005,9 +1009,15 @@ class bidProductsController extends Controller
         $input['ytlink'] = $request->ytlink;
         $input['des'] = clean($request->des);
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
-        // $input['vender_id'] = $findstore->user->id;
         $input['is_bid'] = 1;
         $input['is_new'] = 0;
+
+        $bid_auth = $request->file('bid_auth');
+        $path = 'files/bid_auth/';
+        $filename = time().'.'.$bid_auth->getClientOriginalExtension();
+        $bid_auth->move($path, $filename);
+        $input['bid_auth'] = $filename;
+        
         $data = Product::create($input);
          
         $data->save();

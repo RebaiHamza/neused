@@ -108,6 +108,14 @@
       <small class="txt-desc">(Please Choose Owner Name )</small>
     </div>
 
+    <div class="last_btn col-md-6">
+      <label for="bid_auth">
+         Select Government Authorization:
+      </label>
+      <input type="file" name="bid_auth" id="bid_auth" class="form-control" >
+     <small class="txt-desc">(Please attach Government Authorization to bid)</small>
+    </div>
+
     <div class="margin-top-15 col-md-12">
       <label for="editor2"> Key Features :
       </label>
@@ -129,7 +137,7 @@
       <textarea id="editor1" name="des">{{ old('des') }}</textarea>
     </div>
     {{-- Images --}}
-    <div class="margin-top-15"><br>
+    <div class="margin-top-15 col-md-12"><br>
       <label style="padding-top: 10px;padding-left:10px;">
         Images:
       </label><br>

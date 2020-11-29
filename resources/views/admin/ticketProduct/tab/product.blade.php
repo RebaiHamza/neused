@@ -79,6 +79,14 @@
                           </select>
 
                         </div>
+
+                        <div class="last_btn col-md-6">
+                          <label for="ticket_auth">
+                             Select Government Authorization:
+                          </label>
+                          <input type="file" name="ticket_auth" id="ticket_auth" class="form-control" >
+                         <small class="txt-desc">(Please attach Government Authorization for the event)</small>
+                        </div>
                       
 
                       <div class="last_btn col-md-12">

@@ -604,7 +604,7 @@ class ticketProductsController extends Controller
             })
             ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
             ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
-            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured','products.is_ticket as is_ticket', 'products.status as status', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), 'variant_images.main_image as mainimage', 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
+            ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured','products.is_ticket as is_ticket', 'products.ticket_auth as ticket_auth', 'products.bid_auth as bid_auth', 'products.status as status', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), 'variant_images.main_image as mainimage', 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
             ->where('products.deleted_at', '=', null)
             ->where('products.status', '=', '1')
             ->where('is_ticket', '=', 1)
@@ -638,6 +638,7 @@ class ticketProductsController extends Controller
                     $html .= '<p><b>'.str_replace('"', '', $row->productname).'</b></p>';
                     $html .= "<p><b>Store:</b> $row->storename</p>";
                     $html .= "<p><b>Brand:</b> $row->brandname</p>";
+                    $html .= '<p><a target="_blank" href="/files/ticket_auth/'.$row->ticket_auth.'"> Download Gov Authorization </a></p>';
 
                     return $html;
                 })
@@ -798,8 +799,9 @@ class ticketProductsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, ['name' => 'required', 'price' => 'required', 'brand_id' => 'required|not_in:0', 'category_id' => 'required|not_in:0', 'child' => 'required|not_in:0',
+        'ticket_auth' => 'required',
         ], [
-            'name.required' => 'Product Name is needed', 'price.required' => 'Price is needed', 'brand_id.required' => 'Please Choose Brand',
+            'name.required' => 'Product Name is needed', 'price.required' => 'Price is needed', 'brand_id.required' => 'Please Choose Brand', 'ticket_auth.required' => 'Please attach a Government Authorization for the event',
         ]);
 
         $input = $request->all();
@@ -946,6 +948,13 @@ class ticketProductsController extends Controller
         $input['vender_id'] = $findstore->user->id;
         $input['is_ticket'] = 1;
         $input['is_new'] = 0;
+
+        $ticket_auth = $request->file('ticket_auth');
+        $path = 'files/ticket_auth/';
+        $filename = time().'.'.$ticket_auth->getClientOriginalExtension();
+        $ticket_auth->move($path, $filename);
+        $input['ticket_auth'] = $filename;
+
         $data = Product::create($input);
 
         $data->save();

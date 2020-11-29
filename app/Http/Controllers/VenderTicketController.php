@@ -586,12 +586,18 @@ class VenderTicketController extends Controller
     public function store(Request $request)
     {
 
-        $data = $this->validate($request, ["name" => "required", "price" => "required", 'brand_id' => 'required|not_in:0', 'category_id' => 'required|not_in:0', 'child' => 'required|not_in:0',
-
+        $data = $this->validate($request, [
+        "name" => "required",
+        "price" => "required",
+        'brand_id' => 'required|not_in:0',
+        'category_id' => 'required|not_in:0',
+        'child' => 'required|not_in:0',
+        'ticket_auth' => 'required',
         ], [
-
-            "name.required" => "Product Name is needed", "price.required" => "Price is needed", "brand_id.required" => "Please Choose Brand",
-
+            "name.required" => "Product Name is needed",
+            "price.required" => "Price is needed",
+            "brand_id.required" => "Please Choose Brand",
+            "ticket_auth.required" => "Please attach a Government Authorization for the event",
         ]);
 
         $input = $request->all();
@@ -730,6 +736,12 @@ class VenderTicketController extends Controller
         $input['w_type'] = $request->w_type;
         $input['is_ticket'] = 1;
         $input['is_new'] = 0;
+
+        $ticket_auth = $request->file('ticket_auth');
+        $path = 'files/ticket_auth/';
+        $filename = time().'.'.$ticket_auth->getClientOriginalExtension();
+        $ticket_auth->move($path, $filename);
+        $input['ticket_auth'] = $filename;
 
         $data = Product::create($input);
 
