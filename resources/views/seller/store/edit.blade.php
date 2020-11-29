@@ -41,7 +41,7 @@
       <div class="box box-primary">
         <div class="box-header with-border">
           <div class="box-title">
-            Edit Store Details
+            Store Details
           </div>
 
           <div class="box-tools pull-right">
@@ -58,28 +58,28 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Store Name: <span class="required">*</span></label>
-                 <input placeholder="Enter store name" type="text" name="name" class="form-control" value="{{$store->name ?? ''}}">
+                 <input placeholder="Enter store name" type="text" disabled name="name" class="form-control" value="{{$store->name ?? ''}}">
               </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                   <label>Store Email: <span class="required">*</span></label>
-                  <input type="text" name="email" class="form-control" value="{{$store->email ?? ''}}">
+                  <input type="text" name="email" disabled class="form-control" value="{{$store->email ?? ''}}">
                 </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Phone:</label>
-                <input type="text" placeholder="Enter phone no." name="phone" class="form-control" value="{{$store->phone ?? ''}}">
+                <input type="text" disabled placeholder="Enter phone no." name="phone" class="form-control" value="{{$store->phone ?? ''}}">
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Mobile:</label>
-                <input type="text" placeholder="Enter mobile no." name="mobile" class="form-control" value="{{$store->mobile ?? ''}}">
+                <input type="text" disabled placeholder="Enter mobile no." name="mobile" class="form-control" value="{{$store->mobile ?? ''}}">
               </div>
             </div>
 
@@ -87,13 +87,13 @@
               <div class="row">
                 <div class="col-md-3">
                   <label for="">Store Address: <span class="required">*</span></label>
-                  <textarea class="form-control" name="address" placeholder="Enter store address" cols="10" rows="5">{{ $store->address }}</textarea>
+                  <textarea class="form-control" disabled name="address" placeholder="Enter store address" cols="10" rows="5">{{ $store->address }}</textarea>
                 </div>
 
               <div class="col-md-3">
                   <div class="form-group">
                     <label for="">Country: <span class="required">*</span></label>
-                    <select name="country_id" id="country_id" class="form-control select2">
+                    <select disabled name="country_id" id="country_id" class="form-control select2">
                                   <option value="0">Please Choose</option>
                                   @foreach($countrys as $c)
                                   <?php
@@ -114,7 +114,7 @@
             <div class="col-md-3">
               <div class="form-group">
                  <label for="">State: <span class="required">*</span></label>
-                  <select name="state_id" id="upload_id" class="form-control select2">
+                  <select disabled name="state_id" id="upload_id" class="form-control select2">
                               <option value="0">Please choose</option>
                                  @foreach($states as $c)
                                 <option value="{{$c->id}}" {{ $c->id == $store->state_id ? 'selected="selected"' : '' }} >
@@ -128,7 +128,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="">City: <span class="required">*</span></label>
-                <select name="city_id" id="city_id" class="form-control select2">
+                <select disabled name="city_id" id="city_id" class="form-control select2">
                            <option value="0">Please Choose</option>
                               @foreach($city as $c)
                               <option value="{{$c->id}}" {{ $c->id == $store->city_id ? 'selected="selected"' : '' }} >
@@ -142,7 +142,7 @@
             @if($pincodesystem == 1)
               <div class="col-md-3">
               <label for="">Pincode: <span class="required">*</span></label>
-              <input type="text" value="{{ $store->pin_code }}" name="pin_code" placeholder="Enter pincode" class="form-control">
+              <input disabled type="text" value="{{ $store->pin_code }}" name="pin_code" placeholder="Enter pincode" class="form-control">
             </div>
             @endif
 
@@ -171,24 +171,16 @@
                 
               </div>
             </div>
-
-
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Choose Store Logo:</label>
-                <input type="file" class="form-control" name="store_logo">
+                <input disabled type="file" class="form-control" name="store_logo">
               </div>
             </div>
-
-           
-
-            
-
           </div>
           <div class="box-footer">
-              <button @if(env('DEMO_LOCK') == 0) type="submit" @else title="This action is disabled in demo !" disabled="disabled" @endif class="btn btn-md btn-primary"><i class="fa fa-save"></i> Save Details </button>
+              <button type="submit" class="btn btn-md btn-primary"><i class="fa fa-save"></i> Request edit details </button>
             </form>
-              <a @if(env('DEMO_LOCK') == 0) href="{{url('store/delete/'.$store->id)}}" @else title="This action is disabled in demo !" @endif type="button" class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Delete Store </a>
           </div>
         </div>
       </div>

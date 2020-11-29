@@ -620,6 +620,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::resource('admin/pincode', 'PinCodController');
         Route::get('myadmin', 'AdminController@index')->name('admin.main');
         Route::get('admin/appliedform', 'UserController@appliedform')->name('get.store.request');
+        Route::get('admin/requestEdit', 'UserController@editRequest')->name('edit.store.request');
         Route::get('admin/login-socl', 'Configcontroller@socialget')->name('gen.set');
         Route::resource('admin/invoice', 'InvoiceController');
         Route::post('setting/sociallogin/fb', 'Configcontroller@slfb')->name('sl.fb');
@@ -832,6 +833,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::prefix('seller')->group(function () {
 
             Route::get('blog', 'SellerBlogController@index');
+            
             Route::post('blog/store', 'SellerBlogController@store');
 
             Route::get('blog/create', 'SellerBlogController@create');

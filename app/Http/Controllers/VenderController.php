@@ -234,51 +234,55 @@ class VenderController extends Controller
     public function update(Request $request, $id)
     {
 
+        // $store = Store::find($id);
+
+        // $pincodesystem = Config::first()->pincode_system;
+
+        // $data = $this->validate($request, [
+
+        //     "name" => "required", "email" => "required|max:255", "mobile" => "required",
+
+        // ], [
+
+        //     "name.required" => "Store Name is needed", "email.required" => "Email is needed", "mobile.required" => "Mobile No is needed",
+
+        // ]);
+
+        // if ($pincodesystem == 1) {
+
+        //     $request->validate(['pin_code' => 'required'], ["pin_code.required" => "Pincode is required"]);
+
+        // }
+
+        // $store = Store::findOrFail($id);
+
+        // $input = $request->all();
+
+        // if ($file = $request->file('store_logo')) {
+
+        //     if (file_exists(public_path() . '/images/store/' . $store->store_logo)) {
+        //         unlink(public_path() . '/images/store/' . $store->store_logo);
+        //     }
+
+        //     $optimizeImage = Image::make($file);
+        //     $optimizePath = public_path() . '/images/store/';
+        //     $name = time() . $file->getClientOriginalName();
+        //     $optimizeImage->save($optimizePath . $name, 72);
+
+        //     $input['store_logo'] = $name;
+
+        // } else {
+        //     $input['store_logo'] = $store->store_logo;
+        //     $store->update($input);
+        // }
+
+        // $store->update($input);
+
         $store = Store::find($id);
-
-        $pincodesystem = Config::first()->pincode_system;
-
-        $data = $this->validate($request, [
-
-            "name" => "required", "email" => "required|max:255", "mobile" => "required",
-
-        ], [
-
-            "name.required" => "Store Name is needed", "email.required" => "Email is needed", "mobile.required" => "Mobile No is needed",
-
-        ]);
-
-        if ($pincodesystem == 1) {
-
-            $request->validate(['pin_code' => 'required'], ["pin_code.required" => "Pincode is required"]);
-
-        }
-
-        $store = Store::findOrFail($id);
-
-        $input = $request->all();
-
-        if ($file = $request->file('store_logo')) {
-
-            if (file_exists(public_path() . '/images/store/' . $store->store_logo)) {
-                unlink(public_path() . '/images/store/' . $store->store_logo);
-            }
-
-            $optimizeImage = Image::make($file);
-            $optimizePath = public_path() . '/images/store/';
-            $name = time() . $file->getClientOriginalName();
-            $optimizeImage->save($optimizePath . $name, 72);
-
-            $input['store_logo'] = $name;
-
-        } else {
-            $input['store_logo'] = $store->store_logo;
-            $store->update($input);
-        }
-
+        $input['requested_edits'] = '1'; 
         $store->update($input);
 
-        return back()->with('updated', 'Store details has been updated !');
+        return back()->with('updated', 'Your request has been sent!');
 
     }
 

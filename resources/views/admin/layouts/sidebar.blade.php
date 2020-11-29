@@ -23,19 +23,10 @@
          <li id="dashboard" class="{{ Nav::isRoute('admin.main') }}">
             <a class="treeview" href="{{ route('admin.main') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            
           </a>
           </li>
-
-         
-            
-         
               <li class="{{ Nav::isResource('users') }}"><a href="{{url('admin/users')}} "><i class="fa fa-users" aria-hidden="true"></i><span>All Customers</span></a></li>
              
-             
-            
-       
-
          <li id="menum" class="{{ Nav::isResource('admin/menu') }}">
             <a class="treeview" href="{{ route('menu.index') }}">
            <i class="fa fa-window-restore" aria-hidden="true"></i> <span>Menu Management</span>
@@ -43,7 +34,7 @@
           </a>
           </li>
 
-         <li class="treeview {{ Nav::isRoute('get.store.request') }} {{ Nav::isResource('stores') }}">
+         <li class="treeview {{ Nav::isRoute('get.store.request') }} {{ Nav::isResource('stores') }} {{route('edit.store.request')}}">
             <a href="#">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i> <span>Stores</span>
                 <span class="pull-right-container">
@@ -53,13 +44,19 @@
 
               <ul class="treeview-menu">
                   
-                   <li class="{{ Nav::isResource('stores') }}"><a href="{{url('admin/stores')}} "><i class="fa fa-circle-o"></i>Stores </a></li>
+                   <li class="{{ Nav::isResource('stores') }} "><a href="{{url('admin/stores')}} "><i class="fa fa-circle-o"></i>Stores </a></li>
                     @php
                     $genral = App\Genral::first();
                   @endphp
                   @if($genral->vendor_enable==1)
                   <li class="{{ Nav::isRoute('get.store.request') }}"><a href="{{route('get.store.request')}} "><i class="fa fa-circle-o"></i>Stores Request</a></li>
                   @endif
+                  <li class="{{ Nav::isRoute('edit.store.request') }}">
+                    <a href="{{route('edit.store.request')}} ">
+                      <i class="fa fa-circle-o"></i>
+                      Store Edit Requests
+                    </a>
+                  </li>
               </ul>
          </li>
 

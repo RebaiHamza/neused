@@ -171,7 +171,9 @@ class StoreController extends Controller
         $store = Store::find($id);
         $states = Allstate::where('country_id',$store->country_id)->get();
         $citys = Allcity::where('state_id',$store->state_id)->get();
-        
+        $input['requested_edits'] = '0';
+        $store->update($input);
+
         $getallorder = Order::select('id','vender_ids')->get();
         $storeorder = array();
         foreach($getallorder as $order){

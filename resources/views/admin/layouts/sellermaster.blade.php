@@ -158,10 +158,6 @@ $g = App\Genral::first();
                     @foreach(auth()->user()->unreadNotifications->where('n_type','=','order_v') as $notification)
 
                     <li>
-
-
-
-
                       <small class="padding-5 pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i>
                         {{ date('jS M y',strtotime($notification->created_at)) }}</small>
 
@@ -170,9 +166,6 @@ $g = App\Genral::first();
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                         <b>#{{ $notification->data['data'] }}</b>
                       </a>
-
-
-
                     </li>
 
                     @endforeach
@@ -212,19 +205,15 @@ $g = App\Genral::first();
                     <small>Member Since: {{ date('M jS Y',strtotime(Auth::user()->created_at)) }}</small>
                   </p>
                 </li>
-
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
                     <a href="{{ route('get.profile') }}" class="btn btn-default btn-flat">Edit Profile</a>
                   </div>
                   <div class="pull-right">
-
-
                     <a class="btn btn-default btn-flat" onclick="sellerlogout()" role="button">
                       {{ __('Sign out') }}
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                       class="sellerlogout display-none">
                       {{ csrf_field() }}
@@ -236,7 +225,6 @@ $g = App\Genral::first();
             <li><a class="pointer dropdown-item" onclick="sellerlogout()">
                 {{ __('Logout') }}
               </a>
-
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="sellerlogout display-none">
                 {{ csrf_field() }}
               </form>
@@ -269,16 +257,34 @@ $g = App\Genral::first();
           <li class="header">MAIN NAVIGATION</li>
           <li class="{{ Nav::isRoute('seller.dboard') }}"><a href="{{route('seller.dboard')}} "><i
                 class="fa fa-tachometer"></i><span>Dashboard</span></a>
-          <li class="{{ Nav::isRoute('get.profile') }}"><a href="{{route('get.profile')}} "><i class="fa fa-user-circle"
-                aria-hidden="true"></i>
-              <span>Profile</span></a></li>
-          <li class="{{ Nav::isResource('store') }}"><a href="{{route('store.index')}} "><i class="fa fa-address-card-o"
-                aria-hidden="true"></i>
-              <span>Your Store</span> </a></li>
+
+          <li class="treeview {{ Nav::isRoute('get.profile') }} {{ Nav::isResource('store') }}">
+            <a href="#">
+              <i class="fa fa-th-large" aria-hidden="true"></i><span>Settings</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li class="{{ Nav::isRoute('get.profile') }}">
+                <a href="{{route('get.profile')}} ">
+                  <i class="fa fa-circle-o" aria-hidden="true"></i>
+                  <span>Manager Profile</span>
+                </a>
+              </li>
+    
+              <li class="{{ Nav::isResource('store') }}">
+                <a href="{{route('store.index')}} ">
+                  <i class="fa fa-circle-o" aria-hidden="true"></i>
+                  <span>Store Profile</span>
+                </a>
+              </li>
+            </ul>
+          </li>
 
 
-          <li
-            class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }} {{ Nav::isRoute('seller.brand.index')  }} {{ Nav::isRoute('seller.pro.vars.all')  }}  {{ Nav::isResource('seller/products') }} {{ Nav::isRoute('seller.import.product') }} {{ Nav::isRoute('seller.add.var') }} {{ Nav::isRoute('seller.manage.stock') }} {{ Nav::isRoute('seller.edit.var') }} {{ Nav::isRoute('seller.pro.vars.all') }} {{ Nav::isRoute('seller.product.attr') }}">
+          <li class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }} {{ Nav::isRoute('seller.brand.index')  }} {{ Nav::isRoute('seller.pro.vars.all')  }}  {{ Nav::isResource('seller/products') }} {{ Nav::isRoute('seller.import.product') }} {{ Nav::isRoute('seller.add.var') }} {{ Nav::isRoute('seller.manage.stock') }} {{ Nav::isRoute('seller.edit.var') }} {{ Nav::isRoute('seller.pro.vars.all') }} {{ Nav::isRoute('seller.product.attr') }}">
             <a href="#">
               <i class="fa fa-shopping-basket" aria-hidden="true"></i> <span>Products Management</span>
               <span class="pull-right-container">
@@ -382,9 +388,6 @@ $g = App\Genral::first();
         @endif
         </ul>
         </li>
-
-
-
       </section> <!-- /.sidebar -->
     </aside>
 
@@ -395,8 +398,6 @@ $g = App\Genral::first();
       <section class="content">
         <div class="row">
           <div class="col-xs-12">
-
-
             <div class="row tile_count">
               @if($errors->any())
               <div class="alert alert-danger">

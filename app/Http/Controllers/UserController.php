@@ -480,6 +480,48 @@ class UserController extends Controller
         return view("admin.user.appliyed_vender")->withList(count($stores));
     }
 
+    public function editRequest(Request $request)
+    {
+        $stores = \DB::table('stores')->join('allcities','allcities.id','=','stores.city_id')->join('allstates','stores.state_id','=','allstates.id')->join('allcountry','allcountry.id','=','stores.country_id')->join('users','users.id','=','stores.user_id')
+        ->select('stores.*', 'stores.requested_edits as requested_edits', 'othersite as othersite', 'stores.patent as patent', 'stores.register as register', 'allcities.pincode as pincode','allcities.name as city','allstates.name as state','allcountry.name as country','users.name as username')
+        ->where('requested_edits','=','1')->get();
+
+        if($request->ajax()){
+            return FacadesDataTables::of($stores)->addIndexColumn()
+                   ->addColumn('detail',function($row){
+                        $html = '';
+                        $html .= "<p><b>Store Name:</b> $row->name</p>";
+                        $html .= "<p><b>Requested By:</b> $row->username</p>";
+                        $html .= "<p><b>Address:</b> $row->address,</p>";
+                        $html .= "<p><b>Store Location:</b> $row->city, $row->state, $row->country</p>";
+                        if($row->pincode){
+                            $html .= "<p><b>Pincode:</b> $row->pincode</p>";
+                        }else{
+                            $html .= "<p><b>Pincode:</b> - </p>";
+                        }
+                        if($row->othersite)
+                            $html .= "<p><b>Other website selling in: </b> $row->othersite</p>";
+                        else
+                            $html .= "<p><b>Other website selling in: </b> No other websites</p>";
+                        
+
+                        return $html;
+                   })
+                   ->addColumn('requested_at',function($row){
+                       $html1 = '';
+                       $html1 .= '<b>'.date("d-M-Y | h:i A",strtotime($row->updated_at)).'</b><hr>';
+                       $html1 .= '<a target="_blank" href="/files/register/'.$row->register.'">Download Trade Register</a><hr>';
+                       $html1 .= '<a target="_blank" href="/files/patent/'.$row->patent.'">Download Store Patent</a>'; 
+                        return  $html1;
+                   })
+                   ->addColumn('action','admin.user.requestedit')
+                   ->rawColumns(['detail','requested_at','action'])
+                   ->make(true);
+        }
+
+        return view("admin.user.request_edit")->withList(count($stores));
+    }
+
     public function choose_country(Request $request)
     {
 
