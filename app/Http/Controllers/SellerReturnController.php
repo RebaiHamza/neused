@@ -8,13 +8,6 @@ use App\Return_Product;
 use Auth;
 use App\AddSubVariant;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class SellerReturnController extends Controller
 {
     public function index(){

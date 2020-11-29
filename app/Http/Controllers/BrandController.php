@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 use DataTables;
 use Avatar;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class BrandController extends Controller
 {
     /**

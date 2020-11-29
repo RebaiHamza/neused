@@ -13,13 +13,6 @@ use Illuminate\Support\Facades\Input;
 use App\PinCod;
 use Session;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class AddressController extends Controller
 {
     public function getaddressView()

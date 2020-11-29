@@ -7,13 +7,6 @@ use App\Product;
 use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CoupanController extends Controller
 {
     /**

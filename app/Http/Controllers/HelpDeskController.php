@@ -14,13 +14,6 @@ use Illuminate\Http\Request;
 use Image;
 use Mail;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class HelpDeskController extends Controller
 {
     public function get()

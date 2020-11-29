@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<!--
-**********************************************************************************************************
-    Copyright (c) 2020.
-**********************************************************************************************************  -->
-<!--
-  Template Name: emart - Laravel Multi-Vendor Ecommerce Advanced CMS
-  Version: 1.3.0
-  Author: Media City
--->
-
 <html lang="{{ Session::get('changed_language') }}">
 
 <head>

@@ -6,13 +6,6 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Subcategory;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class QuickAddController extends Controller
 {
     public function quickAddCat(Request $request)

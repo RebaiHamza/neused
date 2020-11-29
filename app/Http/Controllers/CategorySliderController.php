@@ -5,13 +5,6 @@ use Illuminate\Http\Request;
 use App\CategorySlider;
 use Illuminate\Support\Facades\Input;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CategorySliderController extends Controller
 {
     public function get()

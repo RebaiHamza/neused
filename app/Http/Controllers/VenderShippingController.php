@@ -10,13 +10,6 @@ use View;
 use DB;
 use App\Image;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class VenderShippingController extends Controller
 {
     /**

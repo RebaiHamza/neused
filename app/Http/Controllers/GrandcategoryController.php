@@ -7,13 +7,6 @@ use App\Category;
 use App\Subcategory;
 use Intervention\Image\ImageManagerStatic as Image;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Developer : @nkit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class GrandcategoryController extends Controller
 {
     /**

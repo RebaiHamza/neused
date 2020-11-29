@@ -26,13 +26,6 @@ use PayPal\Api\PayoutSenderBatchHeader;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class SellerPaymenyController extends Controller
 {
     private $_api_context;

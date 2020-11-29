@@ -6,13 +6,6 @@ use App\UserReview;
 use Illuminate\Http\Request;
 use Stevebauman\Translation\Contracts\Translation;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class ReviewController extends Controller
 {
     protected $translation;

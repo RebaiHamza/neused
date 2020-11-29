@@ -6,13 +6,6 @@ use App\FrontCat;
 use App\Widgetsetting;
 use Illuminate\Http\Request;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class WidgetsettingController extends Controller
 {
     /**

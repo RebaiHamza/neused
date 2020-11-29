@@ -13,13 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Image;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: Media City         =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class AddSubVariantController extends Controller
 {
     public function getIndex($id)

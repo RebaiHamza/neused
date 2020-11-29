@@ -9,13 +9,6 @@ use Illuminate\Http\Request;
 use DB;
 use DataTables;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class StateController extends Controller
 {
     /**

@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class BlogController extends Controller
 {
     /**

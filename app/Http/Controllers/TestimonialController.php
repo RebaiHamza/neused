@@ -6,13 +6,6 @@ use App\Testimonial;
 use Illuminate\Http\Request;
 use Image;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class TestimonialController extends Controller
 {
     /**

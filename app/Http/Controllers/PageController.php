@@ -4,13 +4,6 @@ namespace App\Http\Controllers;
 use App\Page;
 use Illuminate\Http\Request;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class PageController extends Controller
 {
     /**

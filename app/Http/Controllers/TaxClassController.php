@@ -8,13 +8,6 @@ use App\Country;
 use App\State;
 use App\Allstate;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class TaxClassController extends Controller
 {
     /**

@@ -23,7 +23,7 @@
    			<div class="card">
           <div class="card-header">
               <h3 class="m-3 text-center text-dark ">
-                  {{ __('Installing eMart') }}
+                  {{ __('Installing Neused') }}
               </h3>
           </div>
    				<div class="card-body" id="stepbox">
@@ -40,7 +40,7 @@
                       {{ __('If you agree to all of the terms of this End-User License Agreement, by checking the box or clicking the button to confirm your acceptance when you first install the web application, you are agreeing to all the terms of this agreement. Also, By downloading, installing, using, or copying this web application, you accept and agree to be bound by the terms of this End-User License Agreement, you are agreeing to all the terms of this agreement. If you do not agree to all of these terms, do not check the box or click the button and/or do not use, copy or install the web application, and uninstall the web application from all your server that you own or control') }}.</p>
                       
                       <b>{{ __('Note') }}:</b> <span class="text-dark font-weight-normal">
-                        {{ __("With eMart, We are using the official Payment API (Paypal, Instamojo, Payu, Stripe) which is available on Developer Center. That is a reason why our prodyuct depends on Payment API(Paypal, Instamojo, Payu, Stripe). Therefore, We are not responsible if they made too many critical changes in their side. We also don't guarantee that the compatibility of the script with Payment API will be forever. Although we always try to update the lastest version of script as soon as possible. We don't provide any refund for all problems which are originated from Payments API (Paypal, Instamojo, Payu, Stripe)") }}.
+                        {{ __("With Neused, We are using the official Payment API (Paypal, Instamojo, Payu, Stripe) which is available on Developer Center. That is a reason why our prodyuct depends on Payment API(Paypal, Instamojo, Payu, Stripe). Therefore, We are not responsible if they made too many critical changes in their side. We also don't guarantee that the compatibility of the script with Payment API will be forever. Although we always try to update the lastest version of script as soon as possible. We don't provide any refund for all problems which are originated from Payments API (Paypal, Instamojo, Payu, Stripe)") }}.
                       </span> 
                      
                      <hr>
@@ -55,7 +55,7 @@
               </form>
    				</div>
    			</div>
-        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('emart Installer') }} v1.2 | <a class="text-white" href="http://mediacity.co.in">{{ __('Mediacity') }}</a></p>
+        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('Neused Installer') }}</p>
    		</div>
       
       <div class="corner-ribbon bottom-right sticky green shadow">{{ __('EULA') }} </div>

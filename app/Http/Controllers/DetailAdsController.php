@@ -5,13 +5,6 @@ use App\DetailAds;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Develoepr: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class DetailAdsController extends Controller
 {
     /**

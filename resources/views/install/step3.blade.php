@@ -40,7 +40,7 @@
                     <br>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom01">{{ __('Project Title') }}:</label>
-                      <input name="project_name" type="text" class="form-control" id="validationCustom01" placeholder="eMart" value="" required>
+                      <input name="project_name" type="text" class="form-control" id="validationCustom01" placeholder="Neused" value="" required>
                       <div class="valid-feedback">
                         {{ __('Looks good!') }}
                       </div>
@@ -129,7 +129,7 @@
               </form>
    				</div>
    			</div>
-        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('emart Installer') }} v1.2 | <a class="text-white" href="http://mediacity.co.in">{{ __('Mediacity') }}</a></p>
+        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('Neused Installer') }}</p>
    		</div>
       
       <div class="corner-ribbon bottom-right sticky green shadow">{{ __('Step 3') }}</div>

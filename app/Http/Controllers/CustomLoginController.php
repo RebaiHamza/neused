@@ -11,13 +11,6 @@ use App\Product;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Input;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CustomLoginController extends Controller
 {
     public function doLogin(Request $request)

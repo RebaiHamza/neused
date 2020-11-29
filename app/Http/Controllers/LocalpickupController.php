@@ -13,13 +13,6 @@ use App\User;
 use App\Notifications\LocalPickUpNotification;
 use App\Genral;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class LocalpickupController extends Controller
 {
     public function apply(Request $request)

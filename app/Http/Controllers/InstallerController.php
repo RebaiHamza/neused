@@ -18,13 +18,6 @@ use Illuminate\Support\Facades\Artisan as FacadesArtisan;
 use Image;
 use Session;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: @nkit                 =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class InstallerController extends Controller
 {
     public function verifylicense()

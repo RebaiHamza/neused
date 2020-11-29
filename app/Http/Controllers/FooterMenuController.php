@@ -5,13 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FooterMenu;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class FooterMenuController extends Controller
 {
     public function store(Request $request){

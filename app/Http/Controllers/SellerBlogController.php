@@ -9,13 +9,6 @@ use Illuminate\Support\Str;
 use Image;
 use Auth;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class SellerBlogController extends Controller
 {
     /**

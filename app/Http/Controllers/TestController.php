@@ -20,14 +20,6 @@ use Stripe\Error\Card;
 use PaytmWallet;
 use Image;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
-
 /** Development Purpose Only ONLY DEVELOEPER SEE WHATS GOING ON HERE */
 /** IF YOU ARE DEVELOPER DO SOME FUN HERE */
 

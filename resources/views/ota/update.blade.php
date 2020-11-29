@@ -91,11 +91,6 @@
                         <label class="custom-control-label"
                             for="customCheck1"><b>{{ __('I read the update procedure carefully and I take backup already.') }}</b></label>
                     </div>
-                    <small class="font-weight-normal text-center">
-                        <a target="__blank"
-                            href="https://codecanyon.net/item/emart-laravel-multivendor-ecommerce-advanced-cms/25300293">Read
-                            complete changelog of update by clicking here.</a>
-                    </small>
                     <hr>
                     <div class="d-flex justify-content-center">
                         <button class="updatebtn btn btn-primary" type="submit">{{ __('Update') }}</button>
@@ -103,8 +98,7 @@
                 </form>
             </div>
         </div>
-        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('emart Updater') }} | <a class="text-white"
-                href="http://mediacity.co.in">{{ __('Mediacity') }}</a></p>
+        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('Neused Updater') }} |</p>
     </div>
 
     <div class="corner-ribbon bottom-right sticky green shadow">{{ __('Updater') }} </div>

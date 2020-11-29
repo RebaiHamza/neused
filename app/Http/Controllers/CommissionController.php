@@ -5,13 +5,6 @@ use App\Commission;
 use App\category;
 use Illuminate\Http\Request;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CommissionController extends Controller
 {
     /**

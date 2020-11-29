@@ -29,13 +29,6 @@ use Illuminate\Support\Facades\Hash;
 use Image;
 use Session;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CheckoutController extends Controller
 {
 

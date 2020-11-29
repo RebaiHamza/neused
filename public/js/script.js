@@ -1,10 +1,3 @@
-/**
- *  emart - Laravel Multi-Vendor Ecommerce Advanced CMS
- *
- * This file contains all theme JS functions
- *
- * @package 
---------------------------------------------------------------*/
 "use strict";
 // Define your library strictly...
 

@@ -5,13 +5,6 @@ use App\BankDetail;
 use App\Config;
 use Illuminate\Http\Request;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Developer : Ankit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class KeyController extends Controller
 {
 

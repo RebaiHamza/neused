@@ -16,13 +16,6 @@ use App\CurrencyCheckout;
 use App\AutoDetectGeo;
 use App\Genral;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CartController extends Controller
 {
     /**

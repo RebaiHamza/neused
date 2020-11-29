@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 class MaintainenceController extends Controller
 {
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
     public function post(Request $request)
     {
 

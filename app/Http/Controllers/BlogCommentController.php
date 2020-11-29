@@ -5,13 +5,6 @@ use App\BlogComment;
 use Illuminate\Http\Request;
 use View;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class BlogCommentController extends Controller
 {
     /**

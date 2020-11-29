@@ -6,13 +6,6 @@ use Illuminate\Http\Request;
 use App\Userbank;
 use Auth;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class UserBankController extends Controller
 {
     public function index()

@@ -6,13 +6,6 @@ use App\Cart;
 use Auth;
 use Illuminate\Http\Request;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class VerifyPaymentController extends Controller
 {
     public function paymentReVerify(Request $request)

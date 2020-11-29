@@ -34,13 +34,6 @@ use Redirect;
 use Session;
 use URL;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer : @nkit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class PaymentController extends Controller
 {
     private $_api_context;

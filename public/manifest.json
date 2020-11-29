@@ -1,8 +1,8 @@
 {
-  "short_name": "eMart",
-  "name": "eMart Lite",
+  "short_name": "Neused",
+  "name": "Neused QAR",
   "orientation": "portrait",
-  "description": "eMart Lite App",
+  "description": "Neused App",
   "icons": [
     {
       "src": "../public/images/icons/icon36x36.png",

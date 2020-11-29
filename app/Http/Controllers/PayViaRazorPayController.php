@@ -23,13 +23,6 @@ use Razorpay\Api\Api;
 use Redirect;
 use Session;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class PayViaRazorPayController extends Controller
 {
 

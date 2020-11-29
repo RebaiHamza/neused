@@ -20,13 +20,6 @@ use App\Notifications\SendOrderStatus;
 use App\PendingPayout;
 use App\multiCurrency;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class VenderOrderController extends Controller
 {
 

@@ -20,7 +20,7 @@ class SeosTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'project_name' => 'eMart',
+                'project_name' => 'NEUSED',
                 'metadata_des' => 'explore us',
                 'metadata_key' => 'online shopping portal',
                 'google_analysis' => '{key}',

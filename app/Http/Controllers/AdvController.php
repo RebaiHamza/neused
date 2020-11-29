@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use View;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class AdvController extends Controller
 {
     /**

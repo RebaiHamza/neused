@@ -31,13 +31,6 @@ use App\User;
 use App\Genral;
 use PaytmWallet;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class SellerCancelOrderController extends Controller
 {
     private $_api_context;

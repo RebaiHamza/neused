@@ -12,13 +12,6 @@ use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Zone;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class ShippingInfoController extends Controller
 {
     public function getinfo(){

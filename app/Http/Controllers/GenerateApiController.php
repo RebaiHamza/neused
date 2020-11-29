@@ -9,12 +9,6 @@ use Illuminate\Support\Str;
 
 class GenerateApiController extends Controller
 {
-    /*==========================================
-    =            Author: Media City            =
-    Author URI: https://mediacity.co.in
-    =            Developer: @nkit              =
-    =            Copyright (c) 2020            =
-    ==========================================*/
 
     public function __construct()
     {

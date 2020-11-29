@@ -24,13 +24,6 @@ use Redirect;
 use Session;
 use URL;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class InstamojoController extends Controller
 {
 

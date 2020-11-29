@@ -5,13 +5,6 @@ use App\Category;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Develoeper: @nkit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class CategoryController extends Controller
 {
 

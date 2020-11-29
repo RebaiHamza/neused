@@ -12,13 +12,6 @@ use App\OrderActivityLog;
 use Auth;
 use App\PendingPayout;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class QuickConfirmOrderController extends Controller
 {
     public function quickconfirmfullorder($orderid, Request $request){

@@ -24,13 +24,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Develoepr : @nkit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class BrainTreeController extends Controller
 {
 

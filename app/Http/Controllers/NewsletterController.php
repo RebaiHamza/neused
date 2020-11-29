@@ -4,13 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Newsletter;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class NewsletterController extends Controller
 {
     public function store(Request $request)

@@ -7,13 +7,6 @@ use Mail;
 use App\Mail\SendFeedback;
 use App\Genral;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class SendFeedBackController extends Controller
 {
     public function send(Request $request)

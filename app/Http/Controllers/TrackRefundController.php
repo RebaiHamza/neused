@@ -13,13 +13,6 @@ use PayPal\Rest\ApiContext;
 use PaytmWallet;
 use Razorpay\Api\Api;
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class TrackRefundController extends Controller
 {
     public function __construct()

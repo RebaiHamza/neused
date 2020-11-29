@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Payout for Order Item #{{ $inv_cus->prefix.$payout->singleorder->inv_no.$inv_cus->postfix }} | eMart</title>
+  <title>Payout for Order Item #{{ $inv_cus->prefix.$payout->singleorder->inv_no.$inv_cus->postfix }} | Neused</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 

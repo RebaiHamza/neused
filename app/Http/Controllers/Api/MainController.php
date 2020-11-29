@@ -21,14 +21,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
-/*==========================================
-=            emart Rest APIs               =
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer : @nkit             =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class MainController extends Controller
 {
     public function categories(Request $request)

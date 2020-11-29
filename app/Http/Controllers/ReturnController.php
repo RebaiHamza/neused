@@ -22,13 +22,6 @@ use App\Genral;
 use App\Notifications\SellerNotification;
 use App\PendingPayout;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class ReturnController extends Controller
 {
     public function returnWindow($id)

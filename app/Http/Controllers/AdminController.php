@@ -26,13 +26,6 @@ use App\DashboardSetting;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Session;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class AdminController extends Controller
 {
 

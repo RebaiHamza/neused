@@ -13,13 +13,6 @@ use App\Order;
 use App\Product;
 use App\Zone;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class ShippingController extends Controller
 {
     /**

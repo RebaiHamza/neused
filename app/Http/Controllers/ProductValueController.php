@@ -6,13 +6,6 @@ use Illuminate\Http\Request;
 use App\ProductAttributes;
 use App\ProductValues;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 class ProductValueController extends Controller
 {
     public function get($id)

@@ -93,7 +93,7 @@
               
           </div>
         </div>
-        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('emart Installer') }} v1.2 | <a class="text-white" href="http://mediacity.co.in">{{ __('Mediacity') }}</a></p>
+        <p class="text-center m-3 text-white">&copy;{{ date('Y') }} | {{ __('Neused Installer') }}</p>
       </div>
       
       <div class="corner-ribbon bottom-right sticky green shadow">{{ __('Step 2') }} </div>

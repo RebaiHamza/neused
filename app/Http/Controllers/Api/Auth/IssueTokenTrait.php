@@ -5,13 +5,6 @@ namespace App\Http\Controllers\Api\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*==========================================
-=            Author: Media City            =
-    Author URI: https://mediacity.co.in
-=            Author: Media City            =
-=            Copyright (c) 2020            =
-==========================================*/
-
 trait IssueTokenTrait{
 
 	public function issueToken(Request $request, $grantType, $scope = ""){

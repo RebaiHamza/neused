@@ -50,13 +50,6 @@ use Validator;
 class WalletController extends Controller
 {
 
-/*==========================================
-=            Author: Media City            =
-Author URI: https://mediacity.co.in
-=            Developer: @nkit              =
-=            Copyright (c) 2020            =
-==========================================*/
-
     public function __construct()
     {
         /** PayPal api context **/
