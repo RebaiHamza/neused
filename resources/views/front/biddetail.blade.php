@@ -759,7 +759,7 @@
                     <div class="pull-left">
                      
                       <div class="stock-box">
-                        <span class="label">{{ __('staticwords.Availability') }} :</span>
+                        <span class="label">{{ __('Highest Bid') }} :</span>
                       </div>
                     </div>
                    <div class="pull-left">
@@ -4221,12 +4221,16 @@
 
 
 
-
+  {{$pro->created_at}}
   <script>
  
     // Set the date we're counting down to
+
     var d = new Date();
-  d.setMinutes(d.getMinutes() + 3);
+  // d.setMinutes(d.getMinutes() + 3);
+    d=Date.parse("{{$pro->created_at}}");
+    
+   
     var countDownDate = new Date(d).getTime();
      
     // Update the count down every 1 second
@@ -4234,9 +4238,10 @@
     
       // Get today's date and time
       var now = new Date().getTime();
+    
       
       // Find the distance between now and the count down date
-      var distance = countDownDate - now;
+      var distance = d - now;
     
       // Time calculations for days, hours, minutes and seconds
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));

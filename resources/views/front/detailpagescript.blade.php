@@ -655,8 +655,8 @@ var setdefvariant = null;
        var selling_date = '{{$pro->selling_start_at}}';
       
        var current_date = '{{date("Y-m-d H:i:s")}}';
-       var IsBid ='{{$pro->is_bid}}'
-
+       var IsBid ='{{$pro->is_bid}}';
+ 
 
        varid = [];
        varid.push(data['id']);
@@ -680,7 +680,8 @@ var setdefvariant = null;
                         $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
                  
                   }else
-                  $('.stockval').text("Hurry Up ! Only "+data['stock']+" left");
+                  var maxbid='{{$MaxBid}}';
+                  $('.stockval').text(maxbid );
 
 $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('Add Your Bid') }}</button></div></div></form></div>');
 $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
@@ -721,7 +722,7 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
       $('.quant-input').html('');
       $('.quant-input').append('<input type="hidden"  value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'" value="1" class="qty-section">');
        
-      $('.quant-input').html('<input style="width: 100px;" type="number"   name="bidPrice"   >');
+      $('.quant-input').html('<input style="width: 100px;"  type="number"   name="bidPrice"   >');
 
  
  
@@ -741,7 +742,7 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
      $('#cartForm form').attr("action",formurl);
      }else{
 
-      var formurl = '{{ url("MyBid")}}';
+      var formurl = '{{ url("MyBid/$pro->id")}}';
      $('.quantity-container form').attr("action",formurl);
 
      $('#cartForm form').attr("action",formurl);
@@ -773,10 +774,10 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
                icon: 'warning'
              });
               $(this).val(maxOrder);
-                formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+maxOrder;
+               formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+maxOrder;
          
-                if (IsBid==0){
-      var formurl = '{{ url("MyBid")}}';}
+                if (IsBid==1){
+      var formurl = '{{ url("MyBid/$pro->id")}}';}
                $('.quantity-container form').attr("action",formurl);
                $('#cartForm form').attr("action",formurl);     
               return false;
@@ -791,9 +792,9 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
                icon: 'error'
              });
 
-             formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
-             if (IsBid==0){
-      var formurl = '{{ url("MyBid")}}';}
+              formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
+             if (IsBid==1){
+      var formurl = '{{ url("MyBid/$pro->id")}}';}
              $('.quantity-container form').attr("action",formurl);
              $('#cartForm form').attr("action",formurl);     
              return false;
@@ -806,17 +807,18 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
                icon: 'warning'
              });
              $(this).val(minOrder);
-             formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+minOrder;
-             if (IsBid==0){
-      var formurl = '{{ url("MyBid")}}';}
+              formurl = "'{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+minOrder;"
+             if (IsBid==1){
+      var formurl = '{{ url("MyBid/$pro->id")}}';}
              $('.quantity-container form').attr("action",formurl);
              $('#cartForm form').attr("action",formurl);     
              return false;
          }
 
-         formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
+        formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
          
-         
+         if (IsBid==1){
+      var formurl = '{{ url("MyBid/$pro->id")}}';}
          $('.quantity-container form').attr("action",formurl);
          $('#cartForm form').attr("action",formurl);     
 
@@ -1655,7 +1657,8 @@ function tagfilter(d,attr,indexNum){
 
 
         var formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
-
+        if (IsBid==0){
+      var formurl = '{{ url("MyBid")}}';}
         if(stock > 0 && stock <= 5)
          {
            @if($price_login != 1)
@@ -1746,7 +1749,9 @@ function tagfilter(d,attr,indexNum){
 
          varqty.push(newValue);
 
-         var formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
+        //  var formurl = '{{ url("add_item/$pro->id")}}/'+varid+'/'+cartprice+'/'+cartofferprice+'/'+varqty;
+         if (IsBid==0){
+      var formurl = '{{ url("MyBid")}}';}
 
          $('.quantity-container form').attr("action",formurl);
          $('#cartForm form').attr("action",formurl);

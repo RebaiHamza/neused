@@ -341,7 +341,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('pincode-check', 'PinCodController@pincode_check');
         
         Route::get('/bid', 'bid\MainController@index');
-        Route::post('/MyBid','bid\MainController@UserBid');
+        Route::post('/MyBid/{id}','bid\MainController@UserBid');
         Route::get('/ticket', 'ticket\MainController@index');
         Route::get('/used', 'used\MainController@index');
         Route::get('/', 'MainController@index');
@@ -353,7 +353,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('cat/{id}', 'MainController@cat');
         Route::get('details/{id}', 'MainController@details_product');
         Route::get('useddetails/{id}', 'used\MainController@details_product');
-        Route::get('details-bid/{id}', 'bid\MainController@details_product');
+        Route::get('details-bid/{id}', 'bid\MainController@details_product')->name('details-bid');
+        Route::post('details-bid/{id}', 'bid\MainController@details_product')->name('details-bid');
         Route::get('addtTocartfromWishList/{id}', 'MainController@addtTocartfromWishList');
         Route::get('AddToWishList/{id}', 'MainController@AddToWishList');
         Route::get('wishlist/', 'MainController@wishlist_show');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\bid;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AddSubVariant;
+ 
 use App\Adv;
 use App\BidProduct;
 use App\AutoDetectGeo;
@@ -28,6 +29,7 @@ use App\Product;
 use App\ProductAttributes;
 use App\Slider;
 use App\Store;
+ 
 use App\used_coupan;
 use App\User;
 use App\UserReview;
@@ -448,7 +450,7 @@ class MainController extends Controller
         $mainproreviews = UserReview::where('pro_id', $id)->where('status', '1')
             ->get();
         $pro = Product::find($id);
-
+        $MaxBid = DB::table('BidProduct')->where('pro_id', $id)->max('price_total');
         if (isset($pro)) {
 
             $qualityprogress = 0;
@@ -495,7 +497,7 @@ class MainController extends Controller
 
             $faqs = FaqProduct::where('pro_id', $id)->get();
 
-            return view("front.biddetail", compact("pro", "mainproreviews", 'conversion_rate', 'qualityprogress', 'valueprogress', 'priceprogress', 'faqs'));
+            return view("front.biddetail", compact("pro", "mainproreviews", 'conversion_rate', 'qualityprogress', 'valueprogress', 'priceprogress', 'faqs','MaxBid'));
 
         } else {
             notify()
@@ -504,14 +506,69 @@ class MainController extends Controller
         }
 
     }
-  public function UserBid(Request $request){
+  public function UserBid(Request $request,$id){
+    require_once str_replace('\bid','',__DIR__).'\price.php';
+
+    $mainproreviews = UserReview::where('pro_id', $id)->where('status', '1')
+        ->get();
+    $pro = Product::find($id);
+    $MaxBid = DB::table('BidProduct')->where('pro_id', $id)->max('price_total');
     $newuser = Auth::user();
     $price_total =$request->bidPrice;
-    $id=$request->idp;
+    
+     
+   
 
-    DB::insert('insert into bidproduct (user_id, pro_id,price_total) values (?,?, ?)', [1, 1,$price_total]);
+    DB::insert('insert into bidproduct (user_id, pro_id,price_total) values (?,?, ?)', [$newuser,$id,$price_total]);
+ 
 
-    return redirect("details-bid",$id);
+        $qualityprogress = 0;
+        $quality = 0;
+        $tq = 0;
+
+        $priceprogress = 0;
+        $price = 0;
+        $tp = 0;
+
+        $valueprogress = 0;
+        $value = 0;
+        $vp = 0;
+
+        if (!empty($mainproreviews[0])) {
+
+            $count = count($mainproreviews);
+
+            foreach ($mainproreviews as $key => $r) {
+                $quality = $tq + $r->qty * 5;
+            }
+
+            $countq = ($count * 1) * 5;
+            $ratq = $quality / $countq;
+            $qualityprogress = ($ratq * 100) / 5;
+
+            foreach ($mainproreviews as $key => $r) {
+                $price = $tp + $r->price * 5;
+            }
+
+            $countp = ($count * 1) * 5;
+            $ratp = $price / $countp;
+            $priceprogress = ($ratp * 100) / 5;
+
+            foreach ($mainproreviews as $key => $r) {
+                $value = $vp + $r->value * 5;
+            }
+
+            $countv = ($count * 1) * 5;
+            $ratv = $value / $countv;
+            $valueprogress = ($ratv * 100) / 5;
+
+        }
+
+        $faqs = FaqProduct::where('pro_id', $id)->get();
+        // $name=ProductAttributes::where('id',$var_id)->first();
+       return view("front.biddetail", compact("pro", "mainproreviews", 'conversion_rate', 'qualityprogress', 'valueprogress', 'priceprogress', 'faqs','MaxBid'));
+    //   return redirect()->route('details-bid', ['id' => $id])->where([ $name[0]['attr_name'] => $var_name[0]]);
+         
 
   }
 
