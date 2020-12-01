@@ -48,6 +48,7 @@ class CoupanController extends Controller
         if ($request->link_by == 'product')
         {
             $input['minamount'] = NULL;
+            $input['maxamount'] = NULL;
             $input['cat_id'] = NULL;
         }
         else

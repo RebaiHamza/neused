@@ -81,6 +81,14 @@
             <input value="{{ $coupan->minamount }}" type="number" min="0.0" value="0.00" step="0.1" class="form-control" name="minamount">
           </div>
         </div>
+
+        <div id="maxAmount" class="form-group {{ $coupan->link_by=='product' ? 'display-none' : "" }}">
+          <label>Max Amount: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa {{ $defCurrency->currency_symbol }}"></i></span>
+            <input value="{{ $coupan->maxamount }}" type="number" min="0.0" value="0.00" step="0.1" class="form-control" name="maxamount">
+          </div>
+        </div>
         
         <div class="form-group">
           <label>Expiry Date: </label>

@@ -80,6 +80,14 @@
             <input type="number" min="0.0" value="0.00" step="0.1" class="form-control" name="minamount">
           </div>
         </div>
+
+        <div id="maxAmount" class="form-group">
+          <label>Max Amount: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa {{ $defCurrency->currency_symbol }}"></i></span>
+            <input type="number" min="0.0" value="0.00" step="0.1" class="form-control" name="maxamount">
+          </div>
+        </div>
         
         
          <div class="form-group">

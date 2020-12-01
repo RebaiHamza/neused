@@ -8,7 +8,7 @@ class Coupan extends Model
 {
     
     protected $fillable = [
-      'code','distype','amount','link_by','maxusage','minamount','expirydate','pro_id','cat_id','is_login'
+      'code','distype','amount','link_by','maxusage','minamount','maxamount','expirydate','pro_id','cat_id','is_login'
     ];
 
      public function cate (){

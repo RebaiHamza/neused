@@ -34,7 +34,9 @@
 	    			<td>
 	    				<p>Linked to : <b>{{ ucfirst($cpn->link_by) }}</b></p>
 	    				<p>Expiry Date: <b>{{ date('d-M-Y',strtotime($cpn->expirydate)) }}</b></p>
-	    				<p>Discount Type: <b>{{ $cpn->distype == 'per' ? "Percentage" : "Fixed Amount" }}</b></p>
+              <p>Discount Type: <b>{{ $cpn->distype == 'per' ? "Percentage" : "Fixed Amount" }}</b></p>
+              <p>Min Amount: <b>{{ $cpn->minamount }}</b></p>
+              <p>Max Amount: <b>{{ $cpn->maxamount }}</b></p>
 	    			</td>
 	    			<td>
 	    				<a title="Edit coupon" href="{{ route('coupan.edit',$cpn->id) }}" class="btn btn-sm bg-blue btn-flat">

@@ -259,9 +259,65 @@ class CouponApplyController extends Controller
 
                 $total = $total + $cart->sum('shipping');
 
-                if ($cpn->minamount != 0)
-                {
+                if (($cpn->minamount != 0) and ($cpn->minamount != 0)){
+                    if (($total >= $cpn->minamount) and ($total <= $cpn->maxamount))
+                    {
+                        //check cart amount  //
+                        $totaldiscount = 0;
 
+                        foreach ($cart as $key => $c)
+                        {
+
+                            $per = 0;
+
+                            if ($cpn->distype == 'per')
+                            {
+
+                                if ($c->semi_total != 0)
+                                {
+                                    $per = $c->semi_total * $cpn->amount / 100;
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+                                else
+                                {
+                                    $per = $c->price_total * $cpn->amount / 100;
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+
+                            }
+                            else
+                            {
+
+                                if ($c->semi_total != 0)
+                                {
+                                    $per = $cpn->amount / count($cart);
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+                                else
+                                {
+                                    $per = $cpn->amount / count($cart);
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+
+                            }
+
+                            Cart::where('user_id', Auth::user()->id)
+                                ->update(['distype' => 'cart', 'disamount' => $per]);
+
+                        }
+
+                        //Putting a session//
+                        Session::put('coupanapplied', ['code' => $cpn->code, 'cpnid' => $cpn->id, 'discount' => $totaldiscount, 'msg' => "$cpn->code Applied Successfully !", 'appliedOn' => 'cart']);
+
+                        //end return success with discounted amount
+                        return back();
+                    }
+                    else
+                    {
+                        return back()
+                            ->with('fail', 'For Apply this coupon your cart total should be between ' . $cpn->minamount . ' and ' . $cpn->maxamount);
+                    }
+                } else if ($cpn->minamout != 0){
                     if ($total >= $cpn->minamount)
                     {
                         //check cart amount  //
@@ -319,7 +375,64 @@ class CouponApplyController extends Controller
                         return back()
                             ->with('fail', 'For Apply this coupon your cart total should be ' . $cpn->minamount . ' or greater !');
                     }
+                } else if ($cpn->maxamount != 0){
+                    if ($total <= $cpn->maxamount)
+                    {
+                        //check cart amount  //
+                        $totaldiscount = 0;
 
+                        foreach ($cart as $key => $c)
+                        {
+
+                            $per = 0;
+
+                            if ($cpn->distype == 'per')
+                            {
+
+                                if ($c->semi_total != 0)
+                                {
+                                    $per = $c->semi_total * $cpn->amount / 100;
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+                                else
+                                {
+                                    $per = $c->price_total * $cpn->amount / 100;
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+
+                            }
+                            else
+                            {
+
+                                if ($c->semi_total != 0)
+                                {
+                                    $per = $cpn->amount / count($cart);
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+                                else
+                                {
+                                    $per = $cpn->amount / count($cart);
+                                    $totaldiscount = $totaldiscount + $per;
+                                }
+
+                            }
+
+                            Cart::where('user_id', Auth::user()->id)
+                                ->update(['distype' => 'cart', 'disamount' => $per]);
+
+                        }
+
+                        //Putting a session//
+                        Session::put('coupanapplied', ['code' => $cpn->code, 'cpnid' => $cpn->id, 'discount' => $totaldiscount, 'msg' => "$cpn->code Applied Successfully !", 'appliedOn' => 'cart']);
+
+                        //end return success with discounted amount
+                        return back();
+                    }
+                    else
+                    {
+                        return back()
+                            ->with('fail', 'For Apply this coupon your cart total should be ' . $cpn->maxamount . ' or less !');
+                    }
                 }
                 else
                 {
@@ -364,7 +477,6 @@ class CouponApplyController extends Controller
 
                         Cart::where('id', '=', $c->id)
                             ->update(['distype' => 'cart', 'disamount' => $per]);
-
                     }
 
                     //Putting a session//
