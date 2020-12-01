@@ -75,6 +75,14 @@ class GuestController extends Controller
                 return redirect()
                     ->intended(route('seller.dboard'));
             }
+            else if(Auth::user()->role_id == 'om'){
+                return redirect()
+                    ->intended(route('seller.orders'));
+            }
+            else if(Auth::user()->role_id == 'pm'){
+                return redirect()
+                    ->intended(route('seller.orders'));
+            }
             else
             {
                 Auth::logout();

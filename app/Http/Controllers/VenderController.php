@@ -19,6 +19,7 @@ use App\SellerPayout;
 use App\Store;
 use App\User;
 use App\Vender;
+use App\Help;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -48,6 +49,85 @@ class VenderController extends Controller
         $city = Allcity::where('state_id', $store->state_id)->get();
 
         return view("seller.store.edit", compact("store", "countrys", "states", "city", "user", "auth_id"));
+    }
+
+    public function showRoles(){
+
+        // $users = \DB::table('users')->where('role_id', '!=', 'a')->get();
+        // $pagetitle = 'All Users (Exclude: Admins)';
+        // if ($request->ajax()) {
+
+        //     return DataTables::of($users)
+        //         ->addIndexColumn()
+        //         ->addColumn('image', function ($user) {
+        //             if ($user->image != '') {
+        //                 $image = '<img src="' . url("images/user/" . $user->image) . '" height="100" width="100"/>';
+        //             } else {
+        //                 $image = '<img title=' . $user->name . '" src="' . Avatar::create($user->name)->toBase64() . '" />';
+        //             }
+
+        //             return $image;
+        //         })
+        //         ->addColumn('detail', function ($user) {
+
+        //             if ($user->role_id == 'u') {
+        //                 $detail = '<h4>' . $user->name . '</h4><p><b>Email:</b> ' . $user->email . '</p>
+        //                             <p><b>Mobile:</b> ' . $user->mobile . '</p>
+        //                             <p><b>User Role:</b>User</p>';
+        //             } else {
+        //                 $detail = '<h4>' . $user->name . '</h4><p><b>Email:</b> ' . $user->email . '</p>
+        //                             <p><b>Mobile:</b> ' . $user->mobile . '</p>
+        //                             <p><b>User Role:</b>Seller</p>';
+        //             }
+
+        //             return $detail;
+        //         })->addColumn('timestamp', function ($user) {
+        //         $time = '<p> <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+        //                         <span class="font-weight">' . date('M jS Y', strtotime($user->created_at)) . ',</span></p>
+        //                         <p ><i class="fa fa-clock-o" aria-hidden="true"></i>
+        //                         <span class="font-weight">' . date('h:i A', strtotime($user->created_at)) . '</span></p>
+
+        //                         <p class="custom-border"></p>
+
+        //                         <p>
+        //                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <span class="font-weight">' . date('M jS Y', strtotime($user->updated_at)) . '</span>
+        //                         </p>
+
+        //                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="font-weight">' . date('h:i A', strtotime($user->updated_at)) . '</span></p>';
+
+        //         return $time;
+        //     })
+        //         ->editColumn('status', 'admin.user.status')
+        //         ->editColumn('action', 'admin.user.action')
+        //         ->rawColumns(['image', 'detail', 'timestamp', 'status', 'action'])
+        //         ->make(true);
+        // }
+        return view("seller.role.show");
+    }
+
+    public function createRole()
+    {
+        return view("seller.role.add_role");
+    }
+
+    public function storeRole(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+        $input = $request->all();
+
+        $u = new User;
+
+        $input['password'] = Hash::make($request->password);
+
+        $u->create($input);
+
+        return back()->with("added", "User Has Been Added");
     }
 
     public function getInvoiceSetting(Request $request)
@@ -534,6 +614,8 @@ class VenderController extends Controller
         /*find store*/
         $ifstore = Store::where('user_id', Auth::user()->id)->first();
 
+        $helps = Help::all();
+
         if (!$ifstore) {
             notify()
                 ->error('Sorry Your store is not created yet ! Please apply for seller account under My account menu !');
@@ -545,7 +627,7 @@ class VenderController extends Controller
             return redirect('/');
         }
 
-        return view('seller.dashbord.index', compact('money', 'payouts', 'sellerorders', 'totalreturnorders', 'orders', 'products', 'inv_cus', 'totalcanorders', 'sellerpayoutdata'));
+        return view('seller.dashbord.index', compact('helps', 'money', 'payouts', 'sellerorders', 'totalreturnorders', 'orders', 'products', 'inv_cus', 'totalcanorders', 'sellerpayoutdata'));
     }
 
     public function enable()
@@ -647,7 +729,7 @@ class VenderController extends Controller
 
         }
 
-        return view('seller.order.index', compact('sellerorders', 'emptyOrder', 'inv_cus'));
+        return view('manager.order.index', compact('sellerorders', 'emptyOrder', 'inv_cus'));
 
     }
 

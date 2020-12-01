@@ -65,7 +65,7 @@
             <td> 
               <form method="POST" action="{{ route('cat.featured.quick.update',$cat->id) }}">
                 {{ csrf_field() }}
-                <button @if(env('DEMO_LOCK') == 0) type="submit" @else title="This operation is disabled in demo !" disabled="" @endif class="btn btn-xs {{ $cat->featured ==1 ? 'btn-success' : 'btn-danger' }}">
+                <button type="submit" class="btn btn-xs {{ $cat->featured ==1 ? 'btn-success' : 'btn-danger' }}">
                   {{ $cat->featured==1 ? 'Yes' : 'No' }}
                 </button>
               </form>
@@ -88,9 +88,6 @@
                             
                           </td>
             <td>
-
-              
-
 
                             <ul class="nav table-nav">
                               <li class="dropdown">

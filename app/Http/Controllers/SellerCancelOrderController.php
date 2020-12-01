@@ -105,6 +105,66 @@ class SellerCancelOrderController extends Controller
 
     }
 
+    public function orderCancelManager(){
+
+    	$sellercanorders = collect();
+    	$allcanorders = CanceledOrders::orderBy('id','DESC')->get();
+        $allfullcanceledorders = FullOrderCancelLog::orderBy('id','DESC')->get();
+        $unreadorder = collect();
+        $unreadorder2 = collect();
+
+    	/*partial cancel order section*/
+            foreach ($allcanorders as $key => $value) {
+
+                if($value->singleOrder->vender_id == Auth::user()->id){
+
+                    $sellercanorders->push($value);
+
+                }
+
+            }
+
+            foreach ($sellercanorders as $key => $sorder) {
+                if($value->read_at == NULL){
+                    $unreadorder->push($sorder);
+                }
+            }
+        /*end*/
+
+        /*full order detect per seller section*/
+
+        $sellerfullcanorders = collect();
+        $total = 0;
+        
+            foreach ($allfullcanceledorders as $key => $forder) {
+                 $order = Order::find($forder->order_id);
+
+                 if(in_array(Auth::user()->id, $order->vender_ids)){
+                    $sellerfullcanorders->push($forder);
+                 }
+            }
+
+            foreach ($sellerfullcanorders as $key => $sorder) {
+
+                if($sorder->read_at == NULL){
+                    $unreadorder2->push($sorder);
+                }
+
+                
+            }
+        /*end*/
+        
+        $partialcount = count($unreadorder);
+        $partialcount2 = count($unreadorder2);
+
+    	$inv_cus = Invoice::first();
+
+
+    	
+    	return view('manager.order.cancelorders.index',compact('partialcount2','inv_cus','partialcount','sellercanorders','sellerfullcanorders'));
+
+    }
+
     public function updatefullcancelorder(Request $request,$id){
 
          $forder = FullOrderCancelLog::findorfail($id);

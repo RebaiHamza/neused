@@ -3,15 +3,32 @@
 @section("body")
 
 <div class="box">
+
+        <div class="box-header with-border">
+          <div class="box-title"><span class="lnr lnr-laptop"></span> Help Center</div>
+        </div>
+
+        <div class="box-body">
+          @foreach ($helps as $help)
+          <div class="row dbrow">
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <center><h4>{{$help->help_name}}</h4></center>
+              </div>
+              <a href="/files/help_file/{{$help->help_file}}" class="small-box-footer">
+                Download <i class="fa fa-arrow-circle-down"></i>
+              </a>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
   <div class="box-header with-border">
     <div class="box-title"><span class="lnr lnr-laptop"></span> Dashboard</div>
   </div>
   <div class="box-body">
-
- 
-
-  
-
     <div class="row dbrow">
      <div class="col-lg-3 col-xs-6">
       <!-- small box -->

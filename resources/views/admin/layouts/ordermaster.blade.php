@@ -89,7 +89,7 @@ $g = App\Genral::first();
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="{{ route('seller.dboard') }}" class="logo">
+      <a href="" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
           <img title="{{ config('app.name') }}" width="20px"
@@ -113,13 +113,6 @@ $g = App\Genral::first();
 
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-
-            <li><a title="Visit site" href="{{ url('/') }}" target="_blank">Visit site <i class="fa fa-external-link"
-                  aria-hidden="true"></i></a></li>
-
-            <li>
-              <a title="Change language" href="#"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;</a>
-            </li>
             <li class="m-15">
 
               <select class="langdropdown2 form-control" onchange="changeLang()" id="changed_lng">
@@ -128,56 +121,6 @@ $g = App\Genral::first();
                   value="{{ $lang->lang_code }}">{{ $lang->name }}</option>
                 @endforeach
               </select>
-            </li>
-
-            <li class="dropdown notifications-menu">
-              <a title="Order Notification" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell"></i>
-                @if(auth()->user()->unreadnotifications->where('n_type','=','order_v')->count())
-                <span id="countNoti" class="label label-warning">
-
-                  {{ auth()->user()->unreadnotifications->where('n_type','=','order_v')->count() }}
-
-                </span>
-                @endif
-              </a>
-              <ul @if(auth()->user()->unreadnotifications->where('n_type','=','order_v')->count()>2) @endif
-                class="scroll dropdown-menu">
-                <li class="header">@if(auth()->user()->unreadnotifications->where('n_type','=','order_v')->count())
-                  You have {{ auth()->user()->unreadnotifications->where('n_type','=','order_v')->count() }} New Orders
-                  Notification!
-                  @else
-                  <span class="text-center">No Notifications</span>
-                  @endif </li>
-                <li>
-                  <!-- inner menu: contains the actual data -->
-                  <ul class="menu">
-
-                    @if(auth()->user()->unreadnotifications->where('n_type','=','order_v')->count())
-
-                    @foreach(auth()->user()->unreadNotifications->where('n_type','=','order_v') as $notification)
-
-                    <li>
-                      <small class="padding-5 pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                        {{ date('jS M y',strtotime($notification->created_at)) }}</small>
-
-                      <a title="{{ $notification->data['data'] }}" onclick="markread('{{ $notification->id }}')"
-                        href="{{ url($notification->url) }}">
-                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                        <b>#{{ $notification->data['data'] }}</b>
-                      </a>
-                    </li>
-
-                    @endforeach
-
-                    @endif
-
-                  </ul>
-                </li>
-                @if(auth()->user()->unreadnotifications->where('n_type','=','order_v')->count())
-                <li class="footer"><a href="{{ route('mark_read_order') }}">Mark all as Read</a></li>
-                @endif
-              </ul>
             </li>
 
             @php
@@ -255,103 +198,7 @@ $g = App\Genral::first();
 
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
-          <li class="{{ Nav::isRoute('seller.dboard') }}">
-            <a href="{{route('seller.dboard')}} ">
-              <i class="fa fa-tachometer"></i><span>Dashboard</span>
-            </a>
-          </li>
 
-          <li class="{{url('seller/roles')}}">
-            <a href="{{url('seller/roles')}}">
-              <i class="fa fa-users" aria-hidden="true"></i>
-              <span>Roles</span>
-            </a>
-          </li>
-
-          <li class="treeview {{ Nav::isRoute('get.profile') }} {{ Nav::isResource('store') }}">
-            <a href="#">
-              <i class="fa fa-th-large" aria-hidden="true"></i><span>Settings</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-
-            <ul class="treeview-menu">
-              <li class="{{ Nav::isRoute('get.profile') }}">
-                <a href="{{route('get.profile')}} ">
-                  <i class="fa fa-circle-o" aria-hidden="true"></i>
-                  <span>Manager Profile</span>
-                </a>
-              </li>
-    
-              <li class="{{ Nav::isResource('store') }}">
-                <a href="{{route('store.index')}} ">
-                  <i class="fa fa-circle-o" aria-hidden="true"></i>
-                  <span>Store Profile</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }} {{ Nav::isRoute('seller.brand.index')  }} {{ Nav::isRoute('seller.pro.vars.all')  }}  {{ Nav::isResource('seller/products') }} {{ Nav::isRoute('seller.import.product') }} {{ Nav::isRoute('seller.add.var') }} {{ Nav::isRoute('seller.manage.stock') }} {{ Nav::isRoute('seller.edit.var') }} {{ Nav::isRoute('seller.pro.vars.all') }} {{ Nav::isRoute('seller.product.attr') }}">
-            <a href="#">
-              <i class="fa fa-shopping-basket" aria-hidden="true"></i> <span>Products Management</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="{{ Nav::isRoute('seller.brand.index')  }}"><a href="{{ route('seller.brand.index') }}"><i
-                    class="fa fa-circle-o"></i>Brands</a></li>
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/newproducts') }}"><a
-                  href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>New Products</span></a></li>
-              
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproduct') }}"><a
-                    href="{{route('my.ticketproducts.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
-              
-                    <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
-                      href="{{route('my.bidproducts.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
-
-              <li
-                class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }}">
-                <a href="#"><i class="fa fa-circle-o"></i>Categories
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                </a>
-                <ul class="treeview-menu">
-                  <li class="{{ Nav::isRoute('seller.get.categories') }}"><a
-                      href="{{route('seller.get.categories')}}"><i class="fa fa-circle-o"></i>Categories</a></li>
-                  <li class="{{ Nav::isRoute('seller.get.subcategories') }}"><a
-                      href="{{route('seller.get.subcategories')}}"><i class="fa fa-circle-o"></i>Subcategories</a></li>
-                  <li class="{{ Nav::isRoute('seller.get.childcategories') }}"><a
-                      href="{{route('seller.get.childcategories')}}"><i class="fa fa-circle-o"></i>Childcategories</a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="{{ Nav::isRoute('seller.product.attr') }}"><a href="{{route('seller.product.attr')}} "><i
-                    class="fa fa-circle-o"></i><span>Product Attributes</span></a></li>
-
-              <li class="{{ Nav::isRoute('seller.import.product') }}">
-                <a href="{{route('seller.import.product')}} "><i class="fa fa-circle-o"></i><span>Import
-                    Products</span></a>
-              </li>
-
-
-            </ul>
-          </li>
-
-          <li class="treeview {{ Nav::isResource('order') }} {{ Nav::isRoute('seller.canceled.orders') }}">
-
-            <a href="#">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Order Management</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
               <li class="{{ Nav::isResource('order') }}">
                 <a href="{{url('seller/orders')}} "><i class="fa fa-circle-o" aria-hidden="true"></i>
                   <span>Orders</span> </a>
@@ -361,35 +208,12 @@ $g = App\Genral::first();
                 <a href="{{ route('seller.canceled.orders') }}"><i class="fa fa-circle-o"></i> Cancelled Orders</a>
               </li>
 
-              <li class="{{ Nav::isRoute('seller.return.index') }}">
-                <a href="{{ route('seller.return.index') }}"><i class="fa fa-circle-o"></i> Returned Orders</a>
+              <li class="{{ Nav::isRoute('seller.return.orders') }}">
+                <a href="{{ route('seller.return.orders') }}"><i class="fa fa-circle-o"></i> Returned Orders</a>
               </li>
-            </ul>
-          </li>
-
-          <li class="{{ Nav::isResource('blog') }}"><a href="{{url('seller/blog')}}"><i class="fa fa-circle-o"></i>Blog</a></li>
-
-          <li class="{{ Nav::isRoute('vender.invoice.setting') }}"><a href="{{ route('vender.invoice.setting') }}"><i
-                class="fa fa-file-text-o" aria-hidden="true"></i> <span>Invoice Setting</span></a></li>
 
           <li class="{{ Nav::isRoute('seller.shipping.info') }}"><a href="{{ route('seller.shipping.info') }}"><i
                 class="fa fa-cubes" aria-hidden="true"></i> <span>Shipping Information</span></a></li>
-
-          <li
-            class="treeview {{ Nav::isRoute('seller.commission') }} {{ Nav::isRoute('vender.payout.show.complete') }} {{ Nav::isRoute('seller.payout.index') }}">
-            <a href="#">
-              <i class="fa fa-pie-chart"></i> <span>Account Management</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="{{ Nav::isRoute('vender.payout.show.complete') }} {{ Nav::isRoute('seller.payout.index') }}"><a
-                  href="{{route('seller.payout.index')}} "><i class="fa fa-circle-o"></i> Payouts</a></li>
-              <li class="{{ Nav::isRoute('seller.commission') }}"><a href="{{ route('seller.commission') }}"><i
-                    class="fa fa-circle-o"></i> Commissions</a></li>
-
-          </li>
 
         </ul>
         @php $vender = App\Genral::first(); @endphp

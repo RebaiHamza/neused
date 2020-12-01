@@ -350,14 +350,15 @@
               </li>
             </ul>
           </li>
-          <li><a title="Logout?" class="pointer dropdown-item" onclick="adminlogout()">
-                                         <i class="fa fa-power-off" aria-hidden="true"></i>
-                                    </a>
-                    <form action="{{ route('logout') }}" method="POST" class="adminlogout display-none">
-                        {{ csrf_field() }}
-                    </form>
+          <li>
+            <a title="Logout?" class="pointer dropdown-item" onclick="adminlogout()">
+              <i class="fa fa-power-off" aria-hidden="true"></i>
+            </a>
+            <form action="{{ route('logout') }}" method="POST" class="adminlogout display-none">
+              {{ csrf_field() }}
+            </form>
                                     
-                                    </li>
+          </li>
         </ul>
       </div>
     </nav>

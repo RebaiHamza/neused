@@ -610,6 +610,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('admin/update/payu/settings', 'KeyController@payuupdate')->name('store.payu.settings');
         Route::post('admin/update/paystack/settings', 'KeyController@paystackUpdate')->name('store.paystackupdate.settings');
         Route::resource('admin/users', 'UserController');
+        
         Route::resource('admin/category', 'CategoryController');
         Route::get('admin/requestedcategory', 'CategoryController@requested')->name('requested.category');
         Route::resource('admin/grandcategory', 'GrandcategoryController');
@@ -758,7 +759,9 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
         Route::get('admin/dashbord-setting', 'DashboardController@dashbordsetting')->name('admin.dash');
         Route::post('admin/dashbord-setting/{id}', 'DashboardController@dashbordsettingu')->name('admin.dash.update');
-
+        Route::get('admin/help', 'helpsController@index');
+        Route::get('admin/help/create', 'helpsController@create');
+        Route::post('admin/help/store', 'helpsController@store');
         Route::post('admin/dashbord-setting/fb/{id}', 'DashboardController@fbSetting')->name('fb.update');
         Route::post('admin/dashbord-setting/tw/{id}', 'DashboardController@twSetting')->name('tw.update');
         Route::post('admin/dashbord-setting/ins/{id}', 'DashboardController@insSetting')->name('ins.update');
@@ -831,6 +834,11 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     Route::group(['middleware' => ['web', 'isActive', 'IsInstalled', 'auth', 'is_vendor', 'switch_lang']], function () {
         Route::prefix('seller')->group(function () {
+            Route::post('roles/store','VenderController@storeRole');
+
+            Route::get('roles','VenderController@showRoles');
+
+            Route::get('roles/create', 'VenderController@createRole');
 
             Route::get('blog', 'SellerBlogController@index');
             
@@ -920,7 +928,6 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
             Route::get('sellerdashboard/', 'VenderController@dashbord')->name('seller.dboard');
             Route::get('store/delete/{id}', 'VenderController@destroy');
             Route::resource('store', 'VenderController');
-            Route::get('orders', 'VenderController@order');
             Route::get('enable', 'VenderController@enable');
 
             Route::name('my.')->group(function () {
@@ -928,9 +935,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
                 
                 Route::resource('ticketproducts', 'VenderTicketController');
                 Route::resource('bidproducts', 'VenderBidController');
-            });
-
-            
+            });            
 
             Route::get('commission', 'VenderController@commission')->name('seller.commission');
             Route::get('myprofile', 'VenderController@profile')->name('get.profile');
@@ -956,7 +961,15 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
             Route::get('order/{orderid}/edit', 'VenderOrderController@editOrder')->name('seller.order.edit');
         });
     });
+    // Order Manager
+    Route::get('seller/orders', 'VenderController@order')->name('seller.orders');
+    Route::get('seller/ord/cancelled', 'SellerCancelOrderController@orderCancelManager')->name('seller.canceled.orders');
+    Route::get('seller/ord/returned', 'SellerReturnController@managerreturn')->name('seller.return.orders');
+    
+    // Product Manager
 
+    
+    
     /*Seller Routes END*/
 
     Route::get('update/orderstatus/{id}', 'VenderOrderController@updateStatus');

@@ -25,7 +25,13 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
           </li>
-              <li class="{{ Nav::isResource('users') }}"><a href="{{url('admin/users')}} "><i class="fa fa-users" aria-hidden="true"></i><span>All Customers</span></a></li>
+          
+          <li class="{{ Nav::isResource('users') }}">
+            <a href="{{url('admin/users')}} ">
+              <i class="fa fa-users" aria-hidden="true"></i>
+              <span>All Customers</span>
+            </a>
+          </li>
              
          <li id="menum" class="{{ Nav::isResource('admin/menu') }}">
             <a class="treeview" href="{{ route('menu.index') }}">
@@ -185,25 +191,17 @@
               </ul>
         </li>
 
-         <li class="treeview {{ Nav::isRoute('review.index') }} {{ Nav::isRoute('r.ap') }}"> <a href="#">
+        <li class="treeview {{ Nav::isRoute('review.index') }} {{ Nav::isRoute('r.ap') }}"> <a href="#">
             <i class="fa fa-star-half-o" aria-hidden="true"></i> <span>Reviews & Ratings</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
             </a>
-        <ul class="treeview-menu">
-         
-         
-            
-                <li class="{{ Nav::isRoute('review.index') }}"><a href="{{url('admin/review')}}"><i class="fa fa-circle-o"></i>All Reviews</a></li>
-                <li class="{{ Nav::isRoute('r.ap') }}"><a href="{{url('admin/review_approval')}}"><i class="fa fa-circle-o"></i>Reviews For Approval</a></li>
-                
-              
-           
-         
-            
-          </ul>
-          </li>
+            <ul class="treeview-menu">
+              <li class="{{ Nav::isRoute('review.index') }}"><a href="{{url('admin/review')}}"><i class="fa fa-circle-o"></i>All Reviews</a></li>
+              <li class="{{ Nav::isRoute('r.ap') }}"><a href="{{url('admin/review_approval')}}"><i class="fa fa-circle-o"></i>Reviews For Approval</a></li>
+            </ul>
+        </li>
 
         <li id="martools" class="treeview {{ Nav::isResource('admin/testimonial') }} {{ Nav::isResource('admin/adv') }} {{ Nav::isResource('admin/hotdeal') }} {{ Nav::isResource('admin/detailadvertise') }}">
           <a href="#">
@@ -219,7 +217,13 @@
             <li class="{{ Nav::isResource('admin/adv') }}"><a href="{{url('admin/adv')}}"><i class="fa fa-circle-o"></i>Advertisements</a></li>
             <li class="{{ Nav::isResource('admin/testimonial') }}"><a href="{{url('admin/testimonial')}} "><i class="fa fa-circle-o"></i>Testimonials</a></li>
            </ul>
-          
+        </li>
+
+        <li class="{{ Nav::isResource('admin/help') }}">
+          <a href="{{url('admin/help')}} ">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span>Seller Help Files</span>
+          </a>
         </li>
 
 

@@ -41,6 +41,37 @@ class SellerReturnController extends Controller
     	return view('seller.order.returnorders.index',compact('sellerorders','countP','countC','inv_cus'));
     }
 
+    public function managerreturn(){
+
+    	$inv_cus = Invoice::first();
+    	$allorders = Return_Product::orderBy('id','desc')->get();
+    	$sellerorders = collect();
+    	$unreadorders = collect();
+    	$readedorders = collect();
+
+    	foreach ($allorders as $key => $order) {
+    		if(Auth::user()->id == $order->getorder->vender_id){
+    			$sellerorders->push($order);
+    		}
+    	}
+
+    	foreach ($sellerorders as $key => $order) {
+    		if($order->status == 'initiated'){
+    			$unreadorders->push($order);
+    		}
+    	}
+
+    	foreach ($sellerorders as $key => $order) {
+    		if($order->status != 'initiated'){
+    			$readedorders->push($order);
+    		}
+    	}
+    	
+        $countP = count($unreadorders);
+    	$countC = count($readedorders);
+    	return view('manager.order.returnorders.index',compact('sellerorders','countP','countC','inv_cus'));
+    }
+
     public function show($id){
 
     	$rorder = Return_Product::find($id);
