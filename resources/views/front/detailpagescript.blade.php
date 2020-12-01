@@ -680,12 +680,39 @@ var setdefvariant = null;
                         $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
                  
                   }else
+                  var d = new Date();
+  // d.setMinutes(d.getMinutes() + 3);
+    d=Date.parse("{{$pro->created_at}}");
+    var now = new Date().getTime();
+    
+      
+    // Find the distance between now and the count down date
+    var distance = d - now;
                   var maxbid='{{$MaxBid}}';
-                  $('.stockval').text(maxbid );
+                  if (distance> 0){   
+                  $('.stockval').text(  );
 
 $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('Add Your Bid') }}</button></div></div></form></div>');
 $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
 
+                   }else
+                   {
+                  
+                    $('.quantity-container').html('<div><div class="qty-count"><form action="" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">{{ __('staticwords.AddtoCart') }}</button></div></div></form></div>');
+                        $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADD TO CART <span class="sr-only">(current)</span></button></form>');
+                 
+
+
+                     
+
+                   }
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   }
                  else if(stock == 0){
 
@@ -717,14 +744,25 @@ $('#cartForm').append('<form action="" method="post">{{ csrf_field() }} <button 
       $('.quant-input').append('<input type="number" value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'" value="1" class="qty-section">');
        }else{
 
+        var d = new Date();
+  // d.setMinutes(d.getMinutes() + 3);
+    d=Date.parse("{{$pro->created_at}}");
+    var now = new Date().getTime();
+    
+      
+    // Find the distance between now and the count down date
+    var distance = d - now;
+
+      // if({{$pro->created_at}})
+      if (distance> 0){ 
         $('.quant-input').html('<input type="hidden"  id="nmovimentos" name="quantity" value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'">');
 
       $('.quant-input').html('');
       $('.quant-input').append('<input type="hidden"  value="'+data['min_order_qty']+'" min="'+data['min_order_qty']+'" max="'+data['stock']+'" maxorders="'+data['max_order_qty']+'" value="1" class="qty-section">');
        
-      $('.quant-input').html('<input style="width: 100px;"  type="number"   name="bidPrice"   >');
+      $('.quant-input').html('<input style="width: 100px;"  type="number"    name="bidPrice"   >');
 
- 
+       }
  
     }
      varqty =  [];
@@ -1077,7 +1115,7 @@ function tagfilter(d,attr,indexNum){
        var login_check = '{{ Auth::check() }}';
 
        if (guestpricenable == "0" || login_check) {
-
+       
          if(saleprice == 0)
        {
          $('.dtl-price-main').html('');
@@ -1171,9 +1209,11 @@ function tagfilter(d,attr,indexNum){
                          buyersaleprice = Math.round(buyersaleprice * 100) / 100;
           var login_check = '{{ Auth::check() }}';
        if (guestpricenable == '0' || login_check) {
-
+        var maxbid='{{$MaxBid}}';
        if(saleprice == 0)
        {
+          var maxbid='{{$MaxBid}}';
+
          $('.dtl-price-main').html('');
          $('.dtl-price-main').append("<i class='{{session()->get('currency')['value']}}'></i>"+" "+buyerprice);
 
@@ -1661,6 +1701,7 @@ function tagfilter(d,attr,indexNum){
       var formurl = '{{ url("MyBid")}}';}
         if(stock > 0 && stock <= 5)
          {
+
            @if($price_login != 1)
            $('.stockval').text("Hurry Up ! Only "+data['stock']+" left");
             $('.quantity-container').html('<div><div class="qty-count"><form action="'+formurl+'" method="post">{{ csrf_field() }}<div><div class="cart-quantity"><div class="quant-input"></div></div><div class="add-btn"><button type="submit" class="btn btn-primary">Add to Cart</button></div></div></form></div>');

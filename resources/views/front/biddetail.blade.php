@@ -759,7 +759,7 @@
                     <div class="pull-left">
                      
                       <div class="stock-box">
-                        <span class="label">{{ __('Highest Bid') }} :</span>
+                        {{-- <span class="label">{{ __('Highest Bid') }} :</span> --}}
                       </div>
                     </div>
                    <div class="pull-left">
@@ -918,8 +918,8 @@
 
                   <div class="col-sm-6 col-xs-12 col-md-8">
                     <div class="price-box price-box-border">
-                      <span class="price price-main dtl-price-main">
-
+                      <span class="price price-main">
+                        {{$MaxBid}}
                       </span>
                       <span class="margin-top-15 font-size-20 price-strike price-strike-main dtl-price-strike-main"></span>
 
