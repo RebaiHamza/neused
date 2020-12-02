@@ -293,6 +293,12 @@ $g = App\Genral::first();
             </ul>
           </li>
 
+          @php
+            $store_type = App\Store::where('user_id', Auth::user()->id)->get()->first();
+            $is_new = $store_type['new_seller'];
+            $is_ticket = $store_type['ticket_seller'];
+            $is_bid = $store_type['bid_seller']; 
+          @endphp
 
           <li class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }} {{ Nav::isRoute('seller.brand.index')  }} {{ Nav::isRoute('seller.pro.vars.all')  }}  {{ Nav::isResource('seller/products') }} {{ Nav::isRoute('seller.import.product') }} {{ Nav::isRoute('seller.add.var') }} {{ Nav::isRoute('seller.manage.stock') }} {{ Nav::isRoute('seller.edit.var') }} {{ Nav::isRoute('seller.pro.vars.all') }} {{ Nav::isRoute('seller.product.attr') }}">
             <a href="#">
@@ -304,15 +310,19 @@ $g = App\Genral::first();
             <ul class="treeview-menu">
               <li class="{{ Nav::isRoute('seller.brand.index')  }}"><a href="{{ route('seller.brand.index') }}"><i
                     class="fa fa-circle-o"></i>Brands</a></li>
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/newproducts') }}"><a
-                  href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>New Products</span></a></li>
+              @if ($is_new != 0)
+                <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/newproducts') }}"><a
+                href="{{route('my.products.index')}} "><i class="fa fa-circle-o"></i><span>New Products</span></a></li>
+              @endif
+              @if ($is_ticket != 0)
+                <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproduct') }}"><a
+                href="{{route('my.ticketproducts.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
+              @endif
               
-              <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/ticketproduct') }}"><a
-                    href="{{route('my.ticketproducts.index')}} "><i class="fa fa-circle-o"></i><span>Tickets</span></a></li>
-              
-                    <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
-                      href="{{route('my.bidproducts.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
-
+              @if ($is_bid != 0)
+                <li class="{{ Nav::isRoute('seller.pro.vars.all')  }} {{ Nav::isResource('seller/bidproducts') }}"><a
+                href="{{route('my.bidproducts.index')}} "><i class="fa fa-circle-o"></i><span>Bids</span></a></li>
+              @endif
               <li
                 class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }}">
                 <a href="#"><i class="fa fa-circle-o"></i>Categories

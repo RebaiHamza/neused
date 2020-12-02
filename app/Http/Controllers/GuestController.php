@@ -112,7 +112,8 @@ class GuestController extends Controller
             'country_id' => 'required|not_in:0',
             'state_id' => 'required|not_in:0',
             'city_id' => 'required|not_in:0',
-            'store_logo' => 'required | max:1000',  
+            'store_logo' => 'required | max:1000',
+
 
         ], [
             'mobile.unique' => 'Mobile number is already taken !',
@@ -158,6 +159,24 @@ class GuestController extends Controller
             $patent->move($path, $filename);
             $input['patent'] = $filename;
 
+            if($request['new_type'] == 1){
+                $new_type = 1;
+            }else{
+                $new_type = 0;
+            }
+
+            if($request['ticket_type'] == 1){
+                $ticket_type = 1; 
+            }else{
+                $ticket_type = 0;
+            }
+
+            if($request['bid_type'] == 1){
+                $bid_type = 1;
+            }else{
+                $bid_type = 0;
+            }
+
        $inputstore = ([
         'user_id' => $user->id,
         'name' => $request['storename'],
@@ -169,6 +188,9 @@ class GuestController extends Controller
         'state_id' => $request['state_id'],
         'pin_code' => $request['pin_code'],
         'status' => '0',
+        'new_seller' => $new_type,
+        'ticket_seller' => $ticket_type,
+        'bid_seller' => $bid_type,
         'verified_store' => $request['verified_store'],
         'store_logo' => $request['store_logo'],
         'branch' => $request['branch'],

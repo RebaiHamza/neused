@@ -297,6 +297,42 @@ require_once(base_path().'/app/Http/Controllers/price.php');
 
                 <div class="offset-md-3 col-md-6">
                     <hr>
+                    <h5 class="info-text">{{ __('What do you want to sell?') }}</h5>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" value="1" name="new_type"
+                                        class="custom-control-input" id="seller_types1">
+                                    <label class="custom-control-label" for="seller_types1">New Products</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" value="1" name="ticket_type"
+                                        class="custom-control-input" id="seller_types2">
+                                    <label class="custom-control-label" for="seller_types2">Tickets</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" value="1" name="bid_type"
+                                        class="custom-control-input" id="seller_types3">
+                                    <label class="custom-control-label" for="seller_types3">Bids</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offset-md-3 col-md-6">
+                    <hr>
                     <h5 class="info-text">{{ __('staticwords.ChooseCategoryyouwishtosell') }}</h5>
                     <div class="row form-group">
                         @php
