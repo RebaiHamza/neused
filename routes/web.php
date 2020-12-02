@@ -714,6 +714,9 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::resource('admin/widget', 'WidgetsettingController');
         Route::resource('admin/zone', 'ZoneController');
         Route::resource('admin/testimonial', 'TestimonialController');
+        Route::resource('admin/studio', 'StudiosController');
+        Route::get('admin/studio/create', 'StudiosController@create');
+        Route::get('admin/requestedPacks', 'StudiosController@requestedPacks');
         Route::resource('admin/special', 'SpecialOfferController');
         Route::get('admin/sp_offer_widget', 'SpecialOfferController@show_widget')->name('sp.offer.widget');
         Route::put('admin/sp_offer_widget', 'SpecialOfferController@update_widget');
@@ -834,6 +837,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     Route::group(['middleware' => ['web', 'isActive', 'IsInstalled', 'auth', 'is_vendor', 'switch_lang']], function () {
         Route::prefix('seller')->group(function () {
+            Route::get('studio','StudiosController@indexSeller')->name('seller.studio');
+            
             Route::post('roles/store','VenderController@storeRole');
 
             Route::get('roles','VenderController@showRoles');
@@ -1026,6 +1031,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
     Route::post('/admin/quickupdate/faq/{id}', 'QuickUpdateController@faqUpdate')->name('faq.quick.update');
 
     Route::post('/admin/quickupdate/blog/{id}', 'QuickUpdateController@blogUpdate')->name('blog.quick.update');
+
+    Route::post('/admin/quickupdate/studio/{id}', 'QuickUpdateController@studioUpdate')->name('studio.quick.update');
 
     Route::post('/admin/quickupdate/page/{id}', 'QuickUpdateController@pageUpdate')->name('page.quick.update');
 

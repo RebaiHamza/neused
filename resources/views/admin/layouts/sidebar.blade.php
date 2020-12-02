@@ -203,7 +203,7 @@
             </ul>
         </li>
 
-        <li id="martools" class="treeview {{ Nav::isResource('admin/testimonial') }} {{ Nav::isResource('admin/adv') }} {{ Nav::isResource('admin/hotdeal') }} {{ Nav::isResource('admin/detailadvertise') }}">
+        <li id="martools" class="treeview {{ Nav::isResource('admin/studio') }} {{ Nav::isResource('admin/testimonial') }} {{ Nav::isResource('admin/adv') }} {{ Nav::isResource('admin/hotdeal') }} {{ Nav::isResource('admin/detailadvertise') }}">
           <a href="#">
             <i class="fa fa-line-chart" aria-hidden="true"></i><span>Marketing Tools</span>
             <span class="pull-right-container">
@@ -215,6 +215,8 @@
             <li class="{{ Nav::isResource('admin/hotdeal') }}"><a href="{{url('admin/hotdeal')}}"><i class="fa fa-circle-o"></i>Hot Deals</a></li>
             <li class="{{ Nav::isResource('admin/detailadvertise') }}"><a href="{{url('admin/detailadvertise')}}"><i class="fa fa-circle-o"></i>Block Advertisments</a></li>
             <li class="{{ Nav::isResource('admin/adv') }}"><a href="{{url('admin/adv')}}"><i class="fa fa-circle-o"></i>Advertisements</a></li>
+            <li class="{{ Nav::isResource('admin/studio') }}"><a href="{{url('admin/studio')}}"><i class="fa fa-circle-o"></i>Neused Studio</a></li>
+            <li class="{{ Nav::isResource('admin/requestedPacks') }}"><a href="{{url('admin/requestedPacks')}}"><i class="fa fa-circle-o"></i>Requested Packs</a></li>
             <li class="{{ Nav::isResource('admin/testimonial') }}"><a href="{{url('admin/testimonial')}} "><i class="fa fa-circle-o"></i>Testimonials</a></li>
            </ul>
         </li>

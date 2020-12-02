@@ -367,7 +367,10 @@ $g = App\Genral::first();
             </ul>
           </li>
 
-          <li class="{{ Nav::isResource('blog') }}"><a href="{{url('seller/blog')}}"><i class="fa fa-circle-o"></i>Blog</a></li>
+          <li class="{{ Nav::isResource('blog') }}"><a href="{{url('seller/blog')}}"><i class="fas fa-blog"></i>Blog</a></li>
+
+          <li class="{{ Nav::isRoute('seller.studio') }}"><a href="{{ route('seller.studio') }}"><i
+            class="fa fa-bullhorn" aria-hidden="true"></i> <span>Neused Studio</span></a></li>
 
           <li class="{{ Nav::isRoute('vender.invoice.setting') }}"><a href="{{ route('vender.invoice.setting') }}"><i
                 class="fa fa-file-text-o" aria-hidden="true"></i> <span>Invoice Setting</span></a></li>

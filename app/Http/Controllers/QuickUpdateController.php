@@ -29,6 +29,7 @@ use App\Widgetsetting;
 use App\unit;
 use App\SpecialOffer;
 use App\DetailAds;
+use App\Pack;
 
 class QuickUpdateController extends Controller
 {
@@ -335,6 +336,23 @@ class QuickUpdateController extends Controller
         else
         {
             Blog::where('id','=',$id)->update(['status' => "1"]);
+            return back()->with('added','Status changed to Active !');
+        }
+    }
+
+    public function studioUpdate($id)
+    {
+
+         $pack = Pack::findorfail($id);
+
+        if($pack->status==1)
+        {
+            Pack::where('id','=',$id)->update(['status' => "0"]);
+            return back()->with('added','Status changed to Deactive !');
+        }
+        else
+        {
+            Pack::where('id','=',$id)->update(['status' => "1"]);
             return back()->with('added','Status changed to Active !');
         }
     }
