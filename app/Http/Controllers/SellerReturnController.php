@@ -69,7 +69,7 @@ class SellerReturnController extends Controller
     	
         $countP = count($unreadorders);
     	$countC = count($readedorders);
-    	return view('manager.order.returnorders.index',compact('sellerorders','countP','countC','inv_cus'));
+    	return view('seller.order.returnorders.index',compact('sellerorders','countP','countC','inv_cus'));
     }
 
     public function show($id){

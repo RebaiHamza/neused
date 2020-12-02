@@ -161,7 +161,7 @@ class SellerCancelOrderController extends Controller
 
 
     	
-    	return view('manager.order.cancelorders.index',compact('partialcount2','inv_cus','partialcount','sellercanorders','sellerfullcanorders'));
+    	return view('seller.order.cancelorders.index',compact('partialcount2','inv_cus','partialcount','sellercanorders','sellerfullcanorders'));
 
     }
 

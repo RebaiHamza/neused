@@ -729,7 +729,7 @@ class VenderController extends Controller
 
         }
 
-        return view('manager.order.index', compact('sellerorders', 'emptyOrder', 'inv_cus'));
+        return view('seller.order.index', compact('sellerorders', 'emptyOrder', 'inv_cus'));
 
     }
 
