@@ -323,6 +323,7 @@ class UserController extends Controller
 
         return view("admin.user.show", compact("users","pagetitle"));
     }
+
     public function onlyUsers(Request $request)
     {
 

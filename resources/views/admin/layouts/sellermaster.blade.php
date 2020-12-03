@@ -255,6 +255,12 @@ $g = App\Genral::first();
 
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
+
+        @php
+          $user = Auth::user();
+        @endphp
+        
+        @if ($user->is_fa)
           <li class="{{ Nav::isRoute('seller.dboard') }}">
             <a href="{{route('seller.dboard')}} ">
               <i class="fa fa-tachometer"></i><span>Dashboard</span>
@@ -292,14 +298,14 @@ $g = App\Genral::first();
               </li>
             </ul>
           </li>
-
+        @endif
           @php
-            $store_type = App\Store::where('user_id', Auth::user()->id)->get()->first();
+            $store_type = App\Store::where('id', Auth::user()->store_id)->get()->first();
             $is_new = $store_type['new_seller'];
             $is_ticket = $store_type['ticket_seller'];
             $is_bid = $store_type['bid_seller']; 
           @endphp
-
+        @if ($user->is_fa or $user->is_pm)
           <li class="treeview {{ Nav::isRoute('seller.get.categories') }} {{ Nav::isRoute('seller.get.subcategories') }} {{ Nav::isRoute('seller.get.childcategories') }} {{ Nav::isRoute('seller.brand.index')  }} {{ Nav::isRoute('seller.pro.vars.all')  }}  {{ Nav::isResource('seller/products') }} {{ Nav::isRoute('seller.import.product') }} {{ Nav::isRoute('seller.add.var') }} {{ Nav::isRoute('seller.manage.stock') }} {{ Nav::isRoute('seller.edit.var') }} {{ Nav::isRoute('seller.pro.vars.all') }} {{ Nav::isRoute('seller.product.attr') }}">
             <a href="#">
               <i class="fa fa-shopping-basket" aria-hidden="true"></i> <span>Products Management</span>
@@ -352,32 +358,35 @@ $g = App\Genral::first();
 
             </ul>
           </li>
+        @endif
 
-          <li class="treeview {{ Nav::isResource('order') }} {{ Nav::isRoute('seller.canceled.orders') }}">
+        @if ($user->is_fa or $user->is_om)
+        <li class="treeview {{ Nav::isResource('order') }} {{ Nav::isRoute('seller.canceled.orders') }}">
 
-            <a href="#">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Order Management</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="{{ Nav::isResource('order') }}">
-                <a href="{{url('seller/orders')}} "><i class="fa fa-circle-o" aria-hidden="true"></i>
-                  <span>Orders</span> </a>
-              </li>
+          <a href="#">
+            <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Order Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ Nav::isResource('order') }}">
+              <a href="{{url('seller/orders')}} "><i class="fa fa-circle-o" aria-hidden="true"></i>
+                <span>Orders</span> </a>
+            </li>
 
-              <li class="{{ Nav::isRoute('seller.canceled.orders') }}">
-                <a href="{{ route('seller.canceled.orders') }}"><i class="fa fa-circle-o"></i> Cancelled Orders</a>
-              </li>
+            <li class="{{ Nav::isRoute('seller.canceled.orders') }}">
+              <a href="{{ route('seller.canceled.orders') }}"><i class="fa fa-circle-o"></i> Cancelled Orders</a>
+            </li>
 
-              <li class="{{ Nav::isRoute('seller.return.index') }}">
-                <a href="{{ route('seller.return.index') }}"><i class="fa fa-circle-o"></i> Returned Orders</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="{{ Nav::isResource('blog') }}"><a href="{{url('seller/blog')}}"><i class="fas fa-blog"></i>Blog</a></li>
+            <li class="{{ Nav::isRoute('seller.return.index') }}">
+              <a href="{{ route('seller.return.index') }}"><i class="fa fa-circle-o"></i> Returned Orders</a>
+            </li>
+          </ul>
+        </li>
+        @endif
+        @if ($user->is_fa or $user->is_mm)
+            <li class="{{ Nav::isResource('blog') }}"><a href="{{url('seller/blog')}}"><i class="fas fa-blog"></i>Blog</a></li>
 
           <li class="{{ Nav::isRoute('seller.studio') }}"><a href="{{ route('seller.studio') }}"><i
             class="fa fa-bullhorn" aria-hidden="true"></i> <span>Neused Studio</span></a></li>
@@ -387,6 +396,8 @@ $g = App\Genral::first();
 
           <li class="{{ Nav::isRoute('seller.shipping.info') }}"><a href="{{ route('seller.shipping.info') }}"><i
                 class="fa fa-cubes" aria-hidden="true"></i> <span>Shipping Information</span></a></li>
+        @endif
+          
 
           <li
             class="treeview {{ Nav::isRoute('seller.commission') }} {{ Nav::isRoute('vender.payout.show.complete') }} {{ Nav::isRoute('seller.payout.index') }}">

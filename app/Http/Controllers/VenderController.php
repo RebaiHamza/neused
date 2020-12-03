@@ -119,7 +119,40 @@ class VenderController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
+        if($request['pm'] == 1){
+            $pm = 1;
+        }else{
+            $pm = 0;
+        }
+
+        if($request['om'] == 1){
+            $om = 1; 
+        }else{
+            $om = 0;
+        }
+
+        if($request['mm'] == 1){
+            $mm = 1;
+        }else{
+            $mm = 0;
+        }
+
+        if($pm == 0 and $om == 0 and $mm == 0){
+            $fa = 1;
+        } else {
+            $fa = 0;
+        }
+
         $input = $request->all();
+
+        
+        $input['is_pm'] = $pm;
+        $input['is_om'] = $om;
+        $input['is_mm'] = $mm;
+        $input['is_fa'] = $fa;
+        $input['role_id'] = 'v';
+
+        $input['store_id'] = Auth::user()->store_id;
 
         $u = new User;
 
@@ -262,7 +295,7 @@ class VenderController extends Controller
         ]);
         $input = $request->all();
         $auth_id = Auth::user()->id;
-        $cat = Store::where('user_id', $auth_id)->where('rd', '0')
+        $cat = Store::where('id', Auth::user()->store_id)->where('rd', '0')
             ->first();
         if (empty($cat)) {
             if ($file = $request->file('store_logo')) {
@@ -313,51 +346,6 @@ class VenderController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        // $store = Store::find($id);
-
-        // $pincodesystem = Config::first()->pincode_system;
-
-        // $data = $this->validate($request, [
-
-        //     "name" => "required", "email" => "required|max:255", "mobile" => "required",
-
-        // ], [
-
-        //     "name.required" => "Store Name is needed", "email.required" => "Email is needed", "mobile.required" => "Mobile No is needed",
-
-        // ]);
-
-        // if ($pincodesystem == 1) {
-
-        //     $request->validate(['pin_code' => 'required'], ["pin_code.required" => "Pincode is required"]);
-
-        // }
-
-        // $store = Store::findOrFail($id);
-
-        // $input = $request->all();
-
-        // if ($file = $request->file('store_logo')) {
-
-        //     if (file_exists(public_path() . '/images/store/' . $store->store_logo)) {
-        //         unlink(public_path() . '/images/store/' . $store->store_logo);
-        //     }
-
-        //     $optimizeImage = Image::make($file);
-        //     $optimizePath = public_path() . '/images/store/';
-        //     $name = time() . $file->getClientOriginalName();
-        //     $optimizeImage->save($optimizePath . $name, 72);
-
-        //     $input['store_logo'] = $name;
-
-        // } else {
-        //     $input['store_logo'] = $store->store_logo;
-        //     $store->update($input);
-        // }
-
-        // $store->update($input);
-
         $store = Store::find($id);
         $input['requested_edits'] = '1'; 
         $store->update($input);
@@ -386,7 +374,8 @@ class VenderController extends Controller
             $auth_id = Auth::user()->id;
 
             DB::table('products')
-                ->where('vender_id', $auth_id)->update(array(
+                // ->where('vender_id', $auth_id)->update(array(
+                ->where('store_id', $auth_id->store_id)->update(array(
                 'status' => '0',
             ));
         }
@@ -398,7 +387,7 @@ class VenderController extends Controller
     {
 
         $products = Product::join('stores', 'stores.id', '=', 'products.store_id')
-                    ->where('stores.user_id','=',Auth::user()->id)->select('products.*')->get();
+                    ->where('stores.id','=',Auth::user()->store_id)->select('products.*')->get();
 
         $returnorders = Return_Product::orderBy('id', 'DESC')->get();
         $payouts = SellerPayout::where('sellerid', Auth::user()->id)
@@ -612,7 +601,8 @@ class VenderController extends Controller
         $totalreturnorders = count($ro2);
 
         /*find store*/
-        $ifstore = Store::where('user_id', Auth::user()->id)->first();
+
+        $ifstore = Store::where('id', Auth::user()->store_id)->first();
 
         $helps = Help::all();
 
@@ -632,14 +622,15 @@ class VenderController extends Controller
 
     public function enable()
     {
-        $auth_id = Auth::user()->id;
-        // $conversion_rate = Store::where('user_id',$auth_id)->first();
-        $conversion_rate = DB::table('stores')->where('user_id', $auth_id)->update(['rd' => '0']);
+        $auth_id = Auth::user();
+        
+        $conversion_rate = DB::table('stores')->where('id', $auth_id->store_id)->update(['rd' => '0']);
         if ($conversion_rate) {
             $auth_id = Auth::user()->id;
 
             DB::table('products')
-                ->where('vender_id', $auth_id)->update(array(
+                // ->where('vender_id', $auth_id)->update(array(
+                ->where('store_id', $auth_id->store_id)->update(array(
                 'status' => '1',
             ));
         }

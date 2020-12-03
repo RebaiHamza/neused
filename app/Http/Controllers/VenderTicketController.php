@@ -47,8 +47,8 @@ class VenderTicketController extends Controller
             ->leftJoin('variant_images', 'variant_images.var_id', '=', 'add_sub_variants.id')
             ->leftJoin('grandcategories', 'grandcategories.id', '=', 'products.grand_id')
             ->select('products.id as proid', 'products.category_id as category_id', FacadesDB::raw("JSON_EXTRACT(products.name, '$.$lang') as productname"), 'products.featured as featured', 'products.status as status', 'products.is_ticket as is_ticket', 'products.created_at as createdat', 'products.updated_at as updateat', 'stores.name as storename', 'brands.name as brandname', FacadesDB::raw("JSON_EXTRACT(categories.title, '$.$lang') as catname"), FacadesDB::raw("JSON_EXTRACT(subcategories.title, '$.$lang') as subcatname"), FacadesDB::raw("JSON_EXTRACT(grandcategories.title, '$.$lang') as childname"), "variant_images.main_image as mainimage", 'products.price as price', 'products.vender_price as vender_price', 'products.tax_r as tax_r', 'products.vender_offer_price as vender_offer_price', 'products.offer_price as offer_price', 'add_sub_variants.main_attr_id as main_attr_id', 'add_sub_variants.main_attr_value as main_attr_value')
-            ->where('products.vender_id', '=', FacadesAuth::user()->id)
-            ->where('stores.user_id', '=', FacadesAuth::user()->id)
+            // ->where('products.vender_id', '=', FacadesAuth::user()->id)
+            ->where('stores.id', '=', FacadesAuth::user()->store_id)
             ->where('products.deleted_at','=',NULL)
             ->where('is_ticket', '=', 1)
             ->get();
@@ -494,7 +494,7 @@ class VenderTicketController extends Controller
                     'child' => $subcatid->id,
                     'grand_id' => $childid,
                     'store_id' => $store['id'],
-                    'vender_id' => $store->user['id'],
+                    // 'vender_id' => $store->user['id'],
                     'brand_id' => $brandnid->id,
                     'name' => $line['product_name'],
                     'des' => clean($line['product_description']),
@@ -573,7 +573,7 @@ class VenderTicketController extends Controller
         $brands = Brand::all();
         $categorys = Category::all();
 
-        return view('seller.ticketproduct.create', compact('auth_name', 'brands', 'categorys', 'vender_id'));
+    return view('seller.ticketproduct.create', compact('auth_name', 'brands', 'categorys', /*'vender_id'*/));
 
     }
 
@@ -729,7 +729,7 @@ class VenderTicketController extends Controller
             $input['return_policy'] = 0;
         }
 
-        $input['vender_id'] = Auth::user()->id;
+        // $input['vender_id'] = Auth::user()->id;
         $input['grand_id'] = isset($request->grand_id) ? $request->grand_id : 0;
         $input['w_d'] = $request->w_d;
         $input['w_my'] = $request->w_my;
@@ -774,12 +774,12 @@ class VenderTicketController extends Controller
             ->get();
         $grand = Grandcategory::where('subcat_id', $cat_id->child)
             ->get();
-        $stores = Store::where('user_id', auth()->id())
+        $stores = Store::where('id', auth()->store_id())
             ->where('status', '1')
             ->where('rd', '0')
             ->get();
         $pro_image = DB::table('pro_images')->where('pro_id', $id)->get();
-        return view("seller.ticketproduct.edit_tab", compact('auth_name', 'stores', 'brands', 'categorys', 'vender_id', 'pro_image', 'products', 'child', 'grand'));
+        return view("seller.ticketproduct.edit_tab", compact('auth_name', 'stores', 'brands', 'categorys', /*'vender_id',*/ 'pro_image', 'products', 'child', 'grand'));
     }
 
     /**
@@ -806,7 +806,7 @@ class VenderTicketController extends Controller
         $brands = Brand::all();
         $products = Product::find($id);
         $categorys = Category::all();
-        $store = Store::where('user_id', Auth::user()->id)
+        $store = Store::where('id', Auth::user()->store_id)
             ->where('status', "1")
             ->first();
 

@@ -128,6 +128,7 @@ class GuestController extends Controller
             'role_id' => 'v',
             'password' => Hash::make($request['password']),
             'is_verified' => 1,
+            'is_fa' => 1,
         ]);
 
 
@@ -209,6 +210,9 @@ class GuestController extends Controller
         $data = Store::create($inputstore);
        
         $data->save();
+
+        $update = User::where('id', $user->id)->update(array('store_id' => $data->id));
+        
         Auth::logout($user);
         return redirect('/');
     }

@@ -61,26 +61,31 @@ Add User to your store
         <div class="last_btn col-md-12">
           <div class="row">
 
-              <div class="col-md-4">
+            <div class="col-md-12">
               
               <label class="control-label" for="">
                           User Role: <span class="required"></span>
               </label>
-
-               <select required="" name="role_id" class="form-control">
-                  <option value="fa">Full Seller Access</option>
-                  <option value="pm">Products Manager</option>
-                  <option value="om">Orders Manager</option>
-                  <option value="pom">Products & Orders Manager</option>
-                  <option value="mm">Marketing Manager</option>
-               </select>
+              <div class="row">
+                <br>
+                <div class="col-md-3">
+                  <input type="checkbox" name="pm" id="role1" value="1"> Products Manager
+                </div>
+                <div class="col-md-3">
+                  <input type="checkbox" name="om" id="role2" value="1"> Orders Manager
+                </div>
+                <div class="col-md-3">
+                  <input type="checkbox" name="mm" id="role3" value="1"> Marketing Manager
+                </div>
+              </div>               
             </div>
 
 
           
           </div>
 
-                      <div class="col-md-4">
+            <div class="col-md-4">
+              <br>
                <label class="control-label" for="">
                           Status:
                </label>
