@@ -276,6 +276,7 @@
             @if($cms->type =='c')
               <li class="{{ Nav::isResource('admin/commission') }}"><a href="{{url('admin/commission')}} "><i class="fa fa-circle-o"></i>Commissions</a></li>
             @endif
+            <li class="{{ Nav::isRoute('admin/commission_used') }}"><a href="{{url('admin/commission_used')}} "><i class="fa fa-circle-o"></i>Used Products Commissions</a></li>
             <li><a href="{{url('admin/commission_setting')}} "><i class="fa fa-circle-o"></i>Commission Setting</a></li>
           </ul>
          </li>

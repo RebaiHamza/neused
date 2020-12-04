@@ -14,7 +14,6 @@ class CommissionSettingController extends Controller
      */
     public function index()
     {
-
         $commission_settings = CommissionSetting::all();
         return view("admin.commission_setting.index", compact("commission_settings"));
     }
@@ -28,7 +27,6 @@ class CommissionSettingController extends Controller
      */
     public function store(Request $request)
     {
-
         $input = $request->all();
         $data = CommissionSetting::create($input);
         $data->save();

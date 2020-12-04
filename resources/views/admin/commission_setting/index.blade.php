@@ -34,6 +34,14 @@
       								      {{'Category'}}
   							           @elseif($commission->type == 'flat')
                             {{'Flat For All'}}
+                            @elseif($commission->type == 'n')
+                            {{'New Products'}}
+                            @elseif($commission->type == 'u')
+                            {{'Used Products'}}
+                            @elseif($commission->type == 't')
+                            {{'Tickets'}}
+                            @elseif($commission->type == 'b')
+                            {{'Bids'}}
       						        @endif
           							</td>
                        <td>

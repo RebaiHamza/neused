@@ -21,9 +21,13 @@
                         </label>
                         
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="type" id="type" class="form-control col-md-7 col-xs-12">
+                          <select name="type" id="type" class="form-control col-md-7 col-xs-12" disabled>
                             <option value="c" {{ $commission->type == 'c' ? 'selected="selected"' : '' }} >Category</option>
                             <option value="flat" {{ $commission->type == 'flat' ? 'selected="selected"' : '' }}>Flat For All</option>
+                            <option value="n" {{ $commission->type == 'n' ? 'selected="selected"' : '' }} >New Product</option>
+                            <option value="u" {{ $commission->type == 'u' ? 'selected="selected"' : '' }} >Used Product</option>
+                            <option value="t" {{ $commission->type == 't' ? 'selected="selected"' : '' }} >Ticket</option>
+                            <option value="b" {{ $commission->type == 'b' ? 'selected="selected"' : '' }} >Bid</option>
                           </select>
                           <small class="txt-desc">(Please Choose Commission Type )</small>
                         </div>

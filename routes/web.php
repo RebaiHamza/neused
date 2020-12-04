@@ -643,6 +643,31 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('admin/taxclassUpdate', 'TaxClassController@update');
         Route::resource('admin/coupan', 'CoupanController');
         Route::resource('admin/commission', 'CommissionController');
+        
+        // Commission Used
+        Route::get('admin/commissionused', 'CommissionController@indexUsed');
+        Route::post('admin/commissionusedstore', 'CommissionController@storeUsed');
+        Route::get('admin/commissionuseddestroy/{id}', 'CommissionController@destroyUsed');
+        Route::get('admin/commissionused/{id}/edit', 'CommissionController@editUsed');
+        Route::post('admin/commissionused/{id}/store_edit', 'CommissionController@updateUsed');
+        Route::get('admin/createused', 'CommissionController@createUsed');
+        
+        // commission ticket
+        Route::get('admin/commissionticket', 'CommissionController@indexTicket');
+        Route::post('admin/commissionticketstore', 'CommissionController@storeTicket');
+        Route::get('admin/commissionticketdestroy/{id}', 'CommissionController@destroyTicket');
+        Route::get('admin/commissionticket/{id}/edit', 'CommissionController@editTicket');
+        Route::post('admin/commissionticket/{id}/store_edit', 'CommissionController@updateTicket');
+        Route::get('admin/createticket', 'CommissionController@createTicket');
+
+        // commission bid
+        Route::get('admin/commissionbid', 'CommissionController@indexBid');
+        Route::post('admin/commissionbidstore', 'CommissionController@storeBid');
+        Route::get('admin/commissionbiddestroy/{id}', 'CommissionController@destroyBid');
+        Route::get('admin/commissionbid/{id}/edit', 'CommissionController@editBid');
+        Route::post('admin/commissionbid/{id}/store_edit', 'CommissionController@updateBid');
+        Route::get('admin/createbid', 'CommissionController@createBid');
+
         Route::resource('admin/commission_setting', 'CommissionSettingController');
         Route::get('admin/sellerpayouts', 'SellerPaymenyController@index')->name('seller.payouts.index');
         Route::get('admin/completed/payouts', 'SellerPaymenyController@complete')->name('seller.payout.complete');
