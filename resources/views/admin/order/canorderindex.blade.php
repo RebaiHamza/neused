@@ -1,13 +1,13 @@
 @extends("admin.layouts.master")
-@section('title','Canceled Orders |')
-@section('Canceled Orders')
+@section('title','Refused Orders |')
+@section('Refused Orders')
 @section("body")
 
 
 <div class="box">
 		<div class="box-header with-border">
 			<div class="box-title">
-				Canceled Orders
+				Refused Orders
 			</div>
 		</div>
 
@@ -17,8 +17,8 @@
 
 				<ul>
 					<li>COD Orders are only viewable !</li>
-					<li>For Prepaid canceled orders with refund method choosen Bank You can update order IF refund is complete.</li>
-					<li>For Prepaid canceled orders with refund method choosen orignal you can track refund status LIVE from respective Payment gateway & Update TXN/REF ID.
+					<li>For Prepaid refused orders with refund method choosen Bank You can update order IF refund is complete.</li>
+					<li>For Prepaid refused orders with refund method choosen orignal you can track refund status LIVE from respective Payment gateway & Update TXN/REF ID.
 					</li>
 				</ul>
 			</div>
@@ -26,8 +26,8 @@
 			<div class="nav-tabs-custom">
 
 				<ul class="nav nav-tabs" id="ordertabs" role="tablist">
-				    <li data-toggle="popover" data-trigger="focus" title="Single Canceled Orders" data-content="If order have only 1 item than its count in single canceled orders." role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Single Canceled Orders  @if($partialcount>0)<span class="badge badge-danger"><span id="pcount">{{ $partialcount }}</span> New @endif</a></li>
-				    <li data-toggle="popover" data-trigger="focus" title="Bulk Canceled Orders" data-content="If order have more than 1 item than its count in Bulk canceled orders." role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bulk Canceled Orders @if($fullcount>0)<span class="badge badge-danger"><span id="fcount">{{ $fullcount }}</span> New @endif</a></li>
+				    <li data-toggle="popover" data-trigger="focus" title="Single Refused Orders" data-content="If order have only 1 item than its count in single refused orders." role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Single Refused Orders  @if($partialcount>0)<span class="badge badge-danger"><span id="pcount">{{ $partialcount }}</span> New @endif</a></li>
+				    <li data-toggle="popover" data-trigger="focus" title="Bulk Refused Orders" data-content="If order have more than 1 item than its count in Bulk refused orders." role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Bulk Refused Orders @if($fullcount>0)<span class="badge badge-danger"><span id="fcount">{{ $fullcount }}</span> New @endif</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -49,7 +49,7 @@
 							</th>
 
 							<th>
-								REASON for Cancellation
+								REASON for Rejection
 							</th>
 
 							<th>
@@ -152,7 +152,7 @@
 								Order ID
 							</th>
 							<th>
-								REASON for Cancellation
+								REASON for Rejection
 							</th>
 							<th>
 								REFUND METHOD

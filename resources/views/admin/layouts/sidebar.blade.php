@@ -169,7 +169,7 @@
         </ul>
         </li>
 
-        <li id="ordersm" class="treeview {{ Nav::isResource('admin.pending.orders') }} {{ Nav::isRoute('admin.can.order') }} {{ Nav::isRoute('return.order.show') }} {{ Nav::isRoute('return.order.detail') }} {{ Nav::isRoute('return.order.index') }} {{ Nav::isResource('order') }} {{ Nav::isResource('invoice') }}">
+        <li id="ordersm" class="treeview {{ Nav::isResource('admin.ready.orders') }} {{ Nav::isResource('admin.pending.orders') }} {{ Nav::isRoute('admin.can.order') }} {{ Nav::isRoute('return.order.show') }} {{ Nav::isRoute('return.order.detail') }} {{ Nav::isRoute('return.order.index') }} {{ Nav::isResource('order') }} {{ Nav::isResource('invoice') }}">
               
             <a href="#">
               <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Orders & Invoices</span>
@@ -182,9 +182,11 @@
 
                 <li class="{{ Nav::isResource('order') }}"><a href="{{route('order.index')}} "><i class="fa fa-circle-o"></i>All Orders </a></li>
                 <li class="{{ Nav::isResource('admin.pending.orders') }}"><a href="{{route('admin.pending.orders')}} "><i class="fa fa-circle-o"></i>Pending Orders </a></li>
-                 <li class="{{ Nav::isRoute('admin.can.order') }}"><a href="{{route('admin.can.order')}} "><i class="fa fa-circle-o"></i>Canceled Orders </a></li>
-
-                <li class="{{ Nav::isRoute('return.order.index') }} {{ Nav::isRoute('return.order.show') }} {{ Nav::isRoute('return.order.detail') }}"><a href="{{route('return.order.index')}} "><i class="fa fa-circle-o"></i>Returned Orders </a></li>
+                <li class="{{ Nav::isResource('admin.ready.orders') }}"><a href="{{route('admin.ready.orders')}} "><i class="fa fa-circle-o"></i>Ready to ship Orders </a></li>
+                <li class="{{ Nav::isRoute('admin.can.order') }}"><a href="{{route('admin.can.order')}} "><i class="fa fa-circle-o"></i>Refused Orders </a></li>
+                <li class="{{ Nav::isResource('admin.shipped.orders') }}"><a href="{{route('admin.shipped.orders')}} "><i class="fa fa-circle-o"></i>Shipped Orders </a></li>
+                <li class="{{ Nav::isResource('admin.notshipped.orders') }}"><a href="{{route('admin.notshipped.orders')}} "><i class="fa fa-circle-o"></i>Not Shipped Orders </a></li>
+                {{-- <li class="{{ Nav::isRoute('return.order.index') }} {{ Nav::isRoute('return.order.show') }} {{ Nav::isRoute('return.order.detail') }}"><a href="{{route('return.order.index')}} "><i class="fa fa-circle-o"></i>Returned Orders </a></li> --}}
                 
                 <li class="{{ Nav::isResource('invoice') }}"><a href="{{url('admin/invoice')}} "><i class="fa fa-circle-o"></i>Invoice Setting</a></li>
 

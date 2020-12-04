@@ -824,9 +824,7 @@ class ProductController extends Controller
         //     $input['tax_name'] = null;
         // }
 
-        $input['tax_r'] = null;
-        $input['tax_name'] = null;
-        $input['tax'] = $request->tax;
+        $input['tax'] = 0;
 
         if (isset($request->free_shipping)) {
             $input['free_shipping'] = '1';

@@ -1265,9 +1265,9 @@ class bidProductsController extends Controller
             $input['featured'] = '0';
         }
 
-        $input['tax_r'] = null;
-        $input['tax_name'] = null;
-        $input['tax'] = $request->tax;
+        // $input['tax_r'] = null;
+        // $input['tax_name'] = null;
+        $input['tax'] = 0;
 
         $input['vender_price'] = $request->price;
         $input['vender_offer_price'] = $request->offer_price;

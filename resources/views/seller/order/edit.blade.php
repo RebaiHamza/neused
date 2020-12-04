@@ -648,10 +648,10 @@ $tstatus = 1;
 								@if(!empty($cancellog) || $invoice->status == 'canceled' || $invoice->status == 'refunded' || $invoice->status == 'returned' || $invoice->status == 'refunded' || $invoice->status == 'ret_ref' || $invoice->status == 'return_request')
 
 									<select  disabled="" class="form-control">
-									<option {{ $invoice->status =="pending" ? "selected" : "" }} value="pending">Pending</option>
-									<option {{ $invoice->status =="processed" ? "selected" : "" }} value="processed">Processed</option>
-									<option {{ $invoice->status =="shipped" ? "selected" : "" }} value="shipped">Shipped</option>
 									<option {{ $invoice->status =="delivered" ? "selected" : "" }} value="delivered">Delivered</option>
+									<option {{ $invoice->status =="canceled" ? "selected" : "" }} value="canceled">Canceled</option>
+									<option {{ $invoice->status =="returned" ? "selected" : "" }} value="returned">Returned</option>
+									<option {{ $invoice->status =="failed" ? "selected" : "" }} value="failed">Failed</option>
 
 									<option {{ $invoice->status == "return_request" ? "selected" : "" }} value="return_request">Return Requested</option>
 									<option {{ $invoice->status =="returned" ? "selected" : "" }} value="returned">Returned</option>
@@ -667,10 +667,10 @@ $tstatus = 1;
 								</select>
 								@else
 									<select  name="status" id="status{{ $invoice->id }}" onchange="changeStatus('{{ $invoice->id }}')" class="form-control">
-									<option {{ $invoice->status =="pending" ? "selected" : "" }} value="pending">Pending</option>
-									<option {{ $invoice->status =="processed" ? "selected" : "" }} value="processed">Processed</option>
-									<option {{ $invoice->status =="shipped" ? "selected" : "" }} value="shipped">Shipped</option>
-									<option {{ $invoice->status =="delivered" ? "selected" : "" }} value="delivered">Delivered</option>
+									<option {{ $invoice->status =="delivered" ? "selected" : "" }} value="delivered">delivered</option>
+									<option {{ $invoice->status =="canceled" ? "selected" : "" }} value="canceled">canceled</option>
+									<option {{ $invoice->status =="returned" ? "selected" : "" }} value="returned">Returned</option>
+									<option {{ $invoice->status =="failed" ? "selected" : "" }} value="failed">Failed</option>
 									
 								</select>
 								@endif

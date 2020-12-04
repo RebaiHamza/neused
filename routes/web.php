@@ -295,6 +295,8 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/getmyinvoice/{id}', 'OrderController@getUserInvoice')->name('user.get.invoice');
 
         Route::post('/order/complete/cancel/{id}', 'FullOrderCancelController@cancelOrder')->name('full.order.cancel');
+
+        Route::post('admin/quick/confirm/notshipped/{id}', 'FullOrderCancelController@notShippedOrder')->name('full.order.notshipped');
     });
 
     Route::get('/onloadvariant/{id}', 'AddSubVariantController@ajaxGet2');
@@ -475,6 +477,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::post('/reposition/category/', 'CategoryController@reposition')->name('cat.repos');
 
         Route::post('admin/quick/confirm/fullorder/{orderid}', 'QuickConfirmOrderController@quickconfirmfullorder')->name('quick.pay.full.order');
+        Route::post('admin/quick/confirm/ready/{orderid}', 'QuickConfirmOrderController@quickReadyfullorder')->name('quick.ready.full.order');
 
         Route::post('/reposition/subcategory/', 'SubCategoryController@reposition')->name('subcat.repos');
 
@@ -525,6 +528,12 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/admin/update/returnOrder/{id}', 'ReturnOrderController@show')->name('return.order.show');
 
         Route::get('admin/ord/canceled', 'OrderController@getCancelOrders')->name('admin.can.order');
+
+        Route::get('admin/ord/ready', 'OrderController@getReadyOrders')->name('admin.ready.orders');
+
+        Route::get('admin/ord/shipped', 'OrderController@getShippedOrders')->name('admin.shipped.orders');
+
+        Route::get('admin/ord/notshipped', 'OrderController@getNotShippedOrders')->name('admin.notshipped.orders');
 
         Route::get('/admin/all/pro/reported', 'ReportProductController@get')->name('get.rep.pro');
 
@@ -681,6 +690,7 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
         Route::get('/admin/shipping-price-weight', 'ShippingWeightController@get')->name('get.wt');
         Route::post('admin/shipping-price-weight/update', 'ShippingWeightController@update')->name('update.ship.wt');
         Route::resource('admin/order', 'OrderController');
+        Route::get('admin/shippedorders', 'OrderController@shippedIndex')->name('admin.shipped.orders');
         Route::get('admin/pending/order', 'OrderController@pendingorder')->name('admin.pending.orders');
         Route::delete('order/bulkdelete', 'OrderController@bulkdelete')->name('order.bulk.delete');
 

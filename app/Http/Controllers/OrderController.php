@@ -31,6 +31,15 @@ class OrderController extends Controller
         return view("admin.order.index", compact("all_orders", 'inv_cus'));
     }
 
+    public function shippedIndex()
+    {
+        // $all_shipped = InvoiceDownload::orderBy('id', 'desc')->where('status','=','shipped')->get();
+        $all_orders = Order::join('invoice_downloads', 'orders.id', '=', 'invoice_downloads.order_id')->where('invoice_downloads.status','=','shipped')
+        ->get(['orders.*', 'invoice_downloads.status']);
+        $inv_cus = Invoice::first();
+        return view("admin.order.index", compact("all_orders", 'inv_cus'));
+    }
+
     public function bulkdelete(Request $request)
     {
 
@@ -145,6 +154,18 @@ class OrderController extends Controller
         $orders = $pendingorders->unique('id');
 
         return view('admin.order.pendingorder',compact('orders','inv_cus'));
+
+    }
+
+    public function getReadyorders(){
+
+        $inv_cus = Invoice::first();
+
+        $pendingorders = Order::join('invoice_downloads','orders.id','=','invoice_downloads.order_id')->join('users','users.id','=','orders.user_id')->where('invoice_downloads.status','=','ready to ship')->where('orders.status','=','1')->select('orders.id as id','orders.order_id as orderid','orders.paid_in as paid_in','order_total as total','users.name as customername','users.id as userid','orders.payment_method as payment_method','orders.created_at as orderdate','orders.handlingcharge as handlingcharge')->get();
+
+        $orders = $pendingorders->unique('id');
+
+        return view('admin.order.readyorder',compact('orders','inv_cus'));
 
     }
 

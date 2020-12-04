@@ -852,18 +852,19 @@ class VenderProductController extends Controller
             $input['featured'] = "0";
         }
 
-        if (isset($request->tax_manual)) {
+        // if (isset($request->tax_manual)) {
 
-            $request->validate(['tax_r' => 'required|numeric', 'tax_name' => 'string|required|min:1']);
+        //     $request->validate(['tax_r' => 'required|numeric', 'tax_name' => 'string|required|min:1']);
+            
+        //     $input['tax'] = 0;
+        // } else {
 
-            $input['tax'] = 0;
+        //     $input['tax_r'] = null;
+        //     $input['tax_name'] = null;
+        //     $input['tax'] = 0;
+        // }
 
-        } else {
-
-            $input['tax_r'] = null;
-            $input['tax_name'] = null;
-
-        }
+        $input['tax'] = 0;
 
         if (isset($request->free_shipping)) {
 

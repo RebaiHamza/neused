@@ -580,17 +580,20 @@
                                                   {
                                                     $tax_amount = $taxRate->rate;
                                                     $price = $row->ori_offer_price == NULL && $row->ori_offer_price == 0 ? $row->ori_price : $row->ori_offer_price*$row->qty;
+                                                    
                                                     $after_tax_amount = $priceMinusTax=($price*(($tax_amount/100)));
+                                                    
                                                      ?>
                                                     <i class="{{ session()->get('currency')['value'] }}"></i>
                                                     <?php
                                                       $after_tax_amount = sprintf("%.2f",($after_tax_amount/$row->qty)*$conversion_rate);
                                                   }// End if Billing Typ per And fix
                                                   else{
-
+                                                    
                                                     $tax_amount = $taxRate->rate;
                                                     $price = $row->ori_offer_price == NULL && $row->ori_offer_price == 0 ? $row->ori_price : $row->ori_offer_price*$row->qty;
-                                                    $after_tax_amount =  $taxRate->rate;
+                                                    
+                                                    $after_tax_amount = $taxRate->rate;
                                                     ?>
                                                     <i class="{{ session()->get('currency')['value'] }}"></i>
                                                     <?php
@@ -642,10 +645,12 @@
                                                   {
                                                     $tax_amount = $taxRate->rate;
                                                     $price = $row->ori_offer_price == 0 ? $row->ori_price : $row->ori_offer_price*$row->qty;
+                                                    
                                                     $after_tax_amount = $priceMinusTax=($price*(($tax_amount/100)));
                                                     ?>
                                                     <i class="{{ session()->get('currency')['value'] }}"></i>
                                                     <?php
+                                                    
                                                     echo $after_tax_amount =  sprintf("%.2f",($after_tax_amount/$row->qty)*$conversion_rate);
                                                   }// End if Billing Typ per And fix
                                                   else{
@@ -726,9 +731,9 @@
 
                              
 
-                          @else
-                            {{ $after_tax_amount }}
-                          @endif
+                            @else
+                              {{ $after_tax_amount }}
+                            @endif
 
                           @endforeach   
 

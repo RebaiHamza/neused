@@ -30,6 +30,7 @@ use PayPal\Api\Refund;
 use PayPal\Api\Sale;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use App\PendingPayout;
 use PaytmWallet;
 use Razorpay\Api\Api;
 use Session;
@@ -660,6 +661,48 @@ class FullOrderCancelController extends Controller
             notify()->error('Unauthorized Action !');
             return back();
         }
+
+    }
+
+    public function notShippedOrder($orderid, Request $request){
+    	
+    	$order = Order::find($orderid);
+
+    	if(isset($order)){
+
+    		foreach ($order->invoices as $key => $invoice) {
+
+    			  $inv = InvoiceDownload::findOrFail($invoice->id);
+
+    			  $inv->status = $request->status;
+	              $inv->save();
+	              $inv_cus = Invoice::first();
+				  $status = ucfirst($request->status);
+
+    			  $newpendingpay = PendingPayout::where('orderid','=',$inv->id)->first();
+
+                  if(isset($newpendingpay)){
+                        $newpendingpay->delete();
+                  }
+
+                  $create_activity = new OrderActivityLog();
+
+	              $create_activity->order_id = $inv->order_id;
+	              $create_activity->inv_id   = $inv->id;
+	              $create_activity->user_id  = Auth::user()->id;
+	              $create_activity->variant_id = $inv->variant_id;
+	              $create_activity->log      = $status;
+
+	              $create_activity->save();
+
+	              
+    		}
+
+    		return back()->with('added','Order confirmed successfully !');
+
+    	}else{
+    		return back()->with('delete','Order not found or deleted !');
+    	}
 
     }
 

@@ -422,7 +422,7 @@ $sellerac = App\Store::where('user_id','=', $user->id)->first();
                   &nbsp;
                 </a>
                 @if($orivar->products->cancel_avl == '1')
-                @if($o->status == 'pending' || $o->status == 'processed' || $o->status == 'shipped')
+                @if($o->status == 'pending' || $o->status == 'Ready to ship' || $o->status == 'shipped')
                 @php
                 $secureid = Crypt::encrypt($o->id);
                 @endphp

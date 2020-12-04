@@ -20,19 +20,17 @@
 												<div class="admin-paid">
 													<p>Order By: <span>{{ $order['customername'] }}</span></p>
 													<p>Paid Via: <span>{{ $order['payment_method'] }}</span></p>
+													<p>Status: <span style="background-color: green; color: white; border-radius:5px; padding:5px">Pending</span></p>
 												</div>
 											</div>
 											<div class="col-md-6">
-												<a @if(env('DEMO_LOCK') == 0) data-toggle="modal" data-target="#cancelFULLOrder{{ $order['id'] }}" @else disabled title="This action is disabled in demo !" @endif class="ml-5 pull-right btn btn-md btn-danger">
-													<i class="fa fa-times"></i> {{ __('Cancel') }}
+												<a data-toggle="modal" data-target="#cancelFULLOrder{{ $order['id'] }}" class="ml-5 pull-right btn btn-md btn-danger">
+													<i class="fa fa-times"></i> Refused
 												</a>
 											
-													<button type="button" @if(env('DEMO_LOCK') == 0) data-toggle="modal" data-target="#confirm{{ $order['id'] }}" @else disabled="" title="This action cannot be done in demo !" @endif class="marginleft-5 pull-right btn btn-md btn-primary">
-														<i class="fa fa-check"></i> {{ __('Confirm') }}
+													<button type="button" data-toggle="modal" data-target="#confirm{{ $order['id'] }}" class="marginleft-5 pull-right btn btn-md btn-primary">
+														<i class="fa fa-check"></i> Ready to ship
 													</button>
-
-												
-												
 											</div>
 										</div>
 									</div>
@@ -51,12 +49,12 @@
 		                            </div>
 		                            <div class="modal-body text-center">
 		                              <h4 class="modal-heading">Are You Sure ?</h4>
-		                              <p>Do you really want to confirm this order ? it will confirm the whole order.</p>
+		                              <p>Do you really want to make this order as Ready to ship ? it will confirm the whole order.</p>
 		                            </div>
 		                            <div class="modal-footer">
 		                                <form action="{{ route('quick.pay.full.order',$order['id']) }}" method="POST">
 											@csrf
-											<input type="hidden" name="status" value="processed">
+											<input type="hidden" name="status" value="Ready to ship">
 			                                          
 			                                 <button type="reset" class="btn btn-gray translate-y-3" data-dismiss="modal">No</button>
 		                                	<button type="submit" class="btn btn-danger">Yes</button>

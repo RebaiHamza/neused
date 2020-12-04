@@ -731,8 +731,9 @@
        <div class='col-sm-12 col-md-12 col-lg-12 col-xl-8 product-info-block main-content'>
 
   <div id="details-container"></div>
-           
+        
             <div class="product-info">
+              
               <div class="stock-container info-container">
                 <div class="row">
                  <div class="col-lg-8">

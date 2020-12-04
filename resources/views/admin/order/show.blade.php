@@ -512,6 +512,8 @@
 									<span class="label label-success">{{ ucfirst($invoice->status) }}</span>
 								@elseif($invoice->status == 'processed')
 									<span class="label label-info">{{ ucfirst($invoice->status) }}</span>
+								@elseif($invoice->status == 'Ready to ship')
+									<span class="label label-info">Ready to ship</span>
 								@elseif($invoice->status == 'shipped')
 									<span class="label label-primary">{{ ucfirst($invoice->status) }}</span>
 								@elseif($invoice->status == 'return_request')
