@@ -401,155 +401,136 @@
                                        
                                        $commision_setting = App\CommissionSetting::first();
 
-                                       if($commision_setting->type == "flat"){
+                                      if($commision_setting->type == "flat"){
 
-                                          $commission_amount = $commision_setting->rate;
-                                         if($commision_setting->p_type == 'f'){
+                                        $commission_amount = $commision_setting->rate;
+                                          if($commision_setting->p_type == 'f'){
                                          
-                                           if($value->pro->tax_r !=''){
+                                          if($value->pro->tax_r !=''){
 
-                                              $cit =$commission_amount*$value->pro->tax_r/100;
-                                              $totalprice = $value->pro->vender_price+$orivar->price+$commission_amount+$cit;
-                                              $totalsaleprice = $value->pro->vender_offer_price + $cit + $orivar->price + $commission_amount;
+                                            $cit =$commission_amount*$value->pro->tax_r/100;
+                                            $totalprice = $value->pro->vender_price+$orivar->price+$commission_amount+$cit;
+                                            $totalsaleprice = $value->pro->vender_offer_price + $cit + $orivar->price + $commission_amount;
 
-                                              if($value->pro->vender_offer_price == 0){
-                                                $show_price = $totalprice;
-                                              }else{
-                                                $totalsaleprice;
-                                                $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
-                                                $show_price = $totalprice;
-                                              }
+                                            if($value->pro->vender_offer_price == 0){
+                                              $show_price = $totalprice;
+                                            }else{
+                                              $totalsaleprice;
+                                              $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
+                                              $show_price = $totalprice;
+                                            }
+                                          }else{
 
+                                            $totalprice = $value->pro->vender_price+$orivar->price+$commission_amount;
+                                            $totalsaleprice = $value->pro->vender_offer_price + $orivar->price + $commission_amount;
 
-                                              }else{
+                                            if($value->pro->vender_offer_price == 0){
+                                              $show_price = $totalprice;
+                                            }else{
+                                              $totalsaleprice;
+                                              $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
+                                              $show_price = $totalprice;
+                                            }
 
-                                              $totalprice = $value->pro->vender_price+$orivar->price+$commission_amount;
-                                              $totalsaleprice = $value->pro->vender_offer_price + $orivar->price + $commission_amount;
+                                          }
+                                        }
+                                        else{
+                                          $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
 
-                                              if($value->pro->vender_offer_price == 0){
-                                                $show_price = $totalprice;
-                                              }else{
-                                                $totalsaleprice;
-                                                $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
-                                                $show_price = $totalprice;
-                                              }
+                                          $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
 
-                                              }
+                                          $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
 
-                                            
-                                         }else{
-
-                                           $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
-
-                                           $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
-
-                                           $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
-
-                                           $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
-
-                                          
-                                             if($value->pro->vender_offer_price ==0){
-                                               $show_price =  round($buyerprice,2);
-                                             }else{
-                                                round($buyersaleprice,2);
+                                          $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
+                                            if($value->pro->vender_offer_price ==0){
+                                              $show_price =  round($buyerprice,2);
+                                            }else{
+                                              round($buyersaleprice,2);
                                                 
-                                               $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
-                                               $show_price = $buyerprice;
-                                             }
+                                              $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
+                                              $show_price = $buyerprice;
+                                            }
                                           
 
-                                         }
-                                       }else{
-                                         
-                                       $comm = App\Commission::where('category_id',$value->pro->category_id)->first();
-                                       if(isset($comm)){
-                                      if($comm->type=='f'){
-                                        
-                                        
+                                        }
+                                      }
+                                      else{
+                                        $comm = App\Commission::where('category_id',$value->pro->category_id)->first();
+                                        if(isset($comm)){
+                                          if($comm->type=='f'){
+                                            if($value->pro->tax_r != ''){
+                                              $cit = $comm->rate*$value->pro->tax_r/100;
 
-                                        if($value->pro->tax_r != ''){
-
-                                                  $cit = $comm->rate*$value->pro->tax_r/100;
-
-                                                  $price = $value->pro->vender_price + $comm->rate + $orivar->price + $cit;
-
-                                                  if($value->pro->vender_offer_price != null){
-                                                    $offer =  $value->pro->vender_offer_price + $comm->rate + $orivar->price + $cit;
-                                                  }else{
-                                                    $offer =  $value->pro->vender_offer_price;
-                                                  }
-
-                                                  if($value->pro->vender_offer_price == 0 || $value->pro->vender_offer_price == null){
+                                              $price = $value->pro->vender_price + $comm->rate + $orivar->price + $cit;
+                                                if($value->pro->vender_offer_price != null){
+                                                  $offer =  $value->pro->vender_offer_price + $comm->rate + $orivar->price + $cit;
+                                                }else{
+                                                  $offer =  $value->pro->vender_offer_price;
+                                                }
+                                                if($value->pro->vender_offer_price == 0 || $value->pro->vender_offer_price == null){
                                                   $show_price = $price;
-                                                  }else{
-
+                                                }else{
                                                   $convert_price = $offer;
                                                   $show_price = $price;
-                                                  }
-                                                  }else{
-                                                  $price = $value->pro->vender_price + $comm->rate + $orivar->price;
+                                                }
+                                            }
+                                            else{
+                                              $price = $value->pro->vender_price + $comm->rate + $orivar->price;
+                                              if($value->pro->vender_offer_price != null){
+                                                $offer =  $value->pro->vender_offer_price + $comm->rate + $orivar->price;
+                                              }else{
+                                                $offer =  $value->pro->vender_offer_price;
+                                              }
+                                              if($value->pro->vender_offer_price == 0 || $value->pro->vender_offer_price == null){
+                                                $show_price = $price;
+                                              }else{
+                                                $convert_price = $offer;
+                                                $show_price = $price;
+                                              }
+                                            }
+                                          }
+                                          else{
+                                            $commission_amount = $comm->rate;
+                                            $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
 
-                                                  if($value->pro->vender_offer_price != null){
-                                                    $offer =  $value->pro->vender_offer_price + $comm->rate + $orivar->price;
-                                                  }else{
-                                                    $offer =  $value->pro->vender_offer_price;
-                                                  }
-                                                  if($value->pro->vender_offer_price == 0 || $value->pro->vender_offer_price == null){
-                                                    $show_price = $price;
-                                                  }else{
+                                            $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
 
-                                                    $convert_price = $offer;
-                                                    $show_price = $price;
-                                                  }
-                                                  }
-                                     }
-                                     else{
+                                            $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
 
-                                          $commission_amount = $comm->rate;
-
-                                           $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
-
-                                           $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
-
-                                           $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
-
-                                           $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
+                                            $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
 
                                           
-                                             if($value->pro->vender_offer_price == 0){
-                                                $show_price = round($buyerprice,2);
-                                             }else{
-                                                round($buyersaleprice,2);
+                                            if($value->pro->vender_offer_price == 0){
+                                              $show_price = round($buyerprice,2);
+                                            }else{
+                                              round($buyersaleprice,2);
                                                 
-                                               $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
-                                               $show_price = round($buyerprice,2);
-                                             }
-                                               
-                                     }
-                                  }else{
-                                           $commission_amount = 0;
+                                              $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
+                                              $show_price = round($buyerprice,2);
+                                            }
+                                          }
+                                        }
+                                        else{
+                                          $commission_amount = 0;
+                                          $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
 
-                                           $totalprice = ($value->pro->vender_price+$orivar->price)*$commission_amount;
+                                          $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
 
-                                           $totalsaleprice = ($value->pro->vender_offer_price+$orivar->price)*$commission_amount;
+                                          $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
 
-                                           $buyerprice = ($value->pro->vender_price+$orivar->price)+($totalprice/100);
-
-                                           $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
-
-                                          
-                                             if($value->pro->vender_offer_price == 0){
-                                                $convert_price = round($buyerprice,2);
-                                             }else{
-                                                round($buyersaleprice,2);
-                                                
-                                               $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
-                                               $show_price = round($buyerprice,2);
-                                             }
-                                  }
-                                     }
-                                       $convert_price = $convert_price*$conversion_rate;
-                                       $show_price = $show_price*$conversion_rate;
+                                          $buyersaleprice = ($value->pro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
+    
+                                          if($value->pro->vender_offer_price == 0){
+                                            $convert_price = round($buyerprice,2);
+                                          }else{
+                                            round($buyersaleprice,2);
+                                            $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
+                                            $show_price = round($buyerprice,2);
+                                          }
+                                        }
+                                      }
+                                      $convert_price = $convert_price*$conversion_rate;
+                                      $show_price = $show_price*$conversion_rate;
                                        
                                      @endphp
                                                
@@ -3220,42 +3201,37 @@
 
                               if($commision_setting->type == "flat"){
 
-                                 $commission_amount = $commision_setting->rate;
+                                $commission_amount = $commision_setting->rate;
                                 if($commision_setting->p_type == 'f'){
                                 
                                   if($relproduct->tax_r !=''){
 
-                                  $cit =$commission_amount*$relproduct->tax_r/100;
-                                  $totalprice = $relproduct->vender_price+$orivar->price+$commission_amount+$cit;
-                                  $totalsaleprice = $relproduct->vender_offer_price + $cit + $orivar->price + $commission_amount;
+                                    $cit =$commission_amount*$relproduct->tax_r/100;
+                                    $totalprice = $relproduct->vender_price+$orivar->price+$commission_amount+$cit;
+                                    $totalsaleprice = $relproduct->vender_offer_price + $cit + $orivar->price + $commission_amount;
 
-                                  if($relproduct->vender_offer_price == 0){
-                                    $show_price = $totalprice;
-                                  }else{
-                                    $totalsaleprice;
-                                    $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
-                                    $show_price = $totalprice;
-                                  }
-
-
+                                    if($relproduct->vender_offer_price == 0){
+                                      $show_price = $totalprice;
+                                    }else{
+                                      $totalsaleprice;
+                                      $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
+                                      $show_price = $totalprice;
+                                    }
                                   }else{
 
-                                  $totalprice = $relproduct->vender_price+$orivar->price+$commission_amount;
-                                  $totalsaleprice = $relproduct->vender_offer_price + $orivar->price + $commission_amount;
+                                    $totalprice = $relproduct->vender_price+$orivar->price+$commission_amount;
+                                    $totalsaleprice = $relproduct->vender_offer_price + $orivar->price + $commission_amount;
 
-                                  if($relproduct->vender_offer_price == 0){
-                                    $show_price = $totalprice;
-                                  }else{
-                                    $totalsaleprice;
-                                    $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
-                                    $show_price = $totalprice;
-                                  }
+                                    if($relproduct->vender_offer_price == 0){
+                                      $show_price = $totalprice;
+                                    }else{
+                                      $totalsaleprice;
+                                      $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
+                                      $show_price = $totalprice;
+                                    }
 
-                                }
-
-                                   
+                                  }               
                                 }else{
-
                                   $totalprice = ($relproduct->vender_price+$orivar->price)*$commission_amount;
 
                                   $totalsaleprice = ($relproduct->vender_offer_price+$orivar->price)*$commission_amount;
@@ -3265,79 +3241,67 @@
                                   $buyersaleprice = ($relproduct->vender_offer_price+$orivar->price)+($totalsaleprice/100);
 
                                  
-                                    if($relproduct->vender_offer_price ==0){
-                                      $show_price =  round($buyerprice,2);
-                                    }else{
-                                       round($buyersaleprice,2);
-                                     
-                                      $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
-                                      $show_price = $buyerprice;
-                                    }
-                                 
-
+                                  if($relproduct->vender_offer_price ==0){
+                                    $show_price =  round($buyerprice,2);
+                                  }else{
+                                    round($buyersaleprice,2);
+                                    $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
+                                    $show_price = $buyerprice;
+                                  }                                 
                                 }
-                              }else{
-                                
-                              $comm = App\Commission::where('category_id',$relproduct->category_id)->first();
-                           if(isset($comm)){
-                             if($comm->type=='f'){
-                               
-                               if($relproduct->tax_r != ''){
+                              }
+                              else{
+                                $comm = App\Commission::where('category_id',$relproduct->category_id)->first();
+                                if(isset($comm)){
+                                  if($comm->type=='f'){                               
+                                    if($relproduct->tax_r != ''){
+                                      $cit = $comm->rate*$relproduct->tax_r/100;
+                                      $price = $relproduct->vender_price + $comm->rate + $orivar->price + $cit;
 
-                                    $cit = $comm->rate*$relproduct->tax_r/100;
+                                      if($relproduct->vender_offer_price != null){
+                                        $offer =  $relproduct->vender_offer_price + $comm->rate + $orivar->price + $cit;
+                                      }else{
+                                        $offer =  $relproduct->vender_offer_price;
+                                      }
 
-                                    $price = $relproduct->vender_price + $comm->rate + $orivar->price + $cit;
+                                      if($relproduct->vender_offer_price == 0 || $relproduct->vender_offer_price == null){
+                                        $show_price = $price;
+                                      }else{
 
-                                    if($relproduct->vender_offer_price != null){
-                                      $offer =  $relproduct->vender_offer_price + $comm->rate + $orivar->price + $cit;
+                                        $convert_price = $offer;
+                                        $show_price = $price;
+                                       }
+
                                     }else{
-                                      $offer =  $relproduct->vender_offer_price;
+
+                                      $price = $relproduct->vender_price + $comm->rate + $orivar->price;
+
+                                      if($relproduct->vender_offer_price != null){
+                                        $offer =  $relproduct->vender_offer_price + $comm->rate + $orivar->price;
+                                      }else{
+                                        $offer =  $relproduct->vender_offer_price;
+                                      }
+                                      if($relproduct->vender_offer_price == 0 || $relproduct->vender_offer_price == null){
+                                        $show_price = $price;
+                                      }else{
+                                        $convert_price = $offer;
+                                        $show_price = $price;
+                                      }
                                     }
 
-                                    if($relproduct->vender_offer_price == 0 || $relproduct->vender_offer_price == null){
-                                      $show_price = $price;
-                                    }else{
+                                  }
+                                  else{
 
-                                    $convert_price = $offer;
-                                    $show_price = $price;
-                                    }
+                                    $commission_amount = $comm->rate;
 
-                                    }else{
+                                    $totalprice = ($relproduct->vender_price+$orivar->price)*$commission_amount;
 
+                                    $totalsaleprice = ($relproduct->vender_offer_price+$orivar->price)*$commission_amount;
 
-                                    $price = $relproduct->vender_price + $comm->rate + $orivar->price;
+                                    $buyerprice = ($relproduct->vender_price+$orivar->price)+($totalprice/100);
 
-                                    if($relproduct->vender_offer_price != null){
-                                      $offer =  $relproduct->vender_offer_price + $comm->rate + $orivar->price;
-                                    }else{
-                                      $offer =  $relproduct->vender_offer_price;
-                                    }
-
-                                    if($relproduct->vender_offer_price == 0 || $relproduct->vender_offer_price == null){
-                                      $show_price = $price;
-                                    }else{
-
-                                      $convert_price = $offer;
-                                      $show_price = $price;
-                                    
-                                    }
-
-                                }
-
-                            }
-                            else{
-
-                                  $commission_amount = $comm->rate;
-
-                                  $totalprice = ($relproduct->vender_price+$orivar->price)*$commission_amount;
-
-                                  $totalsaleprice = ($relproduct->vender_offer_price+$orivar->price)*$commission_amount;
-
-                                  $buyerprice = ($relproduct->vender_price+$orivar->price)+($totalprice/100);
-
-                                  $buyersaleprice = ($relproduct->vender_offer_price+$orivar->price)+($totalsaleprice/100);
-
-                                 
+                                    $buyersaleprice = ($relproduct->vender_offer_price+$orivar->price)+($totalsaleprice/100);
+                 
                                     if($relproduct->vender_offer_price == 0){
                                        $show_price = round($buyerprice,2);
                                     }else{
@@ -3346,12 +3310,9 @@
                                       $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
                                       $show_price = round($buyerprice,2);
                                     }
-                                 
-                                 
-                                  
-                            }
-                         }
-                            }
+                                  }
+                                }
+                              }
                           $convert_price_form = $convert_price;
                           $show_price_form = $show_price;
                           $convert_price = $convert_price*$conversion_rate;
@@ -3571,7 +3532,7 @@
 
                               if($commision_setting->type == "flat"){
 
-                                 $commission_amount = $commision_setting->rate;
+                                $commission_amount = $commision_setting->rate;
                                 if($commision_setting->p_type == 'f'){
                                 
                                   if($relpro->tax_r !=''){
@@ -3589,7 +3550,8 @@
                                     }
 
 
-                                    }else{
+                                  }
+                                  else{
 
                                     $totalprice = $relpro->vender_price+$orivar->price+$commission_amount;
                                     $totalsaleprice = $relpro->vender_offer_price + $orivar->price + $commission_amount;
@@ -3601,85 +3563,9 @@
                                       $convert_price = $totalsaleprice =='' ? $totalprice:$totalsaleprice;
                                       $show_price = $totalprice;
                                     }
-
-                                    }
-
-                                   
-                                }else{
-
-                                  $totalprice = ($relpro->vender_price+$orivar->price)*$commission_amount;
-
-                                  $totalsaleprice = ($relpro->vender_offer_price+$orivar->price)*$commission_amount;
-
-                                  $buyerprice = ($relpro->vender_price+$orivar->price)+($totalprice/100);
-
-                                  $buyersaleprice = ($relpro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
-
-                                 
-                                    if($relpro->vender_offer_price ==0){
-                                      $show_price =  round($buyerprice,2);
-                                    }else{
-                                       round($buyersaleprice,2);
-                                     
-                                      $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
-                                      $show_price = $buyerprice;
-                                    }
-                                 
-
+                                  }
                                 }
-                              }else{
-                                
-                              $comm = App\Commission::where('category_id',$relpro->category_id)->first();
-                           if(isset($comm)){
-                             if($comm->type=='f'){
-                               
-                                if($relpro->tax_r != ''){
-
-                                    $cit = $comm->rate*$relpro->tax_r/100;
-
-                                    $price = $relpro->vender_price + $comm->rate + $orivar->price + $cit;
-
-                                    if($relpro->vender_offer_price != null){
-                                      $offer =  $relpro->vender_offer_price + $comm->rate + $orivar->price + $cit;
-                                    }else{
-                                      $offer =  $relpro->vender_offer_price;
-                                    }
-
-                                    if($relpro->vender_offer_price == 0 || $relpro->vender_offer_price == null){
-                                      $show_price = $price;
-                                    }else{
-
-                                    $convert_price = $offer;
-                                    $show_price = $price;
-                                    }
-
-                                    }else{
-
-
-                                    $price = $relpro->vender_price + $comm->rate + $orivar->price;
-
-                                    if($relpro->vender_offer_price != null){
-                                      $offer =  $relpro->vender_offer_price + $comm->rate + $orivar->price;
-                                    }else{
-                                      $offer =  $relpro->vender_offer_price;
-                                    }
-
-                                    if($relpro->vender_offer_price == 0 || $relpro->vender_offer_price == null){
-                                      $show_price = $price;
-                                    }else{
-
-                                      $convert_price = $offer;
-                                      $show_price = $price;
-
-                                    }
-
-                                    }
-
-                                
-                            }
-                            else{
-
-                                  $commission_amount = $comm->rate;
+                                else{
 
                                   $totalprice = ($relpro->vender_price+$orivar->price)*$commission_amount;
 
@@ -3688,26 +3574,83 @@
                                   $buyerprice = ($relpro->vender_price+$orivar->price)+($totalprice/100);
 
                                   $buyersaleprice = ($relpro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
+                                 
+                                  if($relpro->vender_offer_price ==0){
+                                    $show_price =  round($buyerprice,2);
+                                  }else{
+                                    round($buyersaleprice,2);
+                                     
+                                    $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
+                                    $show_price = $buyerprice;
+                                  }
+                                }
+                              }
+                              else{
+                               
+                                $comm = App\Commission::where('category_id',$relpro->category_id)->first();
+                                if(isset($comm)){
+                                  if($comm->type=='f'){
+                               
+                                    if($relpro->tax_r != ''){
+
+                                      $cit = $comm->rate*$relpro->tax_r/100;
+
+                                      $price = $relpro->vender_price + $comm->rate + $orivar->price + $cit;
+
+                                      if($relpro->vender_offer_price != null){
+                                        $offer =  $relpro->vender_offer_price + $comm->rate + $orivar->price + $cit;
+                                      }else{
+                                        $offer =  $relpro->vender_offer_price;
+                                      }
+                                      if($relpro->vender_offer_price == 0 || $relpro->vender_offer_price == null){
+                                        $show_price = $price;
+                                      }else{
+                                        $convert_price = $offer;
+                                        $show_price = $price;
+                                      }
+                                    }
+                                    else{
+                                      $price = $relpro->vender_price + $comm->rate + $orivar->price;
+                                      if($relpro->vender_offer_price != null){
+                                        $offer =  $relpro->vender_offer_price + $comm->rate + $orivar->price;
+                                      }else{
+                                        $offer =  $relpro->vender_offer_price;
+                                      }
+                                      if($relpro->vender_offer_price == 0 || $relpro->vender_offer_price == null){
+                                        $show_price = $price;
+                                      }else{
+                                        $convert_price = $offer;
+                                        $show_price = $price;
+                                      } 
+                                    }
+                                  }
+                                  else{
+
+                                    $commission_amount = $comm->rate;
+                                    $totalprice = ($relpro->vender_price+$orivar->price)*$commission_amount;
+
+                                    $totalsaleprice = ($relpro->vender_offer_price+$orivar->price)*$commission_amount;
+
+                                    $buyerprice = ($relpro->vender_price+$orivar->price)+($totalprice/100);
+
+                                    $buyersaleprice = ($relpro->vender_offer_price+$orivar->price)+($totalsaleprice/100);
 
                                  
                                     if($relpro->vender_offer_price == 0){
-                                       $show_price = round($buyerprice,2);
+                                      $show_price = round($buyerprice,2);
                                     }else{
                                       $convert_price =  round($buyersaleprice,2);
                                       
                                       $convert_price = $buyersaleprice==''?$buyerprice:$buyersaleprice;
                                       $show_price = round($buyerprice,2);
                                     }
-                                 
-                                 
-                                  
-                            }
-                         }
-                            }
-                          $convert_price_form = $convert_price;
-                          $show_price_form = $show_price;
-                          $convert_price = $convert_price*$conversion_rate;
-                          $show_price = $show_price*$conversion_rate;
+                                  }
+                                }
+                              }
+                              $convert_price_form = $convert_price;
+                              $show_price_form = $show_price;
+                              $convert_price = $convert_price*$conversion_rate;
+                              $show_price = $show_price*$conversion_rate;
                           
                             @endphp
                             

@@ -815,14 +815,18 @@ class ProductController extends Controller
             $input['featured'] = '0';
         }
 
-        if (isset($request->tax_manual)) {
-            $request->validate(['tax_r' => 'required|numeric', 'tax_name' => 'string|required|min:1']);
+        // if (isset($request->tax_manual)) {
+        //     $request->validate(['tax_r' => 'required|numeric', 'tax_name' => 'string|required|min:1']);
 
-            $input['tax'] = 0;
-        } else {
-            $input['tax_r'] = null;
-            $input['tax_name'] = null;
-        }
+        //     $input['tax'] = 0;
+        // } else {
+        //     $input['tax_r'] = null;
+        //     $input['tax_name'] = null;
+        // }
+
+        $input['tax_r'] = null;
+        $input['tax_name'] = null;
+        $input['tax'] = $request->tax;
 
         if (isset($request->free_shipping)) {
             $input['free_shipping'] = '1';
@@ -1035,8 +1039,8 @@ class ProductController extends Controller
         $input['vender_offer_price'] = $request->offer_price;
 
         $commission = CommissionSetting::where("type", "=", "n")->first();
-        // foreach ($commissions as $commission) {
-        //     if ($commission->type == 'flat') {
+        foreach ($commissions as $commission) {
+            if ($commission->type == 'flat') {
                 if ($commission->p_type == 'f') {
                     if (!isset($request->tax_r)) {
                         $price = $input['price'] + $commission->rate;
@@ -1070,52 +1074,52 @@ class ProductController extends Controller
                         $input['commission_rate'] = $tax1;
                     }
                 }
-        //     } else {
-        //         $comm = Commission::where('category_id', $request->category_id)
-        //             ->first();
-        //         if (isset($comm)) {
-        //             if ($comm->type == 'f') {
-        //                 if (!isset($request->tax_manual)) {
-        //                     $price = $input['price'] + $comm->rate;
-        //                     $offer = $input['offer_price'] + $comm->rate;
-        //                     $input['price'] = $price;
-        //                     $input['offer_price'] = $offer;
-        //                     $input['commission_rate'] = $comm->rate;
-        //                 } else {
-        //                     $cit = $commission->rate * $input['tax_r'] / 100;
-        //                     $price = $input['price'] + $comm->rate + $cit;
+            } else {
+                $comm = Commission::where('category_id', $request->category_id)
+                    ->first();
+                if (isset($comm)) {
+                    if ($comm->type == 'f') {
+                        if (!isset($request->tax_manual)) {
+                            $price = $input['price'] + $comm->rate;
+                            $offer = $input['offer_price'] + $comm->rate;
+                            $input['price'] = $price;
+                            $input['offer_price'] = $offer;
+                            $input['commission_rate'] = $comm->rate;
+                        } else {
+                            $cit = $commission->rate * $input['tax_r'] / 100;
+                            $price = $input['price'] + $comm->rate + $cit;
 
-        //                     if ($request->offer_price) {
-        //                         $offer = $input['offer_price'] + $comm->rate + $cit;
-        //                         $input['offer_price'] = $offer;
-        //                     } else {
-        //                         $input['offer_price'] = null;
-        //                     }
+                            if ($request->offer_price) {
+                                $offer = $input['offer_price'] + $comm->rate + $cit;
+                                $input['offer_price'] = $offer;
+                            } else {
+                                $input['offer_price'] = null;
+                            }
 
-        //                     $input['price'] = $price;
+                            $input['price'] = $price;
 
-        //                     $input['commission_rate'] = $comm->rate + $cit;
-        //                 }
-        //             } else {
-        //                 $taxrate = $comm->rate;
-        //                 $price1 = $input['price'];
-        //                 $price2 = $input['offer_price'];
-        //                 $tax1 = $priceMinusTax = ($price1 * (($taxrate / 100)));
-        //                 $tax2 = $priceMinusTax = ($price2 * (($taxrate / 100)));
-        //                 $price = $input['price'] + $tax1;
-        //                 $offer = $input['offer_price'] + $tax2;
-        //                 $input['price'] = $price;
-        //                 $input['offer_price'] = $offer;
+                            $input['commission_rate'] = $comm->rate + $cit;
+                        }
+                    } else {
+                        $taxrate = $comm->rate;
+                        $price1 = $input['price'];
+                        $price2 = $input['offer_price'];
+                        $tax1 = $priceMinusTax = ($price1 * (($taxrate / 100)));
+                        $tax2 = $priceMinusTax = ($price2 * (($taxrate / 100)));
+                        $price = $input['price'] + $tax1;
+                        $offer = $input['offer_price'] + $tax2;
+                        $input['price'] = $price;
+                        $input['offer_price'] = $offer;
 
-        //                 if (!empty($tax2)) {
-        //                     $input['commission_rate'] = $tax2;
-        //                 } else {
-        //                     $input['commission_rate'] = $tax1;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+                        if (!empty($tax2)) {
+                            $input['commission_rate'] = $tax2;
+                        } else {
+                            $input['commission_rate'] = $tax1;
+                        }
+                    }
+                }
+            }
+        }
 
         if ($request->return_avbls == '1') {
             $request->validate(['return_avbls' => 'required', 'return_policy' => 'required'], ['return_policy.required' => 'Please choose return policy']);
