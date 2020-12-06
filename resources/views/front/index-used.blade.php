@@ -4,7 +4,7 @@ $current_date = date('Y-m-d H:i:s');
 @extends("front.layout.master")
 @section("body")
 <div class="body-content outer-top-vs " id="top-banner-and-menu">
-
+ 
   <div class="container-fluid">
     <div class="row no-gutters">
       <!-- ============================================== SIDEBAR ============================================== -->
@@ -347,7 +347,7 @@ $current_date = date('Y-m-d H:i:s');
           <!-- ============================================== SCROLL TABS ============================================== -->
           @php
           $abcd = App\FrontCat::first();
-
+         
           @endphp
           @if(isset($abcd) && $abcd->status == '1')
           <?php $parents = explode(",",$abcd->name);?>
@@ -377,64 +377,64 @@ $current_date = date('Y-m-d H:i:s');
               <!-- /.nav-tabs -->
             </div>
             <div class="tab-content outer-top-xs">
-
+        
 
               <div class="tab-pane in show active" id="all">
                 <div class="product-slider">
 
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                    <!-- /.item -->
-
+             <!-- /.item -->
+            
                     @if(isset($products))
-                    <?php $i = 0;
+                              <?php $i = 0;
                                     $countP = 0;
                                     
                                   ?>
-                    @foreach($products as $pro)
+                              @foreach($products as $pro)
+                             
+                              @if($genrals_settings->vendor_enable == 1)
+                            
+                              @if($pro->vender['role_id'] == 'a')
 
-                    @if($genrals_settings->vendor_enable == 1)
+                              @foreach($pro->subvariants as $key=> $orivar)
 
-                    @if($pro->vender['role_id'] == 'a')
+                              @if($orivar->def == 1)
 
-                    @foreach($pro->subvariants as $key=> $orivar)
+                              @php
+                              $var_name_count = count($orivar['main_attr_id']);
 
-                    @if($orivar->def == 1)
-
-                    @php
-                    $var_name_count = count($orivar['main_attr_id']);
-
-                    $name = array();
-                    $var_name;
-                    $newarr = array();
-                    for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
-                      $var_name[$i]=$orivar['main_attr_value'][$var_id];
-                      $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
-                      }
+                              $name = array();
+                              $var_name;
+                              $newarr = array();
+                              for($i = 0; $i<$var_name_count; $i++){ $var_id=$orivar['main_attr_id'][$i];
+                                $var_name[$i]=$orivar['main_attr_value'][$var_id];
+                                $name[$i]=App\ProductAttributes::where('id',$var_id)->first();
+                                }
 
 
-                      try{
-                      $url =
-                      url('useddetails').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
-                      }catch(Exception $e)
-                      {
-                      $url = url('useddetails').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
-                      }
-
-                      @endphp
-
+                                try{
+                                $url =
+                                url('useddetails').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0].'&'.$name[1]['attr_name'].'='.$var_name[1];
+                                }catch(Exception $e)
+                                {
+                                $url = url('useddetails').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
+                                }
+                              
+                                @endphp
+          
                       <div class="item item-carousel">
                         <div class="products">
                           <div class="product">
 
                             <div class="product-image">
                               <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
-
+                               
                                 <a href="{{$url}}" title="{{$pro->name}}">
 
                                   @if(count($pro->subvariants)>0)
-
+                                 
                                   {{-- @if(isset($orivar->variantimages['main_image'])) --}}
-
+                                 
                                   <img class="ankit {{ $orivar->stock ==0 ? "filterdimage" : ""}}"
                                     src="{{url('variantimages/thumbnails/'.$orivar->variantimages['main_image'])}}"
                                     alt="{{$pro->name}}">
@@ -444,7 +444,7 @@ $current_date = date('Y-m-d H:i:s');
                                   {{-- @endif --}}
 
                                   @else
-
+                                 
                                   <img class="{{ $orivar->stock ==0 ? "filterdimage" : ""}}" title="{{ $pro->name }}"
                                     src="{{url('images/no-image.png')}}" alt="No Image" />
 
@@ -805,11 +805,11 @@ $current_date = date('Y-m-d H:i:s');
 
                           <div class="product-image">
                             <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
-
+                            
                               <a href="{{$url}}" title="{{$pro->name}}">
 
                                 @if(count($pro->subvariants)>0)
-
+                                
                                 <img class="ankit {{ $orivar->stock ==0 ? "filterdimage" : ""}}"
                                   src="{{url('variantimages/thumbnails/'.$orivar->variantimages['main_image'])}}"
                                   alt="{{$pro->name}}">
@@ -818,7 +818,7 @@ $current_date = date('Y-m-d H:i:s');
                                   alt="" />
 
                                 @else
-
+                                
                                 <img class="{{ $orivar->stock ==0 ? "filterdimage" : ""}}" title="{{ $pro->name }}"
                                   src="{{url('images/no-image.png')}}" alt="No Image" />
 
@@ -827,10 +827,10 @@ $current_date = date('Y-m-d H:i:s');
 
                               </a>
                             </div>
-
+                           
 
                             @if($orivar->stock == 0)
-
+                            
                             <h6 align="center" class="oottext"><span>{{ __('staticwords.Outofstock') }}</span></h6>
                             @endif
 
@@ -1178,7 +1178,11 @@ $current_date = date('Y-m-d H:i:s');
 
               <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
 
-                @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                @foreach(App\Product::where('category_id',$parentcats->id)->where('is_used','1')->take(10)->get() as $pro)
+
+
+
+ 
                 @if($genrals_settings->vendor_enable != 1)
                 @if($pro->vender['role_id'] == 'a')
                 @foreach($pro->subvariants as $key=> $orivar)
@@ -1211,7 +1215,7 @@ $current_date = date('Y-m-d H:i:s');
                       <div class="product">
                         <div class="product-image">
                           <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
-
+                          
                             <a href="{{$url}}" title="{{$pro->name}}">
 
                               @if(count($pro->subvariants)>0)
@@ -1581,7 +1585,7 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="product">
                       <div class="product-image">
                         <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
-
+                       
                           <a href="{{$url}}" title="{{$pro->name}}">
 
                             @if(count($pro->subvariants)>0)
@@ -2030,7 +2034,7 @@ $current_date = date('Y-m-d H:i:s');
                                   <div class="item item-carousel">
                                     <div class="products">
                                       <div class="product">
-
+                                      
                                         <div class="product-image">
                                           <div class="image {{ $orivar->stock ==0 ? "pro_img-box" : ""}}">
 
@@ -2425,7 +2429,7 @@ $current_date = date('Y-m-d H:i:s');
                                 <div class="item item-carousel">
                                   <div class="products">
                                     <div class="product">
-
+                                     
                                       <div class="product-image">
                                         <div class="image {{ $orivar->stock ==0 ? "pro_img-box" : ""}}">
 
@@ -2816,7 +2820,8 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="product-slider">
 
                       <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                        @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                       
+                        @foreach(App\Product::where('category_id',$parentcats->id)->where('is_used','1')->take(10)->get() as $pro)
                         @if($genrals_settings->vendor_enable != 1)
                         @if($pro->vender['role_id'] == 'a')
 
@@ -2852,7 +2857,7 @@ $current_date = date('Y-m-d H:i:s');
                               <div class="product">
                                 <div class="product-image">
                                   <div class="image {{ $orivar->stock ==0 ? "pro_img-box" : ""}}">
-
+                                 
                                     <a href="{{$url}}" title="{{$pro->name}}">
 
                                       @if(count($pro->subvariants)>0)
@@ -3283,7 +3288,7 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="product">
                       <div class="product-image">
                         <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
-
+                         
                           <a href="{{$url}}" title="{{$pro->name}}">
 
                             @if(count($pro->subvariants)>0)
@@ -4018,7 +4023,7 @@ $current_date = date('Y-m-d H:i:s');
     <h3 class="section-title display-none">
       {{ __('staticwords.Featured') }}
     </h3>
-
+    
     <div class="feature-product-dtl">
       <div class="row no-pad">
         @foreach($featureds as $featured)
@@ -4027,9 +4032,9 @@ $current_date = date('Y-m-d H:i:s');
 
         @php
         $var_name_count = count($orivar['main_attr_id']);
-
-
-
+       
+ 
+ 
         $name;
         $var_name;
         $newarr = array();
@@ -4057,7 +4062,7 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="image {{ $orivar->stock ==0 ? "pro_img-box" : ""}}">
 
                       <a href="{{$url}}" title="{{$featured->name}}">
-
+                      
                         @if(count($featured->subvariants)>0)
 
                         @if(isset($orivar->variantimages['main_image']))
@@ -4663,7 +4668,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
                 <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
 
                   <a href="{{$url}}" title="{{$pro->name}}">
-
+                  
                     @if(count($pro->subvariants)>0)
 
                     @if(isset($orivar->variantimages['main_image']))
@@ -5030,7 +5035,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
               <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
 
                 <a href="{{$url}}" title="{{$pro->name}}">
-
+                 
                   @if(count($pro->subvariants)>0)
 
                   @if(isset($orivar->variantimages['main_image']))
@@ -5731,7 +5736,7 @@ $getads = App\Adv::where('position','=','abovefeaturedproduct')->where('status',
               <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
 
                 <a href="{{$url}}" title="{{$featured->name}}">
-
+                
                   @if(count($featured->subvariants)>0)
 
                   @if(isset($orivar->variantimages['main_image']))

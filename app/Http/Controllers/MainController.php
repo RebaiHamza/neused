@@ -45,6 +45,14 @@ use View;
 
 class MainController extends Controller
 {
+
+    public function firstPage(){
+        return view('index');
+    }
+
+    public function countryPage(){
+        return view('country');
+    }
     /**
      * Display a listing of the resource.
      *

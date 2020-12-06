@@ -48,6 +48,10 @@ Route::group(['middleware' => ['maintainence_mode']], function () {
 
     Route::post('/menu/sort', 'MenuController@sort')->name('menu.sort');
 
+    Route::get('/indexx', 'MainController@firstPage');
+
+    Route::get('/country', 'MainController@countryPage');
+
     Route::group(['middleware' => ['web', 'switch_lang', 'isActive', 'IsInstalled']], function () {
         Route::get('/verify', 'Auth\RegisterController@getotpview')->name('verify.otp');
 

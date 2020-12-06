@@ -1166,7 +1166,7 @@ $current_date = date('Y-m-d H:i:s');
 
               <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
 
-                @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                @foreach(App\Product::where('category_id',$parentcats->id)->where('is_ticket','1')->take(10)->get() as $pro)
                 @if($genrals_settings->vendor_enable != 1)
                 @if($pro->vender['role_id'] == 'a')
                 @foreach($pro->subvariants as $key=> $orivar)
@@ -2804,7 +2804,7 @@ $current_date = date('Y-m-d H:i:s');
                     <div class="product-slider">
 
                       <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
-                        @foreach(App\Product::where('category_id',$parentcats->id)->take(10)->get() as $pro)
+                        @foreach(App\Product::where('category_id',$parentcats->id)->where('is_ticket','1')->take(10)->get() as $pro)
                         @if($genrals_settings->vendor_enable != 1)
                         @if($pro->vender['role_id'] == 'a')
 
