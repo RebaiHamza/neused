@@ -3249,7 +3249,7 @@ $current_date = date('Y-m-d H:i:s');
           <h3 class="section-title">{{ $category->title }}</h3>
           <div class="row no-pad">
             @foreach($category->products->take($top_categories->pro_limit) as $pro)
-
+   
             @if($pro->status == 1)
             @if($genrals_settings->vendor_enable != 1 )
             @if($pro->vender['role_id'] == 'a')
@@ -3275,8 +3275,10 @@ $current_date = date('Y-m-d H:i:s');
               {
               $url = url('details-bid').'/'.$pro->id.'?'.$name[0]['attr_name'].'='.$var_name[0];
               }
-
+              
               @endphp
+         
+              
               <div class="col-6">
                 <div class="item item-carousel">
                   <div class="products">
@@ -4608,7 +4610,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
   @if(isset($top_categories))
   @if($top_categories->status == 1)
 
-
+ 
 
   <div class="top_cat_header">
     <h3 class="cat_title">{{ __('staticwords.tpc') }}</h3>
@@ -5025,6 +5027,10 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
 
       <div class="item item-carousel">
         <div class="products">
+          @if($pro->is_bid == 1)
+          
+        
+         
           <div class="product">
             <div class="product-image">
               <div class="image {{ $orivar->stock ==0 ? "pro-img-box" : ""}}">
@@ -5354,6 +5360,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
               </div>
               <!-- /.action -->
           </div>
+          @endif
           @endif
           <!-- /.cart -->
         </div>

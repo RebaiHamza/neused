@@ -18,14 +18,15 @@
               if($genrals_settings->vendor_enable == 1){
                 
                 $pirmarycategories = App\Category::
-                                     join('products', function ($join) {
-                                        $join->on('products.category_id', '=', 'categories.id')->where('products.status','1');
-                                     })
-                                     ->leftjoin('users', function ($join) {
-                                        $join->on('products.vender_id', '=', 'users.id')->where('users.status','1');
-                                     })
-                                     ->where('products.is_new',1)
-                                     ->select('categories.*')->where('categories.status','=','1')->get();
+                                    //  join('products', function ($join) {
+                                    //     $join->on('products.category_id', '=', 'categories.id')->where('products.status','1');
+                                    //  })
+                                    //  ->leftjoin('users', function ($join) {
+                                    //     $join->on('products.vender_id', '=', 'users.id')->where('users.status','1');
+                                    //  })
+                                    //  ->where('products.is_new',1)
+                                    //  ->
+                                     select('categories.*')->where('categories.status','=','1')->get();
                                      
               }else{
                 

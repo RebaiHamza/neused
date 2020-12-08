@@ -3238,6 +3238,7 @@ $current_date = date('Y-m-d H:i:s');
           <div class="row no-pad">
             @foreach($category->products->take($top_categories->pro_limit) as $pro)
 
+    
             @if($pro->status == 1)
             @if($genrals_settings->vendor_enable != 1 )
             @if($pro->vender['role_id'] == 'a')
@@ -5013,6 +5014,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
       @endphp
 
       <div class="item item-carousel">
+        @if($pro->is_new == 1)
         <div class="products">
           <div class="product">
             <div class="product-image">
@@ -5346,6 +5348,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
           @endif
           <!-- /.cart -->
         </div>
+        @endif
         <!-- /.product -->
 
       </div>

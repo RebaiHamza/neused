@@ -29,15 +29,15 @@ class MainController extends Controller
             'secret' => 'required|string',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['Secret Key is required']);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['Secret Key is required']);
+        // }
 
-        $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
+        // $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
 
-        if (!$key) {
-            return response()->json(['Invalid Secret Key !']);
-        }
+        // if (!$key) {
+        //     return response()->json(['Invalid Secret Key !']);
+        // }
 
         $categories = Category::orderBy('position', 'ASC')->get();
         return response()->json(['categories' => $categories]);
@@ -89,16 +89,17 @@ class MainController extends Controller
         $validator = Validator::make($request->all(), [
             'secret' => 'required|string',
         ]);
+        dd($validator);
 
-        if ($validator->fails()) {
-            return response()->json(['Secret Key is required']);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['Secret Key is required']);
+        // }
 
-        $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
+        // $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
 
-        if (!$key) {
-            return response()->json(['Invalid Secret Key !']);
-        }
+        // if (!$key) {
+        //     return response()->json(['Invalid Secret Key !']);
+        // }
 
         $cat = Category::find($id);
 
@@ -321,15 +322,15 @@ class MainController extends Controller
             'secret' => 'required|string',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['Secret Key is required']);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['Secret Key is required']);
+        // }
 
-        $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
+        // $key = DB::table('api_keys')->where('secret_key', '=', $request->secret)->first();
 
-        if (!$key) {
-            return response()->json(['Invalid Secret Key !']);
-        }
+        // if (!$key) {
+        //     return response()->json(['Invalid Secret Key !']);
+        // }
 
         if (!Auth::check()) {
             return response()->json("You're not logged in !");

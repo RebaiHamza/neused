@@ -5013,6 +5013,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
       @endphp
 
       <div class="item item-carousel">
+        @if($pro->is_ticket == 1)
         <div class="products">
           <div class="product">
             <div class="product-image">
@@ -5346,6 +5347,7 @@ $getads = App\Adv::where('position','=','abovetopcategory')->where('status','=',
           @endif
           <!-- /.cart -->
         </div>
+        @endif
         <!-- /.product -->
 
       </div>
